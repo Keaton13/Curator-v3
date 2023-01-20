@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
 import btc from "../../assets/btc.png";
 import { CoinMarketContext } from "../../context/context";
+import CMCTableHeader from "./CMCTableHeader";
 
 const CMCTable = () => {
   let { getTopTenCoins } = useContext(CoinMarketContext);
@@ -31,27 +32,28 @@ const CMCTable = () => {
     <div className="text-white font-bold">
       <div className="mx-auto max-w-screen-2xl">
         <table className="w-full">
-          {/* <CMCtableHeader/>*/}
+          <CMCTableHeader/>
 
           {coinData && coinData ? (
             coinData.map((coin, index) => {
-              return (
-                <CMCTableRow
-                  key={index}
-                  starNum={coin.cmc_rank}
-                  coinName={coin.name}
-                  coinSymbol={btc}
-                  showBuy={true}
-                  hRate={coin.quote.USD.percent_change_24H}
-                  dRate={coin.quote.USD.percent_change_7d}
-                  hRateIsIncrement={true}
-                  price={coin.quote.USD.price}
-                  marketCapValue={coin.quote.USD.market_cap}
-                  volumeCryptoValue={coin.quote.USD.volume_24h}
-                  volumeValue={coin.total_supply}
-                  circulatingSupply={coin.circulatingSupply}
-                />
-              );
+            //   return (
+                // <CMCTableRow
+                //   key={index}
+                //   starNum={coin.cmc_rank}
+                //   coinName={coin.name}
+                //   coinSymbol={coin.symbol}
+                //   coinIcon={btc}
+                //   showBuy={true}
+                //   hRate={coin.quote.USD.percent_change_24H}
+                //   dRate={coin.quote.USD.percent_change_7d}
+                //   hRateIsIncrement={true}
+                //   price={coin.quote.USD.price}
+                //   marketCapValue={coin.quote.USD.market_cap}
+                //   volumeCryptoValue={coin.quote.USD.volume_24h}
+                //   volumeValue={coin.total_supply}
+                //   circulatingSupply={coin.circulatingSupply}
+                // />
+            //   );
             })
           ) : (
             <></>
