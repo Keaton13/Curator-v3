@@ -16,7 +16,7 @@ const styles = {
   flexCenter: `flex items-center`,
 };
 
-const currencies = () => {
+const Currencies = () => {
   const [coinName, setCoinName] = useState("");
   const [coinSymbol, setCoinSymbol] = useState("");
   const [price, setPrice] = useState("");
@@ -59,28 +59,37 @@ const currencies = () => {
               </div>
             </div>
             <br />
-            { /* <Graph/> */}
+            {/* <Graph/> */}
             <br />
             <div className={styles.flexBetweenContianer}>
-                <div className='flex'>
-                    <div className={styles.flexContainer}>
-                        <input className='outline-none' type='checkbox'/> &nbsp; USD
-                    </div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div className={styles.flexCenter}>
-                        <input type='checkbox' /> &nbsp; BTC
-                    </div>
+              <div className="flex">
+                <div className={styles.flexContainer}>
+                  <input className="outline-none" type="checkbox" /> &nbsp; USD
                 </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div className={styles.flexCenter}>
+                  <input type="checkbox" /> &nbsp; BTC
+                </div>
+              </div>
 
-                <p>
-                    Want more data?{''}
-                    <span className='text-[#6188FF]'>Check out our API!</span>
-                </p>
+              <p>
+                Want more data?{""}
+                <span className="text-[#6188FF]">Check out our API!</span>
+              </p>
             </div>
             <br />
             <br />
-            {/*  <Chat/> */}
+            {/*<CMCpriceConverter
+                    from={coinName}
+                    fromSymbol={coinSymbol}
+                    fromLogo={solana}
+                    toLogo={<Usd />}
+                    price={price}
+                    to='United States Dollars'
+                    toSymbol='USD'
+                    /> */}
           </div>
+          <div className="pt-10 ml-5">{/*  <Chat/> */}</div>
         </div>
       </main>
     </div>
