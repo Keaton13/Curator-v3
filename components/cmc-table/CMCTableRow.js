@@ -11,20 +11,21 @@ const styles = {
 };
 
 const CMCTableRow = ({
-  starNum,
-  coinName,
-  coinIcon,
-  coinSymbol = "---",
-  price = "---",
-  hRate = "---",
-  dRate = "---",
-  hRateIsIncrement,
-  dRateIsIncrement,
-  marketCapValue = "---",
-  volumeValue = "---",
-  volumeCryptoValue = "---",
-  circulatingSupply = "---",
+    starNum,
+    coinName,
+    coinIcon,
+    coinSymbol,
+    price,
+    hRate,
+    dRate,
+    hRateIsIncrement,
+    dRateIsIncrement,
+    marketCapValue,
+    volumeValue,
+    volumeCryptoValue,
+    circulatingSupply,
 }) => {
+    console.log(price);
   const graphImages = [
     "https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/52.svg",
     "https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/1.svg",
@@ -59,8 +60,9 @@ const CMCTableRow = ({
     );
   };
 
-  const formatNum = (num) => {
-    return Number(num.toFixed(2)).toLocaleString();
+  const formatNum = num => {
+    console.log(num)
+    return Number(num.toFixed(2)).toLocaleString()
   };
 
   return (
