@@ -44,14 +44,14 @@ const CMCTable = () => {
                   coinSymbol={coin.symbol}
                   coinIcon={btc}
                   showBuy={true}
-                  hRate={coin.quote.USD.percent_change_24H}
+                  hRate={coin.quote.USD.percent_change_24h}
                   dRate={coin.quote.USD.percent_change_7d}
                   hRateIsIncrement={true}
                   price={coin.quote.USD.price}
                   marketCapValue={coin.quote.USD.market_cap}
                   volumeCryptoValue={coin.quote.USD.volume_24h}
                   volumeValue={coin.total_supply}
-                  circulatingSupply={coin.circulatingSupply}
+                  circulatingSupply={coin.circulating_supply}
                 />
               );
             })
