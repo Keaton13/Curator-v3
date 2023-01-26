@@ -11,7 +11,6 @@ import terra from "../assets/tera.png";
 import solana from "../assets/solana.png";
 import avalance from "../assets/avalanche.png";
 import bnb from "../assets/bnb.png";
-import { blob } from "stream/consumers";
 
 const styles = {
   converter: `flex items-center justify-between bg-[#171924] border border-grey-500/10 px-5 py-5 rounded-xl`,
@@ -24,9 +23,11 @@ const CMCPriceConverter = ({
   fromSymbol,
   toSymbol,
   fromLogo,
+  toLogo,
   price,
 }) => {
   const coinIcon = () => {
+    console.log(price)
     switch (from) {
       case "Bitcoin":
         return (

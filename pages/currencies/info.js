@@ -1,7 +1,9 @@
 import Header from "../../components/Header";
-import Solana from "../../assets/solana.png";
+import solana from "../../assets/solana.png";
 import Usd from "../../assets/svg/usd";
 import { useEffect, useState } from "react";
+import CMCPriceConverter from "../../components/CMCpriceConverter";
+import Graph from "../../components/Graph";
 
 const styles = {
   activeTab: `p-1 px-2 mr-2 rounded-lg bg-[#171924]`,
@@ -26,11 +28,11 @@ const Currencies = () => {
   }, []);
 
   const getURLData = async () => {
-    const queryString = window.Location.search;
+    const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
     setCoinName(urlParams.get("coin"));
-    setPrice(Number(urlParams.get('price')).toLocaleString())
+    setPrice(urlParams.get("price").toLocaleString());
     setCoinSymbol(urlParams.get("symbol"));
   };
 
@@ -59,7 +61,7 @@ const Currencies = () => {
               </div>
             </div>
             <br />
-            {/* <Graph/> */}
+            <Graph/>
             <br />
             <div className={styles.flexBetweenContianer}>
               <div className="flex">
@@ -79,7 +81,7 @@ const Currencies = () => {
             </div>
             <br />
             <br />
-            {/*<CMCpriceConverter
+            <CMCPriceConverter
                     from={coinName}
                     fromSymbol={coinSymbol}
                     fromLogo={solana}
@@ -87,7 +89,7 @@ const Currencies = () => {
                     price={price}
                     to='United States Dollars'
                     toSymbol='USD'
-                    /> */}
+                    />
           </div>
           <div className="pt-10 ml-5">{/*  <Chat/> */}</div>
         </div>
