@@ -30,7 +30,7 @@ const Currencies = () => {
     const urlParams = new URLSearchParams(queryString);
 
     setCoinName(urlParams.get("coin"));
-    setPrice(urlParams.get("price").toLocalString());
+    setPrice(Number(urlParams.get('price')).toLocaleString())
     setCoinSymbol(urlParams.get("symbol"));
   };
 
