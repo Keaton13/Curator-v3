@@ -4,17 +4,18 @@ import Usd from "../../assets/svg/usd";
 import { useEffect, useState } from "react";
 import CMCPriceConverter from "../../components/CMCpriceConverter";
 import Graph from "../../components/Graph";
+import Chat from '../../components/Chat';
 
 const styles = {
   activeTab: `p-1 px-2 mr-2 rounded-lg bg-[#171924]`,
   tabItem: `px-2`,
-  tabContainer: `flex items-center p-2 rounded-xl bg-[#222531] border-grey-500/10 text-sm`,
+  tabContainer: `flex items-center p-2 rounded-xl bg-[#222531] border border-gray-500/10 text-sm`,
   info: `min-h-screen`,
   main: `text-white mx-auto max-w-screen-2xl`,
   flexStart: `flex items-start`,
   flexBetween: `flex justify-between`,
   flexBetweenCenter: `flex justify-between items-center`,
-  tabContainerWrapper: `p-0 pl-0 pr-0 w-2/3`,
+  tabContainerWrapper: `p-10 pl-0 pr-0 w-2/3`,
   flexCenter: `flex items-center`,
 };
 
@@ -61,7 +62,7 @@ const Currencies = () => {
               </div>
             </div>
             <br />
-            <Graph/>
+            <Graph />
             <br />
             <div className={styles.flexBetweenContianer}>
               <div className="flex">
@@ -82,16 +83,18 @@ const Currencies = () => {
             <br />
             <br />
             <CMCPriceConverter
-                    from={coinName}
-                    fromSymbol={coinSymbol}
-                    fromLogo={solana}
-                    toLogo={<Usd />}
-                    price={price}
-                    to='United States Dollars'
-                    toSymbol='USD'
-                    />
+              from={coinName}
+              fromSymbol={coinSymbol}
+              fromLogo={solana}
+              toLogo={<Usd />}
+              price={price}
+              to="United States Dollars"
+              toSymbol="USD"
+            />
           </div>
-          <div className="pt-10 ml-5">{/*  <Chat/> */}</div>
+          <div className="pt-10 ml-5">
+            <Chat />
+          </div>
         </div>
       </main>
     </div>
