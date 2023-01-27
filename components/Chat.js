@@ -4,6 +4,7 @@ import ChevronUp from "../assets/svg/chevronUp";
 import shiba from "../assets/shiba.png";
 import Image from "next/image";
 import {Button} from './Button'
+import ChatCard from "./ChatCard";
 
 const styles = {
   bullishLabel: `flex cursor-pointer active:bg-green-600 items-center text text-green-600 border border-green-600 h-min px-2 rounded-lg`,
@@ -98,10 +99,10 @@ const Chat = () => {
         <Button label='Post' onPress={sendMessage} />
       </div>
 
-      {/*
-         format the message
+      
+         {/* format the message then insert chatCard for every message*/}
          <ChatCard/>
-         */}
+
     </>
   );
 };
