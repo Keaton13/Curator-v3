@@ -11,7 +11,6 @@ const Home: NextPage = () => {
     <Trending />
     <div className="mt-20"/>
     <CMCTable />
-
   </div>
   )
 };
