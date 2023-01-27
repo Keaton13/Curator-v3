@@ -4,37 +4,49 @@ import { CoinMarketContext } from "../../context/context";
 import CMCTableHeader from "./CMCTableHeader";
 import CMCTableRow from "./CMCTableRow";
 const CMCTable = () => {
-  let { getTopTenCoins } = useContext(CoinMarketContext);
+  let { getTopTenCoins, getCoinMetaData } = useContext(CoinMarketContext);
   let [coinData, setCoinData] = useState(null);
+  let [coinMetaData, setCoinMetaData] = useState(null);
 
   useEffect(() => {
     setData();
   }, []);
 
   const setData = useCallback(async () => {
+    let ids=[]
     try {
       let apiResponse = await getTopTenCoins();
       let filteredResponse = [];
 
       for (let i = 0; i < apiResponse.length; i++) {
         const element = apiResponse[i];
-        if (element.cmc_rank <= 10) filteredResponse.push(element);
+        if (element.cmc_rank <= 10) {
+          ids.push(element.id)
+          filteredResponse.push(element);
+        }
       }
 
       setCoinData(filteredResponse);
     } catch (e) {
       console.log(e.message);
     }
-  }, [getTopTenCoins]);
 
-  console.log(coinData);
+    try {
+      let apiResponse = await getCoinMetaData(ids);
+      setCoinMetaData(apiResponse);
+    } catch (e) {
+      console.log(e.message)
+    }
+
+  }, [getTopTenCoins, getCoinMetaData]);
+
+  console.log(coinData, coinMetaData);
   return (
     <div className="text-white font-bold">
       <div className="mx-auto max-w-screen-2xl">
         <table className="w-full">
           <CMCTableHeader/>
-
-          {coinData && coinData ? (
+          {coinData && coinMetaData ? (
             coinData.map((coin, index) => {
               return (
                 <CMCTableRow
