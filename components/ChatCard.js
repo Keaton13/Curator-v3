@@ -21,7 +21,7 @@ const styles = {
 };
 
 const ChatCard = ({
-  content = "",
+  content = "LETS GOOOOO",
   timeStamp,
   sender,
   bullish,
