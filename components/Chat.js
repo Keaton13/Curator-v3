@@ -3,6 +3,7 @@ import ChevronDown from "../assets/svg/chevronDown";
 import ChevronUp from "../assets/svg/chevronUp";
 import shiba from "../assets/shiba.png";
 import Image from "next/image";
+import {Button} from './Button'
 
 const styles = {
   bullishLabel: `flex cursor-pointer active:bg-green-600 items-center text text-green-600 border border-green-600 h-min px-2 rounded-lg`,
@@ -22,6 +23,10 @@ const styles = {
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [bullishValue, setBullishValue] = useState(true);
+
+  const sendMessage = () => {
+
+  }
 
   return (
     <>
@@ -90,7 +95,7 @@ const Chat = () => {
       />
 
       <div className={styles.postButtonContainer}>
-        {/* <Button label='Post' onPress={sendMessage} /> */}
+        <Button label='Post' onPress={sendMessage} />
       </div>
 
       {/*
