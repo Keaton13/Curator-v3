@@ -37,14 +37,15 @@ const data = {
       borderJoinStyle: 'miter',
       pointBorderColor: '#3773f5',
       pointBackgroundColor: '#3773f5',
-      pointOrderWidth: 1,
+      pointBorderWidth: 1,
       pointHoverRadius: 5,
       pointHoverBackgroundColor: '#3773f5',
       pointHoverBorderColor: '#3773f5',
+      pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
       data: getRandomPoints(),
-    }
+  },
   ]
 };
 
