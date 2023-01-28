@@ -16,7 +16,6 @@ export const CoinMarketProvider = ({children}) => {
 
     const getCoinMetaData = async (ids) => {
         try {
-            console.log('Context ', ids)
             const options = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -24,7 +23,7 @@ export const CoinMarketProvider = ({children}) => {
             }
             const res = await fetch('/api/getCoinMetaData', options)
             const data = await res.json();
-            return data.data;
+            return data.data.data;
         } catch(e) {
             console.log(e.message)
         }

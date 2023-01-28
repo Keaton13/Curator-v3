@@ -135,7 +135,15 @@ const CoinNameRow = ({ name, icon, clicked }) => {
   return (
     <div className={styles.coinNameRow}>
       <div className='mr-3 flex' onClick={clicked}>
-        <div className='mr-2'>{coinIcon()}</div>
+        <div className='mr-2'>
+        <Image
+            src={icon}
+            className="rounded-full"
+            width={20}
+            height={20}
+            alt=""
+          />
+        </div>
         {name}
       </div>
 
