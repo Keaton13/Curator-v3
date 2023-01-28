@@ -10,6 +10,7 @@ const styles = {
 }
 
 const CMCtableRow = ({
+  id,
   starNum,
   coinName,
   coinIcon,
@@ -18,31 +19,12 @@ const CMCtableRow = ({
   hRate = '---',
   dRate = '---',
   // hRateIsIncrement,
-  dRateIsIncrement,
+  // dRateIsIncrement,
   marketCapValue = '---',
   volumeValue = '---',
   volumeCryptoValue = '---',
   circulatingSupply = '---',
 }) => {
-  const graphImages = [
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/52.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/1.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/825.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/3408.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/5426.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/7129.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/3957.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/328.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/2416.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/1765.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/2099.svg',
-    'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/7653.svg',
-  ]
-
-  const getRandomGraph = () => {
-    const rndInt = Math.floor(Math.random() * 10) + 1
-    return graphImages[rndInt]
-  }
 
   const router = useRouter()
 
@@ -114,7 +96,7 @@ const CMCtableRow = ({
         </td>
 
         <td>
-          <Image src={getRandomGraph()} width={150} height={60} alt='' />
+          <Image src={`https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/${id}.svg`} width={150} height={60} alt='' />
         </td>
 
         <td>
