@@ -50,6 +50,7 @@ const CMCTable = () => {
               return (
                 <CMCTableRow
                   key={index}
+                  id={coin.id}
                   starNum={coin.cmc_rank}
                   coinName={coin.name}
                   coinSymbol={coin.symbol}
