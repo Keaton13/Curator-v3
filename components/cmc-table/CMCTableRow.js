@@ -30,13 +30,13 @@ const CMCtableRow = ({
 
   const viewCoinDetails = () => {
     router.push(
-      `/currencies/info?symbol=${coinSymbol}&coin=${coinName}&price=${price}&icon=${coinIcon}`,
+      `/currencies/info?id=${id}`,
     )
   }
 
   const viewPrice = () => {
     router.push(
-      `/currencies/price?symbol=${coinSymbol}&coin=${coinName}&price=${price}&icon=${coinIcon}`,
+      `/currencies/price?id=${id}`,
     )
   }
 
