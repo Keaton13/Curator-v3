@@ -1,42 +1,10 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, { useContext} from "react";
 import btc from "../../assets/btc.png";
 import { CoinMarketContext } from "../../context/context";
 import CMCTableHeader from "./CMCTableHeader";
 import CMCTableRow from "./CMCTableRow";
 const CMCTable = () => {
-  let { getTopTenCoins, getCoinMetaData } = useContext(CoinMarketContext);
-  let [coinData, setCoinData] = useState(null);
-  let [coinMetaData, setCoinMetaData] = useState(null);
-
-  useEffect(() => {
-    setData();
-  }, []);
-
-  const setData = useCallback(async () => {
-    let ids=[]
-    try {
-      let apiResponse = await getTopTenCoins();
-      let filteredResponse = [];
-
-      for (let i = 0; i < apiResponse.length; i++) {
-        const element = apiResponse[i];
-          ids.push(element.id)
-          filteredResponse.push(element);
-      }
-      setCoinData(filteredResponse);
-    } catch (e) {
-      console.log(e.message);
-    }
-
-    try {
-      let apiResponse = await getCoinMetaData(ids);
-      let filtered = Object.values(apiResponse).filter(item => item.id);
-      setCoinMetaData(filtered);
-    } catch (e) {
-      console.log(e.message)
-    }
-
-  }, [getTopTenCoins, getCoinMetaData]);
+  let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
 
   // console.log(coinData, coinMetaData);
   return (
@@ -44,8 +12,8 @@ const CMCTable = () => {
       <div className="mx-auto max-w-screen-2xl">
         <table className="w-full">
           <CMCTableHeader/>
-          {coinData && coinMetaData ? (
-            coinData.map((coin, index) => {
+          {top100Coins && coinMetaData ? (
+            top100Coins.map((coin, index) => {
               let matchingMetaData = coinMetaData.filter(match => match.id === coin.id);
               return (
                 <CMCTableRow
