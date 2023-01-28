@@ -20,12 +20,9 @@ const CMCTable = () => {
 
       for (let i = 0; i < apiResponse.length; i++) {
         const element = apiResponse[i];
-        if (element.cmc_rank <= 10) {
           ids.push(element.id)
           filteredResponse.push(element);
-        }
       }
-
       setCoinData(filteredResponse);
     } catch (e) {
       console.log(e.message);
@@ -33,14 +30,15 @@ const CMCTable = () => {
 
     try {
       let apiResponse = await getCoinMetaData(ids);
-      setCoinMetaData(apiResponse);
+      let filtered = Object.values(apiResponse).filter(item => item.id);
+      setCoinMetaData(filtered);
     } catch (e) {
       console.log(e.message)
     }
 
   }, [getTopTenCoins, getCoinMetaData]);
 
-  console.log(coinData, coinMetaData);
+  // console.log(coinData, coinMetaData);
   return (
     <div className="text-white font-bold">
       <div className="mx-auto max-w-screen-2xl">
@@ -48,17 +46,18 @@ const CMCTable = () => {
           <CMCTableHeader/>
           {coinData && coinMetaData ? (
             coinData.map((coin, index) => {
+              let matchingMetaData = coinMetaData.filter(match => match.id === coin.id);
               return (
                 <CMCTableRow
                   key={index}
                   starNum={coin.cmc_rank}
                   coinName={coin.name}
                   coinSymbol={coin.symbol}
-                  coinIcon={btc}
+                  coinIcon={matchingMetaData[0].logo}
                   showBuy={true}
                   hRate={coin.quote.USD.percent_change_24h}
                   dRate={coin.quote.USD.percent_change_7d}
-                  hRateIsIncrement={true}
+                  // hRateIsIncrement={true}
                   price={coin.quote.USD.price}
                   marketCapValue={coin.quote.USD.market_cap}
                   volumeCryptoValue={coin.quote.USD.volume_24h}

@@ -1,6 +1,5 @@
 export default function handler(req,res) {
     const getCoinMetaData = async () => {
-        console.log("req.body ", req.body);
         const {coinIds} = req.body
         const response = await fetch(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?id=${coinIds}&CMC_PRO_API_KEY=${process.env.CMC_API_KEY}`, 
         {
@@ -15,7 +14,6 @@ export default function handler(req,res) {
         const data = await response.json()
 
         res.status(200).json({data})
-        console.log(data)
     }
 
     getCoinMetaData();

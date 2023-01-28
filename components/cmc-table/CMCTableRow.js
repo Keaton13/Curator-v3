@@ -17,7 +17,7 @@ const CMCtableRow = ({
   price = '----',
   hRate = '---',
   dRate = '---',
-  hRateIsIncrement,
+  // hRateIsIncrement,
   dRateIsIncrement,
   marketCapValue = '---',
   volumeValue = '---',
@@ -86,10 +86,10 @@ const CMCtableRow = ({
           <p>${formatNum(price)}</p>
         </td>
         <td>
-          <Rate isIncrement={hRateIsIncrement} rate={`${formatNum(hRate)}%`} />
+          <Rate rate={`${formatNum(hRate)}%`} />
         </td>
         <td>
-          <Rate isIncrement={dRateIsIncrement} rate={`${formatNum(dRate)}%`} />
+          <Rate rate={`${formatNum(dRate)}%`} />
         </td>
 
         <td>
