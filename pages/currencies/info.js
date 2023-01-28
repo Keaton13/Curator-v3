@@ -23,6 +23,7 @@ const Currencies = () => {
   const [coinName, setCoinName] = useState("");
   const [coinSymbol, setCoinSymbol] = useState("");
   const [price, setPrice] = useState("");
+  const [icon, setIcon] = useState("");
 
   useEffect(() => {
     getURLData();
@@ -35,6 +36,7 @@ const Currencies = () => {
     setCoinName(urlParams.get("coin"));
     setPrice(Number(urlParams.get("price")).toLocaleString());
     setCoinSymbol(urlParams.get("symbol"));
+    setIcon(urlParams.get("icon"));
   };
 
   return (
