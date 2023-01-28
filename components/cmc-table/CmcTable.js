@@ -1,8 +1,8 @@
 import React, { useContext} from "react";
-import btc from "../../assets/btc.png";
 import { CoinMarketContext } from "../../context/context";
 import CMCTableHeader from "./CMCTableHeader";
 import CMCTableRow from "./CMCTableRow";
+
 const CMCTable = () => {
   let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
 

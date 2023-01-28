@@ -3,8 +3,8 @@ import { createContext, useState, useEffect, useCallback } from "react";
 export const CoinMarketContext = createContext()
 
 export const CoinMarketProvider = ({children}) => {
-    const [top100Coins, setCoinData] = useState('')
-    const [coinMetaData, setCoinMetaData] = useState('')
+    const [top100Coins, setCoinData] = useState()
+    const [coinMetaData, setCoinMetaData] = useState()
 
     useEffect(() => {
         setData();

@@ -1,16 +1,7 @@
-import React from "react";
+import { useState, useEffect, useContext } from "react";
+import { CoinMarketContext } from "../context/context";
 import Image from "next/image";
 import Rate from "./cmc-table/Rate";
-import btc from "../assets/btc.png";
-import eth from "../assets/eth.png";
-import usdc from "../assets/usdc.png";
-import usdt from "../assets/usdt.png";
-import xrp from "../assets/xrp.png";
-import cardano from "../assets/cardano.png";
-import terra from "../assets/tera.png";
-import solana from "../assets/solana.png";
-import avalance from "../assets/avalanche.png";
-import bnb from "../assets/bnb.png";
 import RateFilled from "./buttons/RateFilled";
 import DropDownBtn from "./buttons/DropDownBtn";
 
@@ -27,7 +18,30 @@ const styles = {
   flexBetween: `flex justify-between`,
 };
 
-const CoinDetails = ({ coinName, coinSymbol, price, icon }) => {
+const CoinDetails = ({
+  id,
+  coinName,
+  coinSymbol,
+  price,
+  icon,
+}) => {
+  let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
+  const [targetCoin, setTargetCoin] = useState('')
+  const [targetCoinMetaData, setTargetCoinMetaData] = useState('')
+
+  let filteredCoin
+  let filteredCoinMetaData
+
+  useEffect(() => {
+    filterData();
+  }, []);
+
+  const filterData = () => {
+     filteredCoin = top100Coins.find(object => object.id === id);
+     filteredCoinMetaData = coinMetaData.find(object => object.id === id);
+  };
+  console.log(filteredCoin)
+  console.log(filteredCoinMetaData)
   return (
     <main className={styles.coinDetails}>
       <div>
@@ -35,7 +49,7 @@ const CoinDetails = ({ coinName, coinSymbol, price, icon }) => {
           <div className="flex flex-col w-fit">
             <div className="flex items-center">
               <Image
-                src={icon}
+                src={""}
                 className="rounded-full"
                 width={50}
                 height={50}
@@ -44,9 +58,9 @@ const CoinDetails = ({ coinName, coinSymbol, price, icon }) => {
               &nbsp; &nbsp;
               <div>
                 <div className="flex">
-                  <p className="text-3xl">{coinName}</p>
+                  <p className="text-3xl">{targetCoin.name}</p>
                   &nbsp; &nbsp;&nbsp; &nbsp;
-                  <p className={styles.coinSymbol}>{coinSymbol}</p>
+                  <p className={styles.coinSymbol}>{targetCoin.symbol}</p>
                 </div>
               </div>
             </div>
