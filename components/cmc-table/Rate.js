@@ -8,15 +8,16 @@ const styles = {
   green: `ml-2 text-[#17C784]`,
 };
 
-const Rate = ({ isIncrement, rate }) => {
+const Rate = ({rate }) => {
+  rate = parseFloat(rate).toFixed(2);
   return (
     <div className={styles.rate}>
-      {isIncrement ? (
+      {rate >= 0 ? (
         <ChevronUp fill="#17C784" />
       ) : (
         <ChevronDown fill="#EA3943" />
       )}
-      <p className={isIncrement ? styles.green : styles.red}>{rate}</p>
+      <p className={rate >= 0 ? styles.green : styles.red}>{rate + "%"}</p>
     </div>
   );
 };
