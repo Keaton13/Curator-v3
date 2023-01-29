@@ -26,6 +26,9 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
       let name = coinData.name;
       let symbol = coinData.symbol;
       let price = coinData.quote.USD.price.toLocaleString();
+      let rate1h = coinData.quote.USD.percent_change_1h.toFixed(2);
+      let rate24h = coinData.quote.USD.percent_change_24h.toFixed(2);
+      let rate7d = coinData.quote.USD.percent_change_7d.toFixed(2);
       let marketCap = coinData.quote.USD.market_cap.toLocaleString();
       let marketCapDominance = coinData.quote.USD.market_cap_dominance.toFixed(2);
       let fullyDilutedMarketCap =
@@ -50,6 +53,9 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
         name,
         symbol,
         price,
+        rate1h,
+        rate24h,
+        rate7d,
         marketCap,
         marketCapDominance,
         fullyDilutedMarketCap,
@@ -131,17 +137,19 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                   </p>
                   <div className="flex my-3">
                     <h1 className="text-4xl">${coinTextData.price}</h1>
-                    <RateFilled rate={-0.123}/>
+                    <RateFilled rate={coinTextData.rate24h}/>
+                  </div>
+                  <div className="flex items-start justify-between">
+                    <p className="text-gray-400">1h</p>
+                    <Rate rate={coinTextData.rate1h} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p className="text-gray-400">1h</p>
+                    <Rate rate={coinTextData.rate1h} />
                   </div>
                   <div className="flex items-start">
-                    <p className="text-gray-400"> 15.26 ETH</p>
+                    <p className="text-gray-400"> 7d</p>
                     &nbsp;&nbsp;&nbsp;
-                    <Rate rate="0.53%" />
-                  </div>
-                  <div className="flex items-start">
-                    <p className="text-gray-400"> 24.33 BTC</p>
-                    &nbsp;&nbsp;&nbsp;
-                    <Rate rate="0.99%" />
+                    <Rate rate={coinTextData.rate7d} />
                   </div>
                 </div>
 
@@ -192,7 +200,7 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                         Market Cap Dominance
                       </small>
                     </div>
-                    <small>{coinTextData.marketCapDominance}</small>
+                    <small>{coinTextData.marketCapDominance+"%"}</small>
                   </div>
                 </div>
 
