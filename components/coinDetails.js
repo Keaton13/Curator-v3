@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Rate from "./cmc-table/Rate";
 import RateFilled from "./buttons/RateFilled";
 import DropDownBtn from "./buttons/DropDownBtn";
@@ -28,12 +27,13 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
       let symbol = coinData.symbol;
       let price = coinData.quote.USD.price.toLocaleString();
       let marketCap = coinData.quote.USD.market_cap.toLocaleString();
+      let marketCapDominance = coinData.quote.USD.market_cap_dominance.toFixed(2);
       let fullyDilutedMarketCap =
         coinData.quote.USD.fully_diluted_market_cap.toLocaleString();
       let volume = coinData.quote.USD.volume_24h.toLocaleString();
+      let volumeChange24h = coinData.quote.USD.volume_change_24h.toFixed(2);
       let circulatingSupply = coinData.circulating_supply.toLocaleString();
       let totalSupply = coinData.total_supply.toLocaleString();
-      console.log(coinMetaData.urls);
       let website = coinMetaData.urls.website[0];
       let explorer = coinMetaData.urls.explorer[0];
       let sourceCode = coinMetaData.urls.source_code[0];
@@ -51,8 +51,10 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
         symbol,
         price,
         marketCap,
+        marketCapDominance,
         fullyDilutedMarketCap,
         volume,
+        volumeChange24h,
         circulatingSupply,
         maxSupply,
         totalSupply,
@@ -129,17 +131,17 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                   </p>
                   <div className="flex my-3">
                     <h1 className="text-4xl">${coinTextData.price}</h1>
-                    <RateFilled />
+                    <RateFilled rate={-0.123}/>
                   </div>
                   <div className="flex items-start">
                     <p className="text-gray-400"> 15.26 ETH</p>
                     &nbsp;&nbsp;&nbsp;
-                    <Rate isIncrement={false} rate="0.53%" />
+                    <Rate rate="0.53%" />
                   </div>
                   <div className="flex items-start">
                     <p className="text-gray-400"> 24.33 BTC</p>
                     &nbsp;&nbsp;&nbsp;
-                    <Rate isIncrement={true} rate="0.99%" />
+                    <Rate rate="0.99%" />
                   </div>
                 </div>
 
@@ -157,7 +159,7 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                     <small className={styles.title}>Market Cap</small>
                   </div>
                   <small>${coinTextData.marketCap}</small>
-                  <Rate isIncrement={true} rate="0.53%" />
+                  {/* <Rate rate="0.53%" /> */}
                 </div>
 
                 <div className={styles.borderLeft}>
@@ -167,7 +169,7 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                     </small>
                   </div>
                   <small>${coinTextData.fullyDilutedMarketCap}</small>
-                  <Rate isIncrement={true} rate="0.53%" />
+                  {/* <Rate rate="0.53%" /> */}
                 </div>
 
                 <div className={styles.borderLeft}>
@@ -177,20 +179,20 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                         Volume &nbsp;
                         <small className="coin-symbol">
                           {coinTextData.symbol}
-                        </small>{" "}
+                        </small>{""}
                       </small>
                     </div>
                     <small>${coinTextData.volume}</small>
-                    <Rate isIncrement={true} rate={"0.92%"} />
+                    <Rate rate={coinTextData.volumeChange24h} symbol="24h"/>
                   </div>
                   <br />
                   <div>
                     <div>
                       <small className={styles.title}>
-                        Volume / Market Cap
+                        Market Cap Dominance
                       </small>
                     </div>
-                    <small>0.03315</small>
+                    <small>{coinTextData.marketCapDominance}</small>
                   </div>
                 </div>
 

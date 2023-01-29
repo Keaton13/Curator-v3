@@ -8,7 +8,7 @@ const styles = {
   green: `ml-2 text-[#17C784]`,
 };
 
-const Rate = ({rate }) => {
+const Rate = ({rate, symbol }) => {
   rate = parseFloat(rate).toFixed(2);
   return (
     <div className={styles.rate}>
@@ -17,7 +17,12 @@ const Rate = ({rate }) => {
       ) : (
         <ChevronDown fill="#EA3943" />
       )}
-      <p className={rate >= 0 ? styles.green : styles.red}>{rate + "%"}</p>
+      <p className={rate >= 0 ? styles.green : styles.red}>{rate + "%"}&nbsp;&nbsp;</p> 
+      {symbol ? (
+        <small>24h</small>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
