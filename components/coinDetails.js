@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Rate from "./cmc-table/Rate";
 import RateFilled from "./buttons/RateFilled";
 import DropDownBtn from "./buttons/DropDownBtn";
@@ -17,45 +18,53 @@ const styles = {
   flexBetween: `flex justify-between`,
 };
 
-const CoinDetails = ({
-  id,
-  coinData,
-  coinMetaData,
-}) => {
+const CoinDetails = ({ id, coinData, coinMetaData }) => {
   const [coinTextData, setCoinData] = useState({});
 
   useEffect(() => {
-    if(coinData && coinMetaData) {
+    if (coinData && coinMetaData) {
       let logo = coinMetaData.logo;
       let name = coinData.name;
       let symbol = coinData.symbol;
       let price = coinData.quote.USD.price.toLocaleString();
       let marketCap = coinData.quote.USD.market_cap.toLocaleString();
-      let fullyDilutedMarketCap = coinData.quote.USD.fully_diluted_market_cap.toLocaleString()
+      let fullyDilutedMarketCap =
+        coinData.quote.USD.fully_diluted_market_cap.toLocaleString();
       let volume = coinData.quote.USD.volume_24h.toLocaleString();
       let circulatingSupply = coinData.circulating_supply.toLocaleString();
-      let maxSupply
-      if(coinData.max_supply != null) {
+      let totalSupply = coinData.total_supply.toLocaleString();
+      console.log(coinMetaData.urls);
+      let website = coinMetaData.urls.website[0];
+      let explorer = coinMetaData.urls.explorer[0];
+      let sourceCode = coinMetaData.urls.source_code[0];
+      let technicalCode = coinMetaData.urls.technical_doc[0];
+      let reddit = coinMetaData.urls.reddit[0];
+      let maxSupply;
+      if (coinData.max_supply != null) {
         maxSupply = coinData.max_supply.toLocaleString();
       } else {
-        maxSupply = 'Infinite'
+        maxSupply = "Infinite";
       }
-      let totalSupply = coinData.total_supply.toLocaleString();
       setCoinData({
-        logo, 
-        name, 
-        symbol, 
-        price, 
-        marketCap, 
-        fullyDilutedMarketCap, 
-        volume, 
-        circulatingSupply, 
-        maxSupply, 
-        totalSupply
+        logo,
+        name,
+        symbol,
+        price,
+        marketCap,
+        fullyDilutedMarketCap,
+        volume,
+        circulatingSupply,
+        maxSupply,
+        totalSupply,
+        website,
+        explorer,
+        sourceCode,
+        technicalCode,
+        reddit,
       });
     }
-    console.log(coinData, coinMetaData)
-  }, [coinData, coinMetaData])
+    console.log(coinData, coinMetaData);
+  }, [coinData, coinMetaData]);
 
   return (
     <main className={styles.coinDetails}>
@@ -86,12 +95,21 @@ const CoinDetails = ({
               <br />
               <br />
               <div className={styles.coinDetailsLinks}>
-                <div className={styles.greyBtn}>solana.com</div>
-                <div className={styles.greyBtn}>Explorers</div>
-                <div className={styles.greyBtn}>Community</div>
-                <div className={styles.greyBtn}>Chat</div>
-                <div className={styles.greyBtn}>Source code</div>
-                <div className={styles.greyBtn}>Whitepaper</div>
+                <a href={coinTextData.website}>
+                  <div className={styles.greyBtn}>Website</div>
+                </a>
+                <a href={coinTextData.explorer}>
+                  <div className={styles.greyBtn}>Explorer</div>
+                </a>
+                <a href={coinTextData.sourceCode}>
+                  <div className={styles.greyBtn}>Source Code</div>
+                </a>
+                <a href={coinTextData.technicalCode}>
+                  <div className={styles.greyBtn}>Technical code</div>
+                </a>
+                <a href={coinTextData.reddit}>
+                  <div className={styles.greyBtn}>Reddit</div>
+                </a>
               </div>
               <br />
               Topics
@@ -156,7 +174,10 @@ const CoinDetails = ({
                   <div>
                     <div>
                       <small className={styles.title}>
-                        Volume &nbsp;<small className="coin-symbol">{coinTextData.symbol}</small>{" "}
+                        Volume &nbsp;
+                        <small className="coin-symbol">
+                          {coinTextData.symbol}
+                        </small>{" "}
                       </small>
                     </div>
                     <small>${coinTextData.volume}</small>
@@ -178,7 +199,10 @@ const CoinDetails = ({
                     <div>
                       <small className={styles.title}>Circulating Supply</small>
                     </div>
-                    <small>{coinTextData.circulatingSupply}&nbsp;{coinTextData.symbol}</small>
+                    <small>
+                      {coinTextData.circulatingSupply}&nbsp;
+                      {coinTextData.symbol}
+                    </small>
                   </div>
                   <br />
                   <div>
@@ -187,7 +211,9 @@ const CoinDetails = ({
                         <small className={styles.title}>Max Supply</small>
                       </div>
                       <div>
-                        <small>{coinTextData.maxSupply}&nbsp;{coinTextData.symbol}</small>
+                        <small>
+                          {coinTextData.maxSupply}&nbsp;{coinTextData.symbol}
+                        </small>
                       </div>
                     </div>
                     <div className={styles.flexBetween}>
@@ -195,7 +221,9 @@ const CoinDetails = ({
                         <small className={styles.title}>Total Supply</small>
                       </div>
                       <div>
-                        <small>{coinTextData.totalSupply}&nbsp;{coinTextData.symbol}</small>
+                        <small>
+                          {coinTextData.totalSupply}&nbsp;{coinTextData.symbol}
+                        </small>
                       </div>
                     </div>
                   </div>
