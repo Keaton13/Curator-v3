@@ -14,16 +14,16 @@ const CMCtableRow = ({
   starNum,
   coinName,
   coinIcon,
-  coinSymbol = '---',
-  price = '----',
-  hRate = '---',
-  dRate = '---',
-  // hRateIsIncrement,
-  // dRateIsIncrement,
-  marketCapValue = '---',
-  volumeValue = '---',
-  volumeCryptoValue = '---',
-  circulatingSupply = '---',
+  coinSymbol,
+  price,
+  hour1,
+  hour24,
+  dayRate,
+  marketCapValue,
+  volumeValue,
+  volumeInCoin,
+  volumeCryptoValue,
+  circulatingSupply
 }) => {
 
   const router = useRouter()
@@ -68,10 +68,13 @@ const CMCtableRow = ({
           <p>${formatNum(price)}</p>
         </td>
         <td>
-          <Rate rate={`${formatNum(hRate)}%`} />
+          <Rate rate={`${formatNum(hour1)}%`} />
         </td>
         <td>
-          <Rate rate={`${formatNum(dRate)}%`} />
+          <Rate rate={`${formatNum(hour24)}%`} />
+        </td>
+        <td>
+          <Rate rate={`${formatNum(dayRate)}%`} />
         </td>
 
         <td>
@@ -82,16 +85,16 @@ const CMCtableRow = ({
 
         <td>
           <div>
-            <p>{formatNum(volumeValue)}</p>
+            <p>${formatNum(volumeCryptoValue)}</p>
             <p className='text-gray-400'>
-              {formatNum(volumeCryptoValue)} {coinSymbol}
+              {formatNum(volumeInCoin)}&nbsp;{coinSymbol}
             </p>
           </div>
         </td>
 
         <td>
           <div>
-            <p>{formatNum(circulatingSupply)}</p>
+            <p className='float-right mr-3'>{formatNum(circulatingSupply)}&nbsp;{coinSymbol}</p>
           </div>
         </td>
 
