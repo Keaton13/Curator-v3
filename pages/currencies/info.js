@@ -46,7 +46,7 @@ const Currencies = () => {
         <div className={styles.flexStart}>
           <div className={styles.tabContainerWrapper}>
             <div className={styles.flexBetween}>
-              <div className={styles.tabContiner}>
+              <div className={styles.tabContainer}>
                 <p className={styles.activeTab}>Price</p>
                 <p className={styles.tabItem}>Market Cap</p>
                 <p className={styles.tabItem}>Trading View</p>

@@ -12,7 +12,7 @@ const Rate = ({ rate, symbol }) => {
   rate = parseFloat(rate).toFixed(2);
   return (
     <div className={styles.rate}>
-      {symbol ? <small className="text-gray-400">24h</small> : <></>}&nbsp;&nbsp;
+      {symbol ? <small className="text-gray-400">{symbol}</small> : <></>}&nbsp;&nbsp;
       {rate >= 0 ? (
         <ChevronUp fill="#17C784" />
       ) : (
