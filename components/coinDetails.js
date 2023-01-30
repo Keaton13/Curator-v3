@@ -29,8 +29,12 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
       let rate1h = coinData.quote.USD.percent_change_1h.toFixed(2);
       let rate24h = coinData.quote.USD.percent_change_24h.toFixed(2);
       let rate7d = coinData.quote.USD.percent_change_7d.toFixed(2);
+      let rate30d = coinData.quote.USD.percent_change_30d.toFixed(2);
+      let rate60d = coinData.quote.USD.percent_change_60d.toFixed(2);
+      let rate90d = coinData.quote.USD.percent_change_90d.toFixed(2);
       let marketCap = coinData.quote.USD.market_cap.toLocaleString();
-      let marketCapDominance = coinData.quote.USD.market_cap_dominance.toFixed(2);
+      let marketCapDominance =
+        coinData.quote.USD.market_cap_dominance.toFixed(2);
       let fullyDilutedMarketCap =
         coinData.quote.USD.fully_diluted_market_cap.toLocaleString();
       let volume = coinData.quote.USD.volume_24h.toLocaleString();
@@ -56,6 +60,9 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
         rate1h,
         rate24h,
         rate7d,
+        rate30d,
+        rate60d,
+        rate90d,
         marketCap,
         marketCapDominance,
         fullyDilutedMarketCap,
@@ -97,11 +104,8 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                   </div>
                 </div>
               </div>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
+              <br/>
+              <br/>
               <div className={styles.coinDetailsLinks}>
                 <a href={coinTextData.website}>
                   <div className={styles.greyBtn}>Website</div>
@@ -137,19 +141,19 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                   </p>
                   <div className="flex my-3">
                     <h1 className="text-4xl">${coinTextData.price}</h1>
-                    <RateFilled rate={coinTextData.rate24h}/>
+                    <RateFilled rate={coinTextData.rate24h} />
                   </div>
                   <div className="flex items-start justify-between">
-                    <p className="text-gray-400">1h</p>
-                    <Rate rate={coinTextData.rate1h} />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <p className="text-gray-400">1h</p>
-                    <Rate rate={coinTextData.rate1h} />
+                      <Rate rate={coinTextData.rate1h} symbol={'1h'}/>
+                      <Rate rate={coinTextData.rate30d} symbol={'30d'}/>
                   </div>
-                  <div className="flex items-start">
-                    <p className="text-gray-400"> 7d</p>
-                    &nbsp;&nbsp;&nbsp;
-                    <Rate rate={coinTextData.rate7d} />
+                  <div className="flex items-start justify-between">
+                    <Rate rate={coinTextData.rate24h} symbol={'24h'}/>
+                    <Rate rate={coinTextData.rate60d} symbol={'60d'}/>
+                  </div>
+                  <div className="flex items-start justify-between">
+                    <Rate rate={coinTextData.rate7d} symbol={'7d'}/>
+                    <Rate rate={coinTextData.rate90d} symbol={'90d'}/>
                   </div>
                 </div>
 
@@ -187,11 +191,12 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                         Volume &nbsp;
                         <small className="coin-symbol">
                           {coinTextData.symbol}
-                        </small>{""}
+                        </small>
+                        {""}
                       </small>
                     </div>
                     <small>${coinTextData.volume}</small>
-                    <Rate rate={coinTextData.volumeChange24h} symbol="24h"/>
+                    <Rate rate={coinTextData.volumeChange24h} symbol="24h" />
                   </div>
                   <br />
                   <div>
@@ -200,7 +205,7 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
                         Market Cap Dominance
                       </small>
                     </div>
-                    <small>{coinTextData.marketCapDominance+"%"}</small>
+                    <small>{coinTextData.marketCapDominance + "%"}</small>
                   </div>
                 </div>
 
