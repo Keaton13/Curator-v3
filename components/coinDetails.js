@@ -78,7 +78,6 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
         reddit,
       });
     }
-    console.log(coinData, coinMetaData);
   }, [coinData, coinMetaData]);
 
   return (
