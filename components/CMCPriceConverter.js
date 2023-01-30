@@ -166,7 +166,7 @@ const CMCPriceConverter = ({
           <p className="text-3xl">1</p>
           &nbsp;&nbsp;
           <div>
-            <Image alt="" src={converter} width={40} height={40} />
+            <Image alt="test" src={converter} width={40} height={40} />
           </div>
           &nbsp;&nbsp;
           <div className="flex">

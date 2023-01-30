@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from "react";
+import React, { useContext} from "react";
 import { CoinMarketContext } from "../../context/context";
 import CMCTableHeader from "./CMCTableHeader";
 import CMCTableRow from "./CMCTableRow";
@@ -6,10 +6,7 @@ import CMCTableRow from "./CMCTableRow";
 const CMCTable = () => {
   let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
 
-  useEffect(() => {
-
-  }, [top100Coins, coinMetaData])
-
+  // console.log(top100Coins, coinMetaData);
   return (
     <div className="text-white font-bold">
       <div className="mx-auto max-w-screen-2xl">
