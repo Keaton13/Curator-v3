@@ -6,7 +6,6 @@ import CMCTableRow from "./CMCTableRow";
 const CMCTable = () => {
   let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
 
-  // console.log(top100Coins, coinMetaData);
   return (
     <div className="text-white font-bold">
       <div className="mx-auto max-w-screen-2xl">
