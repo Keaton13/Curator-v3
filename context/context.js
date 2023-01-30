@@ -44,6 +44,7 @@ export const CoinMarketProvider = ({children}) => {
           for (let i = 0; i < apiResponse.length; i++) {
             const element = apiResponse[i];
               ids.push(element.id)
+              // console.log(element)
               filteredResponse.push(element);
           }
           setCoinData(filteredResponse);

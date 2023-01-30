@@ -99,7 +99,7 @@ const CMCtableRow = ({
         </td>
 
         <td>
-          <Image src={`https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/${id}.svg`} width={150} height={60} alt='' />
+          <Image src={`https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/${id}.svg`} width={150} height={100} alt='test' />
         </td>
 
         <td>
