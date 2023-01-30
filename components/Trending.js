@@ -23,31 +23,34 @@ const Trending = () => {
 
   useEffect(() => {
     if (top100Coins && coinMetaData) {
-      const sortedMatchingMetaData7d = sortAndGetTop("percent_change_7d");
-      setSortedMatchingData7d(sortedMatchingMetaData7d);
-      const sortedMatchingMetaData24h = sortAndGetTop("percent_change_24h");
-      setSortedMatchingData24h(sortedMatchingMetaData24h);
-      const sortedMatchingLast3 = sortAndGetLast3();
-      setSortedMatchingLast3(sortedMatchingLast3);
+      let top100CoinsCopy = top100Coins.slice();
+      let coinMetaDataCopy = coinMetaData.slice();
+      sortAndGetTop("percent_change_7d", top100CoinsCopy, coinMetaDataCopy);
+      sortAndGetTop("percent_change_24h", top100CoinsCopy, coinMetaDataCopy);
+      sortAndGetLast3(top100CoinsCopy, coinMetaDataCopy);
     }
   }, [top100Coins, coinMetaData]);
 
-  function sortAndGetTop(field, top = 3) {
-    let sortedCoins = top100Coins.sort(
+  function sortAndGetTop(field, top100CoinsCopy, coinMetaDataCopy, top = 3) {
+    let sortedCoins = top100CoinsCopy.sort(
       (a, b) => b.quote.USD[field] - a.quote.USD[field]
     );
     let coins = sortedCoins.slice(0, top);
-    let coinMap = new Map(coinMetaData.map((item) => [item.id, item]));
+    let coinMap = new Map(coinMetaDataCopy.map((item) => [item.id, item]));
     let coinsMapped = coins.map((coin) => coinMap.get(coin.id));
-    return {coins, coinsMapped}
+    if(field == "percent_change_24h"){
+      setSortedMatchingData24h({coins, coinsMapped});
+    } else {
+      setSortedMatchingData7d({coins, coinsMapped});
+    }
   }
 
-  function sortAndGetLast3() {
-    console.log(top100Coins)
-    let coins = top100Coins.slice(top100Coins.length - 3);
-    let coinMap = new Map(coinMetaData.map((item) => [item.id, item]));
+  function sortAndGetLast3(top100CoinsCopy, coinMetaDataCopy) {
+    // console.log(top100Coins)
+    let coins = top100CoinsCopy.slice(top100CoinsCopy.length - 3);
+    let coinMap = new Map(coinMetaDataCopy.map((item) => [item.id, item]));
     let coinsMapped = coins.map((coin) => coinMap.get(coin.id));
-    return {coins, coinsMapped}
+    setSortedMatchingLast3({coins, coinsMapped})
   }
 
   return (
