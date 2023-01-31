@@ -6,7 +6,7 @@ const styles = {
   trendingCardRow: `flex items-center justify-between mb-4 text-[0.93rem]`,
 };
 
-const TrendingCardRow = ({ number, icon, name, symbol, isIncrement, rate }) => {
+const TrendingCardRow = ({ number, icon, name, symbol, rate }) => {
   return (
     <div className={styles.trendingCardRow}>
       <p className="opacity-40">{number}</p>
@@ -19,7 +19,7 @@ const TrendingCardRow = ({ number, icon, name, symbol, isIncrement, rate }) => {
           <span className="text-gray-400"> {symbol}</span>
         </p>
       </div>
-      <Rate isIncrement={isIncrement} rate={rate} />
+      <Rate rate={rate} />
     </div>
   );
 };

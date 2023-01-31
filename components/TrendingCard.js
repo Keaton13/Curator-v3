@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import MoreButton from "./MoreButton";
 import TrendingCardRow from "./TrendingCardRow";
@@ -7,7 +7,22 @@ const styles = {
   trendingCardWrapper: `flex items-center justify-between`,
 };
 
-const TrendingCard = ({ title,icon,trendingData }) => {
+const TrendingCard = ({
+  title,
+  icon,
+  sortedMatchingMetaData,
+}) => {
+  const [topCoins, setTopCoins] = useState(null);
+  const [coinsMapped, setCoinsMapped] = useState(null);
+
+  useEffect(() => {
+    if (sortedMatchingMetaData) {
+      const topCoins = sortedMatchingMetaData.coins;
+      const coinsMapped = sortedMatchingMetaData.coinsMapped;
+      setTopCoins(topCoins);
+      setCoinsMapped(coinsMapped);
+    }
+  });
   return (
     <div className={styles.trendingCard}>
       <div className={styles.trendingCardWrapper}>
@@ -19,19 +34,36 @@ const TrendingCard = ({ title,icon,trendingData }) => {
         <MoreButton />
       </div>
       <br />
-      {trendingData.map((item, index) => {
-        return (
-            <TrendingCardRow
-            key={index}
-            number={item.number}
-            symbol={item.symbol}
-            name={item.name}
-            icon={item.icon}
-            isIncrement={item.isIncrement}
-            rate={item.rate}
-            />
-        )
-      })}
+      {topCoins && coinsMapped ? (
+        <div>
+          <TrendingCardRow
+            key={1}
+            number={1}
+            symbol={topCoins[0].symbol}
+            name={topCoins[0].name}
+            icon={coinsMapped[0].logo}
+            rate={topCoins[0].quote.USD.percent_change_7d}
+          />
+          <TrendingCardRow
+            key={2}
+            number={2}
+            symbol={topCoins[1].symbol}
+            name={topCoins[1].name}
+            icon={coinsMapped[1].logo}
+            rate={topCoins[1].quote.USD.percent_change_7d}
+          />
+          <TrendingCardRow
+            key={3}
+            number={3}
+            symbol={topCoins[2].symbol}
+            name={topCoins[2].name}
+            icon={coinsMapped[2].logo}
+            rate={topCoins[2].quote.USD.percent_change_7d}
+          />
+        </div>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </div>
   );
 };

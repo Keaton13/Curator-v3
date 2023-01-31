@@ -1,10 +1,9 @@
-import Header from "../../components/Header";
-import solana from "../../assets/solana.png";
-import Usd from "../../assets/svg/usd";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { CoinMarketContext } from "../../context/context";
 import CMCPriceConverter from "../../components/CMCpriceConverter";
+import Header from "../../components/Header";
 import Graph from "../../components/Graph";
-import Chat from '../../components/Chat';
+import Chat from "../../components/Chat";
 
 const styles = {
   activeTab: `p-1 px-2 mr-2 rounded-lg bg-[#171924]`,
@@ -20,9 +19,10 @@ const styles = {
 };
 
 const Currencies = () => {
-  const [coinName, setCoinName] = useState("");
-  const [coinSymbol, setCoinSymbol] = useState("");
-  const [price, setPrice] = useState("");
+  let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
+  const [id, setId] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [coinTextData, setCoinTextData] = useState({});
 
   useEffect(() => {
     getURLData();
@@ -31,11 +31,30 @@ const Currencies = () => {
   const getURLData = async () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-
-    setCoinName(urlParams.get("coin"));
-    setPrice(Number(urlParams.get("price")).toLocaleString());
-    setCoinSymbol(urlParams.get("symbol"));
+    setId(Number(urlParams.get("id")));
   };
+
+  useEffect(() => {
+    if (top100Coins && coinMetaData) {
+     let targetCoin = top100Coins.find((object) => object.id === id);
+     let targetCoinMetaData = coinMetaData.find((object) => object.id === id);
+    //  setCoinTextData(targetCoin, targetCoinMetaData)
+    //  setLoading(false);
+     if(targetCoin, targetCoinMetaData) {
+      getCoinTextData(targetCoin, targetCoinMetaData)
+     }
+    }
+  }, [top100Coins, coinMetaData, id]);
+
+  const getCoinTextData = (targetCoin, targetCoinMetaData) => {
+    console.log(targetCoin, targetCoinMetaData)
+    let from = targetCoin.name;
+    let fromLogo = targetCoinMetaData.logo;
+    let fromSymbol = targetCoin.symbol;
+    let price = targetCoin.quote.USD.price;
+    setCoinTextData({from, fromLogo, fromSymbol, price});
+    setLoading(false);
+  }
 
   return (
     <div className={styles.info}>
@@ -44,7 +63,7 @@ const Currencies = () => {
         <div className={styles.flexStart}>
           <div className={styles.tabContainerWrapper}>
             <div className={styles.flexBetween}>
-              <div className={styles.tabContiner}>
+              <div className={styles.tabContainer}>
                 <p className={styles.activeTab}>Price</p>
                 <p className={styles.tabItem}>Market Cap</p>
                 <p className={styles.tabItem}>Trading View</p>
@@ -82,15 +101,13 @@ const Currencies = () => {
             </div>
             <br />
             <br />
-            <CMCPriceConverter
-              from={coinName}
-              fromSymbol={coinSymbol}
-              fromLogo={solana}
-              toLogo={<Usd />}
-              price={price}
-              to="United States Dollars"
-              toSymbol="USD"
-            />
+            {coinTextData ? (
+              <CMCPriceConverter
+                coinTextData={coinTextData}
+              />
+            ) : (
+              <></>
+            )}
           </div>
           <div className="pt-10 ml-5">
             <Chat />
