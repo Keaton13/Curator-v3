@@ -6,6 +6,7 @@ import gainers from "../assets/gainers.png";
 import recent from "../assets/recent.png";
 import Rate from "./cmc-table/Rate";
 import TrendingCard from "./TrendingCard";
+import { get } from "https";
 
 const styles = {
   trendingWrapper: `mx-auto max-w-screen-2xl`,
@@ -13,23 +14,25 @@ const styles = {
   flexCenter: `flex items-center`,
 };
 
-
 const Trending = () => {
-  let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
+  let { top100Coins, coinMetaData, globalCryptoData } =
+    useContext(CoinMarketContext);
   const [checked, setChecked] = useState(false);
   const [sortedMatchingData24h, setSortedMatchingData24h] = useState(null);
   const [sortedMatchingData7d, setSortedMatchingData7d] = useState(null);
   const [sortedMatchingLast3, setSortedMatchingLast3] = useState(null);
+  const [globalCryptoDataText, setGlobalCryptoDataText] = useState(null);
 
   useEffect(() => {
-    if (top100Coins && coinMetaData) {
+    if (top100Coins && coinMetaData && globalCryptoData) {
       let top100CoinsCopy = top100Coins.slice();
       let coinMetaDataCopy = coinMetaData.slice();
       sortAndGetTop("percent_change_7d", top100CoinsCopy, coinMetaDataCopy);
       sortAndGetTop("percent_change_24h", top100CoinsCopy, coinMetaDataCopy);
       sortAndGetLast3(top100CoinsCopy, coinMetaDataCopy);
+      getGlobalCryptoData();
     }
-  }, [top100Coins, coinMetaData]);
+  }, [top100Coins, coinMetaData, globalCryptoData]);
 
   function sortAndGetTop(field, top100CoinsCopy, coinMetaDataCopy, top = 3) {
     let sortedCoins = top100CoinsCopy.sort(
@@ -38,10 +41,10 @@ const Trending = () => {
     let coins = sortedCoins.slice(0, top);
     let coinMap = new Map(coinMetaDataCopy.map((item) => [item.id, item]));
     let coinsMapped = coins.map((coin) => coinMap.get(coin.id));
-    if(field == "percent_change_24h"){
-      setSortedMatchingData24h({coins, coinsMapped});
+    if (field == "percent_change_24h") {
+      setSortedMatchingData24h({ coins, coinsMapped });
     } else {
-      setSortedMatchingData7d({coins, coinsMapped});
+      setSortedMatchingData7d({ coins, coinsMapped });
     }
   }
 
@@ -50,7 +53,23 @@ const Trending = () => {
     let coins = top100CoinsCopy.slice(top100CoinsCopy.length - 3);
     let coinMap = new Map(coinMetaDataCopy.map((item) => [item.id, item]));
     let coinsMapped = coins.map((coin) => coinMap.get(coin.id));
-    setSortedMatchingLast3({coins, coinsMapped})
+    setSortedMatchingLast3({ coins, coinsMapped });
+  }
+
+  function getGlobalCryptoData() {
+    let marketCapUsd = globalCryptoData.quote.USD.total_market_cap;
+    let marketCapUsdConversion = (marketCapUsd / 1e12).toFixed(2);
+    let dailyPercentChange = formatNum(globalCryptoData.quote.USD.total_volume_24h_yesterday_percentage_change);
+
+    setGlobalCryptoDataText({ marketCapUsdConversion, dailyPercentChange });
+  }
+
+
+  function formatNum (num){
+    console.log(num)
+    if(num){
+      return Number(num.toFixed(2)).toLocaleString()
+    }
   }
 
   return (
@@ -72,19 +91,28 @@ const Trending = () => {
           </div>
         </div>
         <br />
-        <div className="flex">
-          <p className="text-gray-400">
-            The global crypto market cap is $1.74T, a &nbsp;
-          </p>
-          <span>
-            <Rate isIncrement={true} rate="0.53%" />
-          </span>
-          <p>
-            {" "}
-            &nbsp; decrease over the last day.{" "}
-            <span className="underline">Read More</span>
-          </p>
-        </div>
+        {globalCryptoDataText ? (
+          <div className="flex">
+            <p className="text-gray-400">
+              The global crypto market cap is {globalCryptoDataText.marketCapUsdConversion} Trillion, a
+            </p>
+            <span>
+              <Rate rate={globalCryptoDataText.dailyPercentChange} />
+            </span>
+            <p>
+              {" "}
+              &nbsp; {globalCryptoDataText.dailyPercentChange >= 0 ? (
+                "increase over the last day"
+              ) : (
+                "decrease over the last day"
+              )}
+              &nbsp;
+              <span className="underline">Read More</span>
+            </p>
+          </div>
+        ) : (
+          <></>
+        )}
         <br />
 
         <div className={styles.flexCenter}>
@@ -93,17 +121,17 @@ const Trending = () => {
               <TrendingCard
                 title="Trending"
                 icon={fire}
-                sortedMatchingMetaData = {sortedMatchingData7d}
+                sortedMatchingMetaData={sortedMatchingData7d}
               />
               <TrendingCard
                 title="Biggest Gainers"
                 icon={gainers}
-                sortedMatchingMetaData = {sortedMatchingData24h}
+                sortedMatchingMetaData={sortedMatchingData24h}
               />
               <TrendingCard
                 title="Recently Added"
                 icon={recent}
-                sortedMatchingMetaData = {sortedMatchingLast3}
+                sortedMatchingMetaData={sortedMatchingLast3}
               />
             </>
           ) : (
