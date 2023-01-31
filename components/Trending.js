@@ -66,7 +66,6 @@ const Trending = () => {
 
 
   function formatNum (num){
-    console.log(num)
     if(num){
       return Number(num.toFixed(2)).toLocaleString()
     }
