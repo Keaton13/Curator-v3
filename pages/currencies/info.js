@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { CoinMarketContext } from "../../context/context";
-import CMCPriceConverter from "../../components/CMCpriceConverter";
+import CMCPriceConverter from "../../components/CMCPriceConverter";
 import Header from "../../components/Header";
 import Graph from "../../components/Graph";
 import Chat from "../../components/Chat";

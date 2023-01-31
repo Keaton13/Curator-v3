@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { CoinMarketContext } from "../../context/context";
 import CoinDetails from "../../components/coinDetails";
-import Header from "../../components/header";
+import Header from "../../components/Header";
 
 const Price = () => {
   let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
