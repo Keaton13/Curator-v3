@@ -1,16 +1,6 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Rate from "./cmc-table/Rate";
-import btc from "../assets/btc.png";
-import eth from "../assets/eth.png";
-import usdc from "../assets/usdc.png";
-import usdt from "../assets/usdt.png";
-import xrp from "../assets/xrp.png";
-import cardano from "../assets/cardano.png";
-import terra from "../assets/tera.png";
-import solana from "../assets/solana.png";
-import avalance from "../assets/avalanche.png";
-import bnb from "../assets/bnb.png";
 import RateFilled from "./buttons/RateFilled";
 import DropDownBtn from "./buttons/DropDownBtn";
 
@@ -27,253 +17,228 @@ const styles = {
   flexBetween: `flex justify-between`,
 };
 
-const CoinDetails = ({ coinName, coinSymbol, price }) => {
-  const coinIcon = () => {
-    console.log(price);
-    switch (coinName) {
-      case "Bitcoin":
-        return (
-          <Image
-            src={btc}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Ethereum":
-        return (
-          <Image
-            src={eth}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Tether":
-        return (
-          <Image
-            src={usdt}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Uscd":
-        return (
-          <Image
-            src={usdc}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Xrp":
-        return (
-          <Image
-            src={xrp}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Cardano":
-        return (
-          <Image
-            src={cardano}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Terra":
-        return (
-          <Image
-            src={terra}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Solana":
-        return (
-          <Image
-            src={solana}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Avalanche":
-        return (
-          <Image
-            src={avalance}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      case "Bnb":
-        return (
-          <Image
-            src={bnb}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
-      default:
-        return (
-          <Image
-            src={btc}
-            className="rounded-full"
-            width={50}
-            height={50}
-            alt=""
-          />
-        );
+const CoinDetails = ({ id, coinData, coinMetaData }) => {
+  const [coinTextData, setCoinData] = useState({});
+
+  useEffect(() => {
+    if (coinData && coinMetaData) {
+      let logo = coinMetaData.logo;
+      let name = coinData.name;
+      let symbol = coinData.symbol;
+      let price = coinData.quote.USD.price.toLocaleString();
+      let rate1h = coinData.quote.USD.percent_change_1h.toFixed(2);
+      let rate24h = coinData.quote.USD.percent_change_24h.toFixed(2);
+      let rate7d = coinData.quote.USD.percent_change_7d.toFixed(2);
+      let rate30d = coinData.quote.USD.percent_change_30d.toFixed(2);
+      let rate60d = coinData.quote.USD.percent_change_60d.toFixed(2);
+      let rate90d = coinData.quote.USD.percent_change_90d.toFixed(2);
+      let marketCap = coinData.quote.USD.market_cap.toLocaleString();
+      let marketCapDominance =
+        coinData.quote.USD.market_cap_dominance.toFixed(2);
+      let fullyDilutedMarketCap =
+        coinData.quote.USD.fully_diluted_market_cap.toLocaleString();
+      let volume = coinData.quote.USD.volume_24h.toLocaleString();
+      let volumeChange24h = coinData.quote.USD.volume_change_24h.toFixed(2);
+      let circulatingSupply = coinData.circulating_supply.toLocaleString();
+      let totalSupply = coinData.total_supply.toLocaleString();
+      let website = coinMetaData.urls.website[0];
+      let explorer = coinMetaData.urls.explorer[0];
+      let sourceCode = coinMetaData.urls.source_code[0];
+      let technicalCode = coinMetaData.urls.technical_doc[0];
+      let reddit = coinMetaData.urls.reddit[0];
+      let maxSupply;
+      if (coinData.max_supply != null) {
+        maxSupply = coinData.max_supply.toLocaleString();
+      } else {
+        maxSupply = "Infinite";
+      }
+      setCoinData({
+        logo,
+        name,
+        symbol,
+        price,
+        rate1h,
+        rate24h,
+        rate7d,
+        rate30d,
+        rate60d,
+        rate90d,
+        marketCap,
+        marketCapDominance,
+        fullyDilutedMarketCap,
+        volume,
+        volumeChange24h,
+        circulatingSupply,
+        maxSupply,
+        totalSupply,
+        website,
+        explorer,
+        sourceCode,
+        technicalCode,
+        reddit,
+      });
     }
-  };
+  }, [coinData, coinMetaData]);
 
   return (
     <main className={styles.coinDetails}>
-      <div>
-        <div className={styles.coinDetailsWrapper}>
-          <div className='flex flex-col w-fit'>
-            <div className='flex items-center'>
-              {coinIcon()}
-              &nbsp; &nbsp;
-              <div>
-                <div className='flex'>
-                  <p className='text-3xl'>{coinName}</p>
-                  &nbsp; &nbsp;&nbsp; &nbsp;
-                  <p className={styles.coinSymbol}>{coinSymbol}</p>
-                </div>
-              </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <div className={styles.coinDetailsLinks}>
-              <div className={styles.greyBtn}>solana.com</div>
-              <div className={styles.greyBtn}>Explorers</div>
-              <div className={styles.greyBtn}>Community</div>
-              <div className={styles.greyBtn}>Chat</div>
-              <div className={styles.greyBtn}>Source code</div>
-              <div className={styles.greyBtn}>Whitepaper</div>
-            </div>
-            <br />
-            Topics
-            <div className={[styles.coinDetailsLinks, 'topics']}>
-              <div className={styles.greyBtn}>Mineable</div>
-              <div className={styles.greyBtn}>PoW</div>
-              <div className={styles.greyBtn}>SHA-256</div>
-              <div className={styles.greyBtn}>Store of value</div>
-            </div>
-          </div>
-
-          <div className='-ml-16'>
-            <div className={styles.coinRates}>
-              <div>
-                <p className='text-gray-400'>
-                  {coinName} ({coinSymbol})
-                </p>
-                <div className='flex my-3'>
-                  <h1 className='text-4xl'>${price}</h1>
-                  <RateFilled />
-                </div>
-                <div className='flex items-start'>
-                  <p className='text-gray-400'> 15.26 ETH</p>
-                  &nbsp;&nbsp;&nbsp;
-                  <Rate isIncrement={false} rate='0.53%' />
-                </div>
-                <div className='flex items-start'>
-                  <p className='text-gray-400'> 24.33 BTC</p>
-                  &nbsp;&nbsp;&nbsp;
-                  <Rate isIncrement={true} rate='0.99%' />
-                </div>
-              </div>
-
-              <div className='flex'>
-                <DropDownBtn label='Buy' />
-                <DropDownBtn label='Exchange' />
-                <DropDownBtn label='Gaming' />
-                <DropDownBtn label='Earn Crypto' />
-              </div>
-            </div>
-
-            <div className={styles.coinInfo}>
-              <div>
+      {coinTextData ? (
+        <div>
+          <div className={styles.coinDetailsWrapper}>
+            <div className="flex flex-col w-fit">
+              <div className="flex items-center">
+                <Image
+                  src={coinTextData.logo}
+                  className="rounded-full"
+                  width={50}
+                  height={50}
+                  alt=""
+                />{" "}
+                &nbsp; &nbsp;
                 <div>
-                  <small className={styles.title}>Market Cap</small>
+                  <div className="flex">
+                    <p className="text-3xl">{coinTextData.name}</p>
+                    &nbsp; &nbsp;&nbsp; &nbsp;
+                    <p className={styles.coinSymbol}>{coinTextData.symbol}</p>
+                  </div>
                 </div>
-                <small>$731,935,983,865</small>
-                <Rate isIncrement={true} rate='0.53%' />
+              </div>
+              <br/>
+              <br/>
+              <div className={styles.coinDetailsLinks}>
+                <a href={coinTextData.website}>
+                  <div className={styles.greyBtn}>Website</div>
+                </a>
+                <a href={coinTextData.explorer}>
+                  <div className={styles.greyBtn}>Explorer</div>
+                </a>
+                <a href={coinTextData.sourceCode}>
+                  <div className={styles.greyBtn}>Source Code</div>
+                </a>
+                <a href={coinTextData.technicalCode}>
+                  <div className={styles.greyBtn}>Technical code</div>
+                </a>
+                <a href={coinTextData.reddit}>
+                  <div className={styles.greyBtn}>Reddit</div>
+                </a>
+              </div>
+              <br />
+              Topics
+              <div className={[styles.coinDetailsLinks, "topics"]}>
+                <div className={styles.greyBtn}>Mineable</div>
+                <div className={styles.greyBtn}>PoW</div>
+                <div className={styles.greyBtn}>SHA-256</div>
+                <div className={styles.greyBtn}>Store of value</div>
+              </div>
+            </div>
+
+            <div className="ml-16">
+              <div className={styles.coinRates}>
+                <div>
+                  <p className="text-gray-400">
+                    {coinTextData.name} ({coinTextData.symbol})
+                  </p>
+                  <div className="flex my-3">
+                    <h1 className="text-4xl">${coinTextData.price}</h1>
+                    <RateFilled rate={coinTextData.rate24h} />
+                  </div>
+                  <div className="flex items-start justify-between">
+                      <Rate rate={coinTextData.rate1h} symbol={'1h'}/>
+                      <Rate rate={coinTextData.rate30d} symbol={'30d'}/>
+                  </div>
+                  <div className="flex items-start justify-between">
+                    <Rate rate={coinTextData.rate24h} symbol={'24h'}/>
+                    <Rate rate={coinTextData.rate60d} symbol={'60d'}/>
+                  </div>
+                  <div className="flex items-start justify-between">
+                    <Rate rate={coinTextData.rate7d} symbol={'7d'}/>
+                    <Rate rate={coinTextData.rate90d} symbol={'90d'}/>
+                  </div>
+                </div>
+
+                <div className="flex">
+                  <DropDownBtn label="Buy" />
+                  <DropDownBtn label="Exchange" />
+                  <DropDownBtn label="Gaming" />
+                  <DropDownBtn label="Earn Crypto" />
+                </div>
               </div>
 
-              <div className={styles.borderLeft}>
+              <div className={styles.coinInfo}>
                 <div>
-                  <small className={styles.title}>
-                    Fully Diluted Market Cap
-                  </small>
+                  <div>
+                    <small className={styles.title}>Market Cap</small>
+                  </div>
+                  <small>${coinTextData.marketCap}</small>
+                  {/* <Rate rate="0.53%" /> */}
                 </div>
-                <small>$811,236,224,810</small>
-                <Rate isIncrement={true} rate='0.53%' />
-              </div>
 
-              <div className={styles.borderLeft}>
-                <div>
+                <div className={styles.borderLeft}>
                   <div>
                     <small className={styles.title}>
-                      Volume &nbsp;<small className='coin-symbol'> BTC</small>{' '}
+                      Fully Diluted Market Cap
                     </small>
                   </div>
-                  <small>$24,143,176,324</small>
-                  <Rate isIncrement={true} rate='0.92%' />
+                  <small>${coinTextData.fullyDilutedMarketCap}</small>
+                  {/* <Rate rate="0.53%" /> */}
                 </div>
-                <br />
-                <div>
-                  <div>
-                    <small className={styles.title}>Volume / Market Cap</small>
-                  </div>
-                  <small>0.03315</small>
-                </div>
-              </div>
 
-              <div className={styles.borderLeft}>
-                <div>
+                <div className={styles.borderLeft}>
                   <div>
-                    <small className={styles.title}>Circulating Supply</small>
+                    <div>
+                      <small className={styles.title}>
+                        Volume &nbsp;
+                        <small className="coin-symbol">
+                          {coinTextData.symbol}
+                        </small>
+                        {""}
+                      </small>
+                    </div>
+                    <small>${coinTextData.volume}</small>
+                    <Rate rate={coinTextData.volumeChange24h} symbol="24h" />
                   </div>
-                  <small>18,983,850.00 BTC</small>
+                  <br />
+                  <div>
+                    <div>
+                      <small className={styles.title}>
+                        Market Cap Dominance
+                      </small>
+                    </div>
+                    <small>{coinTextData.marketCapDominance + "%"}</small>
+                  </div>
                 </div>
-                <br />
-                <div>
-                  <div className={styles.flexBetween}>
+
+                <div className={styles.borderLeft}>
+                  <div>
                     <div>
-                      <small className={styles.title}>Max Supply</small>
+                      <small className={styles.title}>Circulating Supply</small>
                     </div>
-                    <div>
-                      <small>21,000,000</small>
-                    </div>
+                    <small>
+                      {coinTextData.circulatingSupply}&nbsp;
+                      {coinTextData.symbol}
+                    </small>
                   </div>
-                  <div className={styles.flexBetween}>
-                    <div>
-                      <small className={styles.title}>Total Supply</small>
+                  <br />
+                  <div>
+                    <div className={styles.flexBetween}>
+                      <div>
+                        <small className={styles.title}>Max Supply</small>
+                      </div>
+                      <div>
+                        <small>
+                          {coinTextData.maxSupply}&nbsp;{coinTextData.symbol}
+                        </small>
+                      </div>
                     </div>
-                    <div>
-                      <small>18,983,912</small>
+                    <div className={styles.flexBetween}>
+                      <div>
+                        <small className={styles.title}>Total Supply</small>
+                      </div>
+                      <div>
+                        <small>
+                          {coinTextData.totalSupply}&nbsp;{coinTextData.symbol}
+                        </small>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -281,9 +246,10 @@ const CoinDetails = ({ coinName, coinSymbol, price }) => {
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div>Loading...</div>
+      )}
     </main>
   );
 };
-
 export default CoinDetails;
