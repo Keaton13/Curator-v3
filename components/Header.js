@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Search from "../assets/svg/search";
+import { useRouter } from 'next/router'
 
 const styles = {
   header: `bg-[#17171A] text-white h-20 flex gap-[100px] w-full p-[30px]`,
@@ -14,6 +15,12 @@ const styles = {
 };
 
 const Header = () => {
+  const Router = useRouter()
+
+  const handleClick = () => {
+    Router.push('/nfts/nft')
+  }
+
   return (
     <div className={styles.header}>
       <Image
@@ -32,7 +39,7 @@ const Header = () => {
           <div className={styles.navItem}>
             <div className={styles.navLink}>Exchanges</div>
           </div>
-          <div className={styles.navItem}>
+          <div className={styles.navItem} onClick={handleClick}>
             <div className={styles.navLink}>NFT</div>
             <div className={styles.badge} />
           </div>
