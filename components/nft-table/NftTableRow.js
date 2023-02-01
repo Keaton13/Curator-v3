@@ -38,7 +38,8 @@ const styles = {
   },
 };
 
-const NftTableRow = () => {
+const NftTableRow = (collection) => {
+    console.log(collection)
   return (
     <tr style={styles.tableRow}>
       <td style={styles.section1}>
