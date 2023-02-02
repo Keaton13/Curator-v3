@@ -34,6 +34,7 @@ const NftTable = () => {
   const { top10Collections, fetchTop10Collections } = useContext(NFTContext);
 
   useEffect(() => {
+    console.log('Inside Use Effect')
     fetchTop10Collections();
   }, [fetchTop10Collections]);
   return (
@@ -49,7 +50,7 @@ const NftTable = () => {
           </thead>
           <tbody>
             {top10Collections.length > 0 ? (
-              top10Collections.map((collection) => (
+              top10Collections[0].result.map((collection) => (
                 <NftTableRow collection={collection} />
               ))
             ) : (
