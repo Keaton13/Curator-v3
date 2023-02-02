@@ -6,11 +6,12 @@ export const NFTProvider = ({ children }) => {
   const [top10Collections, setTop10Collections] = useState([]);
 
   const fetchTop10Collections = useCallback(async () => {
+    console.log("calling Moralis data")
     try {
-      const res = await fetch("/api/getTrendingNftCollections");
+      const res = await fetch("/api/moralisV2");
       const data = await res.json();
-      console.log(data.data);
-      setTop10Collections(data.data);
+      console.log(data);
+      setTop10Collections(data);
     } catch (e) {
       console.error(e);
     }

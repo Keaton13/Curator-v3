@@ -39,7 +39,7 @@ const styles = {
 };
 
 const NftTableRow = (collection) => {
-    console.log(collection)
+    console.log(collection.collection)
   return (
     <tr style={styles.tableRow}>
       <td style={styles.section1}>

@@ -46,6 +46,8 @@ export const CoinMarketProvider = ({ children }) => {
     }
   };
 
+  
+
   const setData = useCallback(async () => {
     let ids = [];
     try {

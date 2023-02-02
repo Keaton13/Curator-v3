@@ -3,23 +3,26 @@ const Moralis = require('moralis').default;
 const { EvmChain } = require('@moralisweb3/common-evm-utils');
 
 const app = express();
-const port = 3000;
-const MORALIS_API_KEY = 'replace_me';
-const address = 'replace_me';
-const chain = EvmChain.ETHEREUM;
+const port = 3001;
 
-const startServer = async () => {
-  await Moralis.start({
-    apiKey: MORALIS_API_KEY,
-  });
+console.log(process.env.MORALIS_API_KEY)
 
-  app.listen(port, () => {
-    console.log(`Moralis server is listening on port ${port}`);
-  });
-};
+app.get('/nft-collections' , async (req, res) => {
+    await Moralis.start({
+      apiKey: process.env.MORALIS_API_KEY,
+    });
 
-startServer();
+    let address = '0x8c96d1BC087191B2fD5963D792550CeFa7955210'
+    let chain = EvmChain.ETHEREUM;
 
-export default (req, res) => {
-  res.status(200).json({ message: 'Moralis server is running.' });
-};
+    const response = await Moralis.EvmApi.nft.getWalletNFTCollections({
+        address,
+        chain
+    })
+    console.log(response.toJSON())
+})
+
+app.listen(port, () => {
+  console.log(`Moralis server is listening on port ${port}`);
+  console.log(process.env);
+});
