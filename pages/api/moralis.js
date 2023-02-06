@@ -5,8 +5,6 @@ const { EvmChain } = require('@moralisweb3/common-evm-utils');
 const app = express();
 const port = 3001;
 
-console.log(process.env.MORALIS_API_KEY)
-
 app.get('/nft-collections' , async (req, res) => {
     await Moralis.start({
       apiKey: process.env.MORALIS_API_KEY,
@@ -24,5 +22,4 @@ app.get('/nft-collections' , async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Moralis server is listening on port ${port}`);
-  console.log(process.env);
 });

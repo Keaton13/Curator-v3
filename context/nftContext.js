@@ -6,12 +6,22 @@ export const NFTProvider = ({ children }) => {
   const [top10Collections, setTop10Collections] = useState([]);
   const [openSeaData, setOpenSeaData] = useState();
 
+  const getTrendingNftCollections = async () => {
+    try{
+        const res = await fetch("/api/getNftCollectionInfoOffAddress")
+        const data = await res.json();
+        console.log(data);
+    } catch (e) {
+        console.error(e);
+    }
+  }
+
   const fetchTop10Collections = useCallback(async () => {
     console.log("calling Moralis data");
     try {
       const res = await fetch("/api/moralisV2");
       const data = await res.json();
-      console.log(data);
+    //   console.log(data);
       convertCollectionNamesToOpenSeaSlugs(data);
       setTop10Collections(data);
     } catch (e) {
@@ -20,9 +30,9 @@ export const NFTProvider = ({ children }) => {
   }, []);
 
   const convertCollectionNamesToOpenSeaSlugs = async (data) => {
-    console.log(data);
+    // console.log(data);
     let collectionDataForOpenSea = [];
-
+    await getTrendingNftCollections();
     // let collections = {
     //     Eth : [],
     //     Poly : []
@@ -48,7 +58,7 @@ export const NFTProvider = ({ children }) => {
   };
 
   return (
-    <NFTContext.Provider value={{ top10Collections, fetchTop10Collections }}>
+    <NFTContext.Provider value={{ top10Collections, fetchTop10Collections, getTrendingNftCollections }}>
       {children}
     </NFTContext.Provider>
   );

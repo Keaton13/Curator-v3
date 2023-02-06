@@ -31,11 +31,12 @@ const styles = {
 };
 
 const NftTable = () => {
-  const { top10Collections, fetchTop10Collections } = useContext(NFTContext);
+  const { top10Collections, fetchTop10Collections, getTrendingNftCollections } = useContext(NFTContext);
 
   useEffect(() => {
     console.log('Inside Use Effect')
     fetchTop10Collections();
+    getTrendingNftCollections();
   }, [fetchTop10Collections]);
   return (
     <div className="text-white font-bold overflow-x-auto">

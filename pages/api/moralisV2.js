@@ -19,7 +19,6 @@ export default function handler(req, res) {
 
             allNFTS.push(response);
           }
-        console.log(allNFTS)
         res.status(200).send(allNFTS)
         //   const data = await response.json();
 
