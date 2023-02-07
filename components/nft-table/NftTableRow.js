@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 const styles = {
   tableRow: {
@@ -7,7 +7,7 @@ const styles = {
     justifyContent: "center",
   },
   section1: {
-    width: "60%",
+    width: "100%",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -22,15 +22,17 @@ const styles = {
     textAlign: "center",
   },
   number: {
-    width: "50%",
+    width: "10%",
     fontSize: "1.25rem",
     marginRight: "1rem",
-    textAlign: "center"
+    textAlign: "center",
   },
   img: {
-    width: "50%",
     width: "10rem",
     height: "5rem",
+  },
+  imgWidth: {
+    maxWidth: "50%",
   },
   name: {
     width: "50%",
@@ -39,25 +41,36 @@ const styles = {
 };
 
 const NftTableRow = (collection) => {
-    console.log(collection.collection)
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  const data = collection.collection;
+
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+  };
+
   return (
     <tr style={styles.tableRow}>
-      <td style={styles.section1}>
-        <div style={styles.number}>1</div>
-        <div style={styles.img}>
-          <img
-            src="https://i.seadn.io/gcs/files/2eae21911b75d9e160e5cb8651ac59a9.jpg?auto=format&w=136&h=136&fr=1"
-            alt="icon"
-          />
-        </div>
-        <div style={styles.name}>CryptoKitties</div>
-      </td>
-      <td style={styles.section2}>
-        <div style={styles.price}>0.07 ETH</div>
-      </td>
-      <td style={styles.section3}>
-        <div style={styles.volume}>100 ETH</div>
-      </td>
+      {data && (
+        <>
+          <td style={styles.section1}>
+            <div style={styles.number}>1</div>
+            <div style={styles.img}>
+              <img style={styles.imgWidth} src={data.collection.image_url} alt="icon" onLoad={handleImageLoad} />
+              {!isImageLoaded && <div>Loading...</div>}
+            </div>
+            <div style={styles.name}>{data.collection.name}</div>
+          </td>
+          <td style={styles.section2}>
+            <div style={styles.price}>{data.floorPrice.toFixed(2)} ETH</div>
+          </td>
+          <td style={styles.section3}>
+            <div style={styles.volume}>
+              {data.collection.stats.one_day_volume.toFixed(2)} ETH
+            </div>
+          </td>
+        </>
+      )}
     </tr>
   );
 };
