@@ -31,53 +31,65 @@ const styles = {
 };
 
 const NftTable = () => {
-  const { top10Collections, fetchTop10Collections } = useContext(NFTContext);
-
-  useEffect(() => {
-    console.log('Inside Use Effect')
-    fetchTop10Collections();
-  }, [fetchTop10Collections]);
-  return (
-    <div className="text-white font-bold overflow-x-auto">
-      <div className="mx-auto max-w-screen-2xl">
-        <table style={styles.table} className="w-full float-left">
-          <thead style={styles.thead}>
-            <tr>
-              <th style={styles.th1}>Collection</th>
-              <th style={styles.th}>Floor Price</th>
-              <th style={styles.th}>Volume</th>
-            </tr>
-          </thead>
-          <tbody>
-            {top10Collections.length > 0 ? (
-              top10Collections[0].result.map((collection) => (
-                <NftTableRow collection={collection} />
-              ))
-            ) : (
+    const [trending1, setTrending1] = useState(null);
+    const [trending2, setTrending2] = useState(null);
+    const { top10Collections, fetchTop10Collections } = useContext(NFTContext);
+  
+    useEffect(() => {
+      fetchTop10Collections();
+      if(top10Collections) {
+          setTrending1(top10Collections.stats.slice(0, 5))
+          setTrending2(top10Collections.stats.slice(5, 10))
+      }
+    }, [top10Collections]);
+  
+  
+    return (
+      <div className="text-white font-bold overflow-x-auto">
+        <div className="mx-auto max-w-screen-2xl">
+          <table style={styles.table} className="w-full float-left">
+            <thead style={styles.thead}>
               <tr>
-                <td colSpan={3}>Loading...</td>
+                <th style={styles.th1}>Collection</th>
+                <th style={styles.th}>Floor Price</th>
+                <th style={styles.th}>Volume</th>
               </tr>
-            )}
-          </tbody>
-        </table>
-        {/* <table style={styles.table} className="w-full float-left">
-          <thead style={styles.thead}>
-            <tr>
-              <th style={styles.th1}>Collection</th>
-              <th style={styles.th}>Floor Price</th>
-              <th style={styles.th}>Volume</th>
-            </tr>
-          </thead>
-          <tbody>
-            <NftTableRow />
-            <NftTableRow />
-            <NftTableRow />
-            <NftTableRow />
-          </tbody>
-        </table> */}
+            </thead>
+            <tbody>
+              {trending1 ? (
+                trending1.map((collection) => (
+                  <NftTableRow collection={collection} />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={3}>Loading...</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+          <table style={styles.table} className="w-full float-left">
+            <thead style={styles.thead}>
+              <tr>
+                <th style={styles.th1}>Collection</th>
+                <th style={styles.th}>Floor Price</th>
+                <th style={styles.th}>Volume</th>
+              </tr>
+            </thead>
+            <tbody>
+              {trending2 ? (
+                trending2.map((collection) => (
+                  <NftTableRow collection={collection} />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={3}>Loading...</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default NftTable;
