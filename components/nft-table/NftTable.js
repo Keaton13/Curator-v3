@@ -9,7 +9,7 @@ const styles = {
     borderCollapse: "collapse",
   },
   thead: {
-    backgroundColor: "#2D3748",
+    // backgroundColor: "#2D3748",
   },
   th: {
     color: "#A0AEC0",
@@ -22,7 +22,7 @@ const styles = {
     color: "#A0AEC0",
     fontSize: "12px",
     textAlign: "left",
-    padding: "8px",
+    padding: "8px 50px",
     width: "60%",
   },
   td: {
@@ -33,10 +33,9 @@ const styles = {
 const NftTable = () => {
     const [trending1, setTrending1] = useState(null);
     const [trending2, setTrending2] = useState(null);
-    const { top10Collections, fetchTop10Collections } = useContext(NFTContext);
+    const { top10Collections } = useContext(NFTContext);
   
     useEffect(() => {
-      fetchTop10Collections();
       if(top10Collections) {
           setTrending1(top10Collections.stats.slice(0, 5))
           setTrending2(top10Collections.stats.slice(5, 10))
@@ -46,6 +45,7 @@ const NftTable = () => {
   
     return (
       <div className="text-white font-bold overflow-x-auto">
+        <NftTableHeader />
         <div className="mx-auto max-w-screen-2xl">
           <table style={styles.table} className="w-full float-left">
             <thead style={styles.thead}>
@@ -57,8 +57,8 @@ const NftTable = () => {
             </thead>
             <tbody>
               {trending1 ? (
-                trending1.map((collection) => (
-                  <NftTableRow collection={collection} />
+                trending1.map((collection, index) => (
+                  <NftTableRow collection={collection} index={index + 1}/>
                 ))
               ) : (
                 <tr>
@@ -77,8 +77,8 @@ const NftTable = () => {
             </thead>
             <tbody>
               {trending2 ? (
-                trending2.map((collection) => (
-                  <NftTableRow collection={collection} />
+                trending2.map((collection, index) => (
+                  <NftTableRow collection={collection} index={index + 6}/>
                 ))
               ) : (
                 <tr>
