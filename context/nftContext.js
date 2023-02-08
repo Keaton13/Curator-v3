@@ -5,37 +5,52 @@ export const NFTContext = createContext();
 export const NFTProvider = ({ children }) => {
   const [top10Collections, setTop10Collections] = useState();
   const [userWalletNfts, setUserWalletNfts] = useState([]);
-  const [openSeaData, setOpenSeaData] = useState();
-  
+  const [walletNftCollections, setWalletNftCollections] = useState();
+
   useEffect(() => {
     getTrendingNftCollections();
-    fetchTop10Collections();
-  }, [])
+    getWalletNftCollections();
+    // fetchTop10Collections();
+  }, []);
 
   const getTrendingNftCollections = async () => {
-    try{
-        const res = await fetch("/api/getTrendingNftCollections")
-        const data = await res.json();
-        console.log(data.data);
-        setTop10Collections(data.data)
+    try {
+      const res = await fetch("/api/getTrendingNftCollections");
+      const data = await res.json();
+      console.log(data.data);
+      setTop10Collections(data.data);
     } catch (e) {
-        console.error(e);
+      console.error(e);
     }
-  }
+  };
 
   const fetchTop10Collections = useCallback(async () => {
     console.log("calling Moralis data");
     try {
       const res = await fetch("/api/moralisV2");
       const data = await res.json();
-    //   console.log(data);
-    //   convertCollectionNamesToOpenSeaSlugs(data);
-    //   await getTrendingNftCollections();
-      setUserWalletNfts(data);
+      //   console.log(data);
+      //   convertCollectionNamesToOpenSeaSlugs(data);
+      //   await getTrendingNftCollections();
+      console.log(data.data);
+      setUserWalletNfts(data.data);
+      convertCollectionNamesToOpenSeaSlugs(data.data);
     } catch (e) {
       console.error(e);
     }
   }, []);
+
+  const getWalletNftCollections = async () => {
+    try {
+        const res = await fetch("/api/getWalletNftCollectionsOpensea");
+        const data = await res.json();
+        
+        console.log(data);
+        setWalletNftCollections(data);
+    } catch (e) {
+        console.error(e);
+    }
+  }
 
   const convertCollectionNamesToOpenSeaSlugs = async (data) => {
     // console.log(data);
@@ -46,11 +61,12 @@ export const NFTProvider = ({ children }) => {
     //     Poly : []
     // }
 
-    for (let i = 0; i < data[0].result.length; i++) {
-      console.log(data[0].result[i]);
+    for (let i = 0; i < data.data.length; i++) {
+      console.log(data[0]);
       let nftData = {
-        name: data[0].result[i].name,
-        address: data[0].result[i].token_address,
+        name: data.data[i].name,
+        slug: data.data[i].slug,
+        address: data.data[i].primary_asset_contracts[0].address
       };
       collectionDataForOpenSea.push(nftData);
       // let collection = data[0].result[i];
@@ -66,7 +82,7 @@ export const NFTProvider = ({ children }) => {
   };
 
   return (
-    <NFTContext.Provider value={{ top10Collections, userWalletNfts,  }}>
+    <NFTContext.Provider value={{ top10Collections, userWalletNfts }}>
       {children}
     </NFTContext.Provider>
   );

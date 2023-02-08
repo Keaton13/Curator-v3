@@ -51,7 +51,6 @@ const NftTableRow = (collection) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const data = collection.collection;
-  console.log(collection)
   const handleImageLoad = () => {
     setIsImageLoaded(true);
   };
