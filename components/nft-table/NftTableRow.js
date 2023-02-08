@@ -5,6 +5,7 @@ const styles = {
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    boxSizing: "border-box",
   },
   section1: {
     width: "100%",
@@ -12,14 +13,17 @@ const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    padding: "15px",  // add this line
   },
   section2: {
     width: "20%",
     textAlign: "center",
+    padding: "15px",  // add this line
   },
   section3: {
     width: "20%",
     textAlign: "center",
+    padding: "15px",  // add this line
   },
   number: {
     width: "10%",
@@ -28,11 +32,14 @@ const styles = {
     textAlign: "center",
   },
   img: {
-    width: "10rem",
+    display: "flex",
+    alignItems: "center",
+    width: "6rem",
     height: "5rem",
   },
   imgWidth: {
-    maxWidth: "50%",
+    maxWidth: "85%",
+    borderRadius: "10%"
   },
   name: {
     width: "50%",
@@ -44,7 +51,6 @@ const NftTableRow = (collection) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const data = collection.collection;
-
   const handleImageLoad = () => {
     setIsImageLoaded(true);
   };
@@ -54,7 +60,7 @@ const NftTableRow = (collection) => {
       {data && (
         <>
           <td style={styles.section1}>
-            <div style={styles.number}>1</div>
+            <div style={styles.number}>{collection.index}</div>
             <div style={styles.img}>
               <img style={styles.imgWidth} src={data.collection.image_url} alt="icon" onLoad={handleImageLoad} />
               {!isImageLoaded && <div>Loading...</div>}
