@@ -5,12 +5,12 @@ export const NFTContext = createContext();
 export const NFTProvider = ({ children }) => {
   const [top10Collections, setTop10Collections] = useState();
   const [userWalletNfts, setUserWalletNfts] = useState([]);
-  const [walletNftCollections, setWalletNftCollections] = useState();
+  const [walletNftCollectionData, setWalletNftCollectionData] = useState();
+  const [totalWalletValue, setTotalWalletValue] = useState();
 
   useEffect(() => {
     getTrendingNftCollections();
-    getWalletNftCollections();
-    // fetchTop10Collections();
+    convertCollectionData();
   }, []);
 
   const getTrendingNftCollections = async () => {
@@ -24,65 +24,90 @@ export const NFTProvider = ({ children }) => {
     }
   };
 
-  const fetchTop10Collections = useCallback(async () => {
+  const getWalletNfts = async () => {
     console.log("calling Moralis data");
     try {
-      const res = await fetch("/api/moralisV2");
+      const res = await fetch("/api/getWalletNfts");
       const data = await res.json();
-      //   console.log(data);
-      //   convertCollectionNamesToOpenSeaSlugs(data);
-      //   await getTrendingNftCollections();
-      console.log(data.data);
-      setUserWalletNfts(data.data);
-      convertCollectionNamesToOpenSeaSlugs(data.data);
+      return data.data;
     } catch (e) {
       console.error(e);
     }
-  }, []);
+  };
 
   const getWalletNftCollections = async () => {
     try {
-        const res = await fetch("/api/getWalletNftCollectionsOpensea");
-        const data = await res.json();
-        
-        console.log(data);
-        setWalletNftCollections(data);
+      const res = await fetch("/api/getWalletNftCollectionsOpensea");
+      const data = await res.json();
+      return data.data;
     } catch (e) {
-        console.error(e);
+      console.error(e);
     }
-  }
+  };
 
-  const convertCollectionNamesToOpenSeaSlugs = async (data) => {
-    // console.log(data);
-    let collectionDataForOpenSea = [];
-    // await getTrendingNftCollections();
-    // let collections = {
-    //     Eth : [],
-    //     Poly : []
-    // }
-
-    for (let i = 0; i < data.data.length; i++) {
-      console.log(data[0]);
-      let nftData = {
-        name: data.data[i].name,
-        slug: data.data[i].slug,
-        address: data.data[i].primary_asset_contracts[0].address
+  const getCollectionFloorStats = async (slug) => {
+    try {
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ collectionSlug: slug }),
       };
-      collectionDataForOpenSea.push(nftData);
-      // let collection = data[0].result[i];
-      // collections.Eth.push(collection);
+      const res = await fetch("/api/getCollectionFloorStats", options);
+      const data = await res.json();
+      return data.data;
+    } catch (e) {
+      console.error(e);
     }
-    // for(let i=0; i<data[1].result.length; i++){
-    //     let collection = data[1].result[i];
-    //     collections.Poly.push(collection);
-    // }
-    // console.log(collectionData);
-    // setOpenSeaData(collectionDataForOpenSea)
-    console.log(collectionDataForOpenSea);
+  };
+
+  const convertCollectionData = async () => {
+    const walletNfts = await getWalletNfts();
+    const walletCollections = await getWalletNftCollections();
+
+    console.log(walletNfts);
+    console.log(walletCollections);
+
+    let collectionData = [];
+
+    for (let i = 0; i < walletCollections.length; i++) {
+      let collectionDataOpenSea = await getCollectionFloorStats(
+        walletCollections[i].slug
+      );
+      // console.log(data[i]);
+      let nftData = {
+        name: walletCollections[i].name,
+        slug: walletCollections[i].slug,
+        address: walletCollections[i].primary_asset_contracts[0].address,
+        amount: 0,
+        floor: collectionDataOpenSea.stats.floor_price,
+        floorValue: 0,
+      };
+      collectionData.push(nftData);
+    }
+
+    for (let i = 0; i < walletNfts.length; i++) {
+      let address = walletNfts[i].tokenAddress;
+
+      for (let v = 0; v < collectionData.length; v++) {
+        if (collectionData[v].address === address) {
+          collectionData[v].amount++;
+        }
+      }
+    }
+  
+    let totalCollectionInEth = 0;
+    for (let i = 0; i < collectionData.length; i++) {
+      collectionData[i].floorValue = collectionData[i].floor * collectionData[i].amount;
+      totalCollectionInEth = totalCollectionInEth + collectionData[i].floorValue;
+    }
+
+    setUserWalletNfts(walletNfts);
+    setWalletNftCollectionData(collectionData, totalCollectionInEth);
+    setTotalWalletValue(totalCollectionInEth);
   };
 
   return (
-    <NFTContext.Provider value={{ top10Collections, userWalletNfts }}>
+    <NFTContext.Provider value={{ top10Collections, userWalletNfts, walletNftCollectionData, totalWalletValue }}>
       {children}
     </NFTContext.Provider>
   );
