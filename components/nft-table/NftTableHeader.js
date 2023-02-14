@@ -1,18 +1,37 @@
 import React from 'react'
 
 const styles = {
-    tableHeader:  `flex items-start`
-}
+  headerContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: "20px 120px"
+  },
+  headerTitle: {
+    fontSize: "32px",
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "white",
+    // padding: "0 35px"
+    marginLeft: "25px",
+    padding: "20px 0",
+    borderBottom: "1px solid white"
+  },
+  headerSubtitle: {
+    fontSize: "18px",
+    textAlign: "center",
+    color: "#999",
+    marginTop: "10px"
+  }
+};
+
 
 const NftTableHeader = () => {
   return (
-    <thead class="bg-gray-800">
-    <tr class="text-xs text-gray-400">
-      <th class="w-4/6 px-4 py-2">Collection</th>
-      <th class="w-2/6 px-4 py-2">Floor Price</th>
-      <th class="w-2/6 px-4 py-2">Volume</th>
-    </tr>
-  </thead>
+    <div style={styles.headerContainer}>
+    <button style={styles.headerTitle}><span>Trending</span></button>
+    <button style={styles.headerTitle}><span>Top</span></button>
+  </div>
   )
 }
 
