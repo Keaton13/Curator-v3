@@ -35,9 +35,6 @@ const NftTable = () => {
   const [trending2, setTrending2] = useState(null);
   const {
     top10Collections,
-    userWalletNfts,
-    walletNftCollectionData,
-    totalWalletValue,
   } = useContext(NFTContext);
 
   useEffect(() => {
@@ -47,13 +44,6 @@ const NftTable = () => {
     }
   }, [top10Collections]);
 
-  useEffect(() => {
-    if (userWalletNfts && walletNftCollectionData && totalWalletValue) {
-      console.log(userWalletNfts);
-      console.log(walletNftCollectionData);
-      console.log(totalWalletValue)
-    }
-  }, [userWalletNfts, walletNftCollectionData, totalWalletValue]);
 
   return (
     <div className="text-white font-bold overflow-x-auto">
