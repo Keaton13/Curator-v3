@@ -1,6 +1,7 @@
 // import { useEffect, useState, useContext } from "react";
 import Header from "../../components/Header";
 import NftTable from "../../components/nft-table/NftTable";
+import NftDisplay from "../../components/nftDisplay/nftDisplay";
 // import { NFTContext } from "../../context/nftContext";
 
 const Nfts = () => {
@@ -8,6 +9,7 @@ const Nfts = () => {
         <div>
             <Header />
             <NftTable />
+            <NftDisplay />    
         </div>
     )
 }
