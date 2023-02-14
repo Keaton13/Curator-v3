@@ -26,9 +26,9 @@ const nftDisplay = () => {
 
   useEffect(() => {
     if (userWalletNfts && walletNftCollectionData && totalWalletValue) {
-      console.log(userWalletNfts);
-      console.log(walletNftCollectionData);
-      console.log(totalWalletValue);
+    //   console.log(userWalletNfts);
+    //   console.log(walletNftCollectionData);
+    //   console.log(totalWalletValue);
     }
   }, [userWalletNfts, walletNftCollectionData, totalWalletValue]);
   return (

@@ -73,7 +73,7 @@ export const NFTProvider = ({ children }) => {
       let collectionDataOpenSea = await getCollectionFloorStats(
         walletCollections[i].slug
       );
-      // console.log(data[i]);
+      console.log(collectionDataOpenSea);
       let nftData = {
         name: walletCollections[i].name,
         slug: walletCollections[i].slug,
@@ -81,17 +81,23 @@ export const NFTProvider = ({ children }) => {
         amount: 0,
         floor: collectionDataOpenSea.stats.floor_price,
         floorValue: 0,
+        volume24h: collectionDataOpenSea.stats.one_day_volume,
       };
       collectionData.push(nftData);
     }
 
+     
     for (let i = 0; i < walletNfts.length; i++) {
       let address = walletNfts[i].tokenAddress;
 
       for (let v = 0; v < collectionData.length; v++) {
         if (collectionData[v].address === address) {
           collectionData[v].amount++;
+          if(!walletNfts[i].collectionData){
+            walletNfts[i].collectionData = collectionData[v];
+          }
         }
+    
       }
     }
   
