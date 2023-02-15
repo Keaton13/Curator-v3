@@ -7,6 +7,7 @@ const styles = {
     overflow: "hidden",
     display: "flex",
     flexDirection: "column",
+    // boxShadow: "0 0 10px 5px white"
   },
   imageContainer: {
     height: "340px",
