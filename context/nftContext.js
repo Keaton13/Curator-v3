@@ -4,6 +4,9 @@ export const NFTContext = createContext();
 
 export const NFTProvider = ({ children }) => {
   const [trendingCollections, setTrendingCollections] = useState();
+  const [trendingCollections24h, setTrendingCollections24h] = useState();
+  const [trendingCollections7d, setTrendingCollections7d] = useState();
+  const [trendingCollections30d, setTrendingCollections30d] = useState();
   const [userWalletNfts, setUserWalletNfts] = useState([]);
   const [walletNftCollectionData, setWalletNftCollectionData] = useState();
   const [totalWalletValue, setTotalWalletValue] = useState();
@@ -15,10 +18,46 @@ export const NFTProvider = ({ children }) => {
 
   const getTrendingNftCollections = async () => {
     try {
-      const res = await fetch("/api/getTrendingNftCollections24h");
+      const res = await fetch("/api/getTrendingNftCollections");
       const data = await res.json();
       console.log(data.data);
       setTrendingCollections(data.data);
+      getTrendingNftCollections24h();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getTrendingNftCollections24h = async () => {
+    try {
+      const res = await fetch("/api/getTrendingNftCollections24h");
+      const data = await res.json();
+      console.log(data.data);
+      setTrendingCollections24h(data.data);
+      getTrendingNftCollections7d();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getTrendingNftCollections7d = async () => {
+    try {
+      const res = await fetch("/api/getTrendingNftCollections7d");
+      const data = await res.json();
+      console.log(data.data);
+      setTrendingCollections7d(data.data);
+      getTrendingNftCollections30d();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getTrendingNftCollections30d = async () => {
+    try {
+      const res = await fetch("/api/getTrendingNftCollections30d");
+      const data = await res.json();
+      console.log(data.data);
+      setTrendingCollections30d(data.data);
     } catch (e) {
       console.error(e);
     }
@@ -113,7 +152,7 @@ export const NFTProvider = ({ children }) => {
   };
 
   return (
-    <NFTContext.Provider value={{ trendingCollections, userWalletNfts, walletNftCollectionData, totalWalletValue }}>
+    <NFTContext.Provider value={{ trendingCollections24h, userWalletNfts, walletNftCollectionData, totalWalletValue }}>
       {children}
     </NFTContext.Provider>
   );
