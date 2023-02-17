@@ -3,7 +3,7 @@ import { createContext, useState, useEffect, useCallback } from "react";
 export const NFTContext = createContext();
 
 export const NFTProvider = ({ children }) => {
-  const [top10Collections, setTop10Collections] = useState();
+  const [trendingCollections, setTrendingCollections] = useState();
   const [userWalletNfts, setUserWalletNfts] = useState([]);
   const [walletNftCollectionData, setWalletNftCollectionData] = useState();
   const [totalWalletValue, setTotalWalletValue] = useState();
@@ -15,10 +15,10 @@ export const NFTProvider = ({ children }) => {
 
   const getTrendingNftCollections = async () => {
     try {
-      const res = await fetch("/api/getTrendingNftCollections");
+      const res = await fetch("/api/getTrendingNftCollections24h");
       const data = await res.json();
       console.log(data.data);
-      setTop10Collections(data.data);
+      setTrendingCollections(data.data);
     } catch (e) {
       console.error(e);
     }
@@ -113,7 +113,7 @@ export const NFTProvider = ({ children }) => {
   };
 
   return (
-    <NFTContext.Provider value={{ top10Collections, userWalletNfts, walletNftCollectionData, totalWalletValue }}>
+    <NFTContext.Provider value={{ trendingCollections, userWalletNfts, walletNftCollectionData, totalWalletValue }}>
       {children}
     </NFTContext.Provider>
   );
