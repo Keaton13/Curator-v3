@@ -34,15 +34,15 @@ const NftTable = () => {
   const [trending1, setTrending1] = useState(null);
   const [trending2, setTrending2] = useState(null);
   const {
-    top10Collections,
+    trendingCollections24h,
   } = useContext(NFTContext);
 
   useEffect(() => {
-    if (top10Collections) {
-      setTrending1(top10Collections.stats.slice(0, 5));
-      setTrending2(top10Collections.stats.slice(5, 10));
+    if (trendingCollections24h) {
+      setTrending1(trendingCollections24h.stats.slice(0, 5));
+      setTrending2(trendingCollections24h.stats.slice(5, 10));
     }
-  }, [top10Collections]);
+  }, [trendingCollections24h]);
 
 
   return (
