@@ -1,6 +1,6 @@
 export default function handler(req,res) {
-    const getTrendingNftCollections = async () => {
-        const response = await fetch('https://api.nft-stats.com/json_data/collections-trending',
+    const getTrendingNftCollections24h = async () => {
+        const response = await fetch('https://api.nft-stats.com/json_data/collections-24h',
         {
             method: 'GET',
         },
@@ -11,5 +11,5 @@ export default function handler(req,res) {
         res.status(200).json({data})
     }
 
-    getTrendingNftCollections();
+    getTrendingNftCollections24h();
 }

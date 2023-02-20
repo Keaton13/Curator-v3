@@ -3,7 +3,10 @@ import { createContext, useState, useEffect, useCallback } from "react";
 export const NFTContext = createContext();
 
 export const NFTProvider = ({ children }) => {
-  const [top10Collections, setTop10Collections] = useState();
+  const [trendingCollections, setTrendingCollections] = useState();
+  const [trendingCollections24h, setTrendingCollections24h] = useState();
+  const [trendingCollections7d, setTrendingCollections7d] = useState();
+  const [trendingCollections30d, setTrendingCollections30d] = useState();
   const [userWalletNfts, setUserWalletNfts] = useState([]);
   const [walletNftCollectionData, setWalletNftCollectionData] = useState();
   const [totalWalletValue, setTotalWalletValue] = useState();
@@ -18,7 +21,43 @@ export const NFTProvider = ({ children }) => {
       const res = await fetch("/api/getTrendingNftCollections");
       const data = await res.json();
       console.log(data.data);
-      setTop10Collections(data.data);
+      setTrendingCollections(data.data);
+      getTrendingNftCollections24h();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getTrendingNftCollections24h = async () => {
+    try {
+      const res = await fetch("/api/getTrendingNftCollections24h");
+      const data = await res.json();
+      console.log(data.data);
+      setTrendingCollections24h(data.data);
+      getTrendingNftCollections7d();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getTrendingNftCollections7d = async () => {
+    try {
+      const res = await fetch("/api/getTrendingNftCollections7d");
+      const data = await res.json();
+      console.log(data.data);
+      setTrendingCollections7d(data.data);
+      getTrendingNftCollections30d();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getTrendingNftCollections30d = async () => {
+    try {
+      const res = await fetch("/api/getTrendingNftCollections30d");
+      const data = await res.json();
+      console.log(data.data);
+      setTrendingCollections30d(data.data);
     } catch (e) {
       console.error(e);
     }
@@ -73,7 +112,6 @@ export const NFTProvider = ({ children }) => {
       let collectionDataOpenSea = await getCollectionFloorStats(
         walletCollections[i].slug
       );
-      console.log(collectionDataOpenSea);
       let nftData = {
         name: walletCollections[i].name,
         slug: walletCollections[i].slug,
@@ -86,25 +124,25 @@ export const NFTProvider = ({ children }) => {
       collectionData.push(nftData);
     }
 
-     
     for (let i = 0; i < walletNfts.length; i++) {
       let address = walletNfts[i].tokenAddress;
 
       for (let v = 0; v < collectionData.length; v++) {
         if (collectionData[v].address === address) {
           collectionData[v].amount++;
-          if(!walletNfts[i].collectionData){
+          if (!walletNfts[i].collectionData) {
             walletNfts[i].collectionData = collectionData[v];
           }
         }
-    
       }
     }
-  
+
     let totalCollectionInEth = 0;
     for (let i = 0; i < collectionData.length; i++) {
-      collectionData[i].floorValue = collectionData[i].floor * collectionData[i].amount;
-      totalCollectionInEth = totalCollectionInEth + collectionData[i].floorValue;
+      collectionData[i].floorValue =
+        collectionData[i].floor * collectionData[i].amount;
+      totalCollectionInEth =
+        totalCollectionInEth + collectionData[i].floorValue;
     }
 
     setUserWalletNfts(walletNfts);
@@ -113,7 +151,17 @@ export const NFTProvider = ({ children }) => {
   };
 
   return (
-    <NFTContext.Provider value={{ top10Collections, userWalletNfts, walletNftCollectionData, totalWalletValue }}>
+    <NFTContext.Provider
+      value={{
+        trendingCollections,
+        trendingCollections24h,
+        trendingCollections7d,
+        trendingCollections30d,
+        userWalletNfts,
+        walletNftCollectionData,
+        totalWalletValue,
+      }}
+    >
       {children}
     </NFTContext.Provider>
   );

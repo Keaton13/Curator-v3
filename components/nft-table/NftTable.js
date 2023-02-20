@@ -33,21 +33,40 @@ const styles = {
 const NftTable = () => {
   const [trending1, setTrending1] = useState(null);
   const [trending2, setTrending2] = useState(null);
+  const [nftDisplayTime, setNftDisplayTime] = useState("24h");
+  const [nftDisplayCategory, setNftDisplayCategory] = useState("Top");
+
   const {
-    top10Collections,
+    trendingCollections,
+    trendingCollections24h,
+    trendingCollections7d,
+    trendingCollections30d,
   } = useContext(NFTContext);
 
-  useEffect(() => {
-    if (top10Collections) {
-      setTrending1(top10Collections.stats.slice(0, 5));
-      setTrending2(top10Collections.stats.slice(5, 10));
+  let nftCollections1;
+  let nftCollections2;
+
+  if (nftDisplayCategory === "Trending") {
+    nftCollections1 = trendingCollections?.stats?.slice(0, 5) || [];
+    nftCollections2 = trendingCollections?.stats?.slice(5, 10) || [];
+  } else {
+    if (nftDisplayTime === "24h") {
+      nftCollections1 = trendingCollections24h?.stats?.slice(0, 5) || [];
+      nftCollections2 = trendingCollections24h?.stats?.slice(5, 10) || [];
+    } else if (nftDisplayTime === "7d") {
+      nftCollections1 = trendingCollections7d?.stats?.slice(0, 5) || [];
+      nftCollections2 = trendingCollections7d?.stats?.slice(5, 10) || [];
+    } else {
+      nftCollections1 = trendingCollections30d?.stats?.slice(0, 5) || [];
+      nftCollections2 = trendingCollections30d?.stats?.slice(5, 10) || [];
     }
-  }, [top10Collections]);
+  }  
+  
 
 
   return (
     <div className="text-white font-bold overflow-x-auto">
-      <NftTableHeader />
+      <NftTableHeader setNftDisplayTime={setNftDisplayTime} nftDisplayTime={nftDisplayTime} setNftDisplayCategory={setNftDisplayCategory}/>
       <div className="mx-auto max-w-screen-2xl">
         <table style={styles.table} className="w-full float-left">
           <thead style={styles.thead}>
@@ -58,8 +77,8 @@ const NftTable = () => {
             </tr>
           </thead>
           <tbody>
-            {trending1 ? (
-              trending1.map((collection, index) => (
+            {nftCollections1 ? (
+              nftCollections1.map((collection, index) => (
                 <NftTableRow collection={collection} index={index + 1} />
               ))
             ) : (
@@ -78,8 +97,8 @@ const NftTable = () => {
             </tr>
           </thead>
           <tbody>
-            {trending2 ? (
-              trending2.map((collection, index) => (
+            {nftCollections2 ? (
+              nftCollections2.map((collection, index) => (
                 <NftTableRow collection={collection} index={index + 6} />
               ))
             ) : (
