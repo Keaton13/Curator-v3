@@ -47,7 +47,7 @@ const styles = {
   },
 };
 
-const NFTDisplayHeader = () => {
+const NFTDisplayHeader = (props) => {
   const { totalWalletValue } = useContext(NFTContext);
   const [hover, setHover] = React.useState(false);
 
@@ -63,6 +63,7 @@ const NFTDisplayHeader = () => {
         style={hover === 0 ? styles.headerTitleHover : styles.headerTitle}
         onMouseEnter={() => setHover(0)}
         onMouseLeave={() => setHover(false)}
+        onClick={() => props.setNftDisplay("Floor")}
       >
         <span>Floor</span>
       </button>
@@ -70,6 +71,7 @@ const NFTDisplayHeader = () => {
         style={hover === 1 ? styles.headerTitleHover : styles.headerTitle}
         onMouseEnter={() => setHover(1)}
         onMouseLeave={() => setHover(false)}
+        onClick={() => props.setNftDisplay("Volume")}
       >
         <span>Volume</span>
       </button>
@@ -77,6 +79,7 @@ const NFTDisplayHeader = () => {
         style={hover === 2 ? styles.headerTitleHover : styles.headerTitle}
         onMouseEnter={() => setHover(2)}
         onMouseLeave={() => setHover(false)}
+        onClick={() => props.setNftDisplay("Created")}
       >
         <span>Created</span>
       </button>
