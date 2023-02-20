@@ -60,7 +60,7 @@ const NftCard = (nft) => {
   const [localStyles, setLocalStyles] = useState(styles);
 
   nft = nft.nft;
-  console.log(nft);
+//   console.log(nft);
   let nftImage = nft.metadata;
   let nftName = nft.collectionData.name;
   let tokenId = nft.tokenId.slice(0, 8);
@@ -68,7 +68,6 @@ const NftCard = (nft) => {
   if (nftImage) {
     if (nftImage.image.startsWith("ipfs://")) {
       nftImage.image = "https://dweb.link/ipfs/" + nftImage.image.substring(7);
-      console.log(nftImage.image);
     }
   }
 

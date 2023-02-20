@@ -21,28 +21,33 @@ const styles = {
 };
 
 const nftDisplay = () => {
-  const { userWalletNfts, walletNftCollectionData, totalWalletValue } =
-    useContext(NFTContext);
-    const [highestFloor, setHighestFloor] = useState();
-    const [highestVolume, setHighestVolume] = useState();
-    const [newestNft, setNewestNft] = useState();
+  const { userWalletNfts } = useContext(NFTContext);
+  const [nftDisplay, setNftDisplay] = useState("Floor");
+  //   const [highestFloor, setHighestFloor] = useState();
+  //   const [highestVolume, setHighestVolume] = useState();
+  //   const [newestNft, setNewestNft] = useState();
 
-  useEffect(() => {
-    if (userWalletNfts && walletNftCollectionData && totalWalletValue) {
-    //   console.log(userWalletNfts);
-    //   console.log(walletNftCollectionData);
-    //   console.log(totalWalletValue);
-        let hightestFloor = userWalletNfts.sort((a, b) => a.collectionData.floor - b.collectionData.floor);
-        let highestVolume = userWalletNfts.sort((a, b) => a.collectionData.volume24h - b.collectionData.volume24h);
-        let newestNft = userWalletNfts.sort((a, b) => a.blockNumber - b.blockNumber);
-    }
-  }, [userWalletNfts, walletNftCollectionData, totalWalletValue]);
+  let userWalletNftsFiltered;
+  if (nftDisplay === "Floor") {
+    userWalletNftsFiltered = userWalletNfts.sort(
+      (a, b) => b.collectionData.floor - a.collectionData.floor
+    );
+  } else if (nftDisplay == "Volume") {
+    userWalletNftsFiltered = userWalletNfts.sort(
+      (a, b) => b.collectionData.volume24h - a.collectionData.volume24h
+    );
+  } else {
+    userWalletNftsFiltered = userWalletNfts.sort(
+      (a, b) => b.blockNumber - a.blockNumber
+    );
+  }
+
   return (
     <div>
-      <NftDisplayHeader />
+      <NftDisplayHeader setNftDisplay={setNftDisplay} />
       <div style={styles.container}>
         <div style={styles.grid}>
-          {userWalletNfts.map((nft) => (
+          {userWalletNftsFiltered.map((nft) => (
             <NftCard nft={nft} />
           ))}
         </div>

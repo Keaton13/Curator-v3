@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const styles = {
   tableRow: {
@@ -13,17 +13,17 @@ const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    padding: "15px",  // add this line
+    padding: "15px", // add this line
   },
   section2: {
     width: "20%",
     textAlign: "center",
-    padding: "15px",  // add this line
+    padding: "15px", // add this line
   },
   section3: {
     width: "20%",
     textAlign: "center",
-    padding: "15px",  // add this line
+    padding: "15px", // add this line
   },
   number: {
     width: "10%",
@@ -39,7 +39,7 @@ const styles = {
   },
   imgWidth: {
     maxWidth: "85%",
-    borderRadius: "10%"
+    borderRadius: "10%",
   },
   name: {
     width: "50%",
@@ -62,18 +62,33 @@ const NftTableRow = (collection) => {
           <td style={styles.section1}>
             <div style={styles.number}>{collection.index}</div>
             <div style={styles.img}>
-              <img style={styles.imgWidth} src={data.collection.image_url} alt="icon" onLoad={handleImageLoad} />
+              <img
+                style={styles.imgWidth}
+                src={data.collection.image_url}
+                alt="icon"
+                onLoad={handleImageLoad}
+              />
               {!isImageLoaded && <div>Loading...</div>}
             </div>
             <div style={styles.name}>{data.collection.name}</div>
           </td>
           <td style={styles.section2}>
-            <div style={styles.price}>{data.floorPrice.toFixed(2)} ETH</div>
+            {data.floorPrice ? (
+              <div style={styles.price}>{data.floorPrice.toFixed(2)} ETH</div>
+            ) : (
+              <div style={styles.price}>0 ETH</div>
+            )}
           </td>
           <td style={styles.section3}>
-            <div style={styles.volume}>
-              {data.collection.stats.one_day_volume.toFixed(2)} ETH
-            </div>
+            {data.collection.stats ? (
+              <div style={styles.volume}>
+                {data.collection.stats.one_day_volume.toFixed(2)} ETH
+              </div>
+            ) : (
+              <div style={styles.volume}>
+                0 ETH
+              </div>
+            )}
           </td>
         </>
       )}
