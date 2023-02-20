@@ -55,8 +55,6 @@ const NftTableRow = (collection) => {
     setIsImageLoaded(true);
   };
 
-  console.log(data);
-
   return (
     <tr style={styles.tableRow}>
       {data && (
