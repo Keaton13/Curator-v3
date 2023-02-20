@@ -112,7 +112,6 @@ export const NFTProvider = ({ children }) => {
       let collectionDataOpenSea = await getCollectionFloorStats(
         walletCollections[i].slug
       );
-      console.log(collectionDataOpenSea);
       let nftData = {
         name: walletCollections[i].name,
         slug: walletCollections[i].slug,
@@ -125,25 +124,25 @@ export const NFTProvider = ({ children }) => {
       collectionData.push(nftData);
     }
 
-     
     for (let i = 0; i < walletNfts.length; i++) {
       let address = walletNfts[i].tokenAddress;
 
       for (let v = 0; v < collectionData.length; v++) {
         if (collectionData[v].address === address) {
           collectionData[v].amount++;
-          if(!walletNfts[i].collectionData){
+          if (!walletNfts[i].collectionData) {
             walletNfts[i].collectionData = collectionData[v];
           }
         }
-    
       }
     }
-  
+
     let totalCollectionInEth = 0;
     for (let i = 0; i < collectionData.length; i++) {
-      collectionData[i].floorValue = collectionData[i].floor * collectionData[i].amount;
-      totalCollectionInEth = totalCollectionInEth + collectionData[i].floorValue;
+      collectionData[i].floorValue =
+        collectionData[i].floor * collectionData[i].amount;
+      totalCollectionInEth =
+        totalCollectionInEth + collectionData[i].floorValue;
     }
 
     setUserWalletNfts(walletNfts);
@@ -152,7 +151,17 @@ export const NFTProvider = ({ children }) => {
   };
 
   return (
-    <NFTContext.Provider value={{ trendingCollections24h, userWalletNfts, walletNftCollectionData, totalWalletValue }}>
+    <NFTContext.Provider
+      value={{
+        trendingCollections,
+        trendingCollections24h,
+        trendingCollections7d,
+        trendingCollections30d,
+        userWalletNfts,
+        walletNftCollectionData,
+        totalWalletValue,
+      }}
+    >
       {children}
     </NFTContext.Provider>
   );

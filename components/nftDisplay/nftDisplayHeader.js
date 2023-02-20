@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NFTContext } from "../../context/nftContext";
 
 const styles = {
@@ -49,7 +49,7 @@ const styles = {
 
 const NFTDisplayHeader = (props) => {
   const { totalWalletValue } = useContext(NFTContext);
-  const [hover, setHover] = React.useState(false);
+  const [hover, setHover] = useState(false);
 
   useEffect(() => {
     if (totalWalletValue) {

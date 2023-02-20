@@ -68,7 +68,6 @@ const NftCard = (nft) => {
   if (nftImage) {
     if (nftImage.image.startsWith("ipfs://")) {
       nftImage.image = "https://dweb.link/ipfs/" + nftImage.image.substring(7);
-      console.log(nftImage.image);
     }
   }
 
