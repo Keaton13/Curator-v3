@@ -1,4 +1,5 @@
 import React from "react";
+import WhaleStatsTrendingCard from "./WhaleStatsTrendingCard";
 
 const WhaleStatsHeader = () => {
     
@@ -39,6 +40,32 @@ const WhaleStatsHeader = () => {
             &nbsp;
             <span className="underline">Read More</span>
           </p>
+        </div>
+        <br/>
+        <div className={styles.flexCenter}>
+            <>
+            <WhaleStatsTrendingCard />
+            <WhaleStatsTrendingCard />
+            <WhaleStatsTrendingCard />
+              {/* <TrendingCard
+                title="Trending"
+                icon={fire}
+                sortedMatchingMetaData={sortedMatchingData7d}
+                feild={"7d"}
+              />
+              <TrendingCard
+                title="Biggest Gainers"
+                icon={gainers}
+                sortedMatchingMetaData={sortedMatchingData24h}
+                feild={"24h"}
+              />
+              <TrendingCard
+                title="Recently Added"
+                icon={recent}
+                sortedMatchingMetaData={sortedMatchingLast3}
+                feild={"Last3Added"}
+              /> */}
+            </>
         </div>
       </div>
     </div>
