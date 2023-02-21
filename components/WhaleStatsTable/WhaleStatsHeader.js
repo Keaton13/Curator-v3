@@ -1,5 +1,8 @@
 import React from "react";
 import WhaleStatsTrendingCard from "./WhaleStatsTrendingCard";
+import btc from '../../assets/btc.png';
+import eth from '../../assets/eth.png'
+import usdt from '../../assets/usdt.png'
 
 const WhaleStatsHeader = () => {
     
@@ -44,9 +47,9 @@ const WhaleStatsHeader = () => {
         <br/>
         <div className={styles.flexCenter}>
             <>
-            <WhaleStatsTrendingCard />
-            <WhaleStatsTrendingCard />
-            <WhaleStatsTrendingCard />
+            <WhaleStatsTrendingCard title="BTC" symbol={btc}/>
+            <WhaleStatsTrendingCard title="ETH" symbol={eth}/>
+            <WhaleStatsTrendingCard title="USDT/USDC" symbol={usdt}/>
               {/* <TrendingCard
                 title="Trending"
                 icon={fire}
