@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Search from "../assets/svg/search";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 const styles = {
   header: `bg-[#17171A] text-white h-20 flex gap-[100px] w-full p-[30px]`,
@@ -15,11 +15,7 @@ const styles = {
 };
 
 const Header = () => {
-  const Router = useRouter()
-
-  const handleClick = () => {
-    Router.push('/nfts/nft')
-  }
+  const Router = useRouter();
 
   return (
     <div className={styles.header}>
@@ -33,18 +29,30 @@ const Header = () => {
       <div className={styles.headerwrapper}>
         <nav className={styles.nav}>
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Cryptocurrencies</div>
+            <div className={styles.navLink} onClick={() => Router.push("/")}>
+              Cryptocurrencies
+            </div>
             <div className={styles.badge} />
           </div>
           <div className={styles.navItem}>
             <div className={styles.navLink}>Exchanges</div>
           </div>
-          <div className={styles.navItem} onClick={handleClick}>
-            <div className={styles.navLink}>NFT</div>
+          <div className={styles.navItem}>
+            <div
+              className={styles.navLink}
+              onClick={() => Router.push("/nfts/nft")}
+            >
+              NFT Display
+            </div>
             <div className={styles.badge} />
           </div>
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Cryptown</div>
+            <div
+              className={styles.navLink}
+              onClick={() => Router.push("/whaleStats/whaleStats")}
+            >
+              Whale Stats
+            </div>
             <div className={styles.badge} />
           </div>
           <div className={styles.navItem}>
