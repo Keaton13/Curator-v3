@@ -1,14 +1,24 @@
+import React, { useContext, useEffect } from "react";
 import Header from "../../components/Header";
-import WhaleStatsHeader from "../../components/WhaleStatsTable/WhaleStatsHeader"
+import WhaleStatsHeader from "../../components/WhaleStatsTable/WhaleStatsHeader";
+import { WhaleContext } from "../../context/whaleContext";
 
 const WhaleStats = () => {
-    return (
-        <div className="min-h-screen">
-            <Header />
-            <div className="mt-10"/>
-            <WhaleStatsHeader />
-        </div>
-    )
-}
+  let { whaleTransactions, whaleTransactionData } = useContext(WhaleContext);
 
-export default WhaleStats
+  useEffect(() => {
+    if(whaleTransactions) {
+        console.log(whaleTransactions);
+        console.log(whaleTransactionData);
+    }
+  })
+  return (
+    <div className="min-h-screen">
+      <Header />
+      <div className="mt-10" />
+      <WhaleStatsHeader whaleTransactionData={whaleTransactionData}/>
+    </div>
+  );
+};
+
+export default WhaleStats;

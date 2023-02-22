@@ -4,8 +4,8 @@ import btc from '../../assets/btc.png';
 import eth from '../../assets/eth.png'
 import usdt from '../../assets/usdt.png'
 
-const WhaleStatsHeader = () => {
-    
+const WhaleStatsHeader = ({whaleTransactionData}) => {
+    console.log(whaleTransactionData)
     const styles = {
         trendingWrapper: `mx-auto max-w-screen-2xl`,
         h1: `text-3xl text-white`,
@@ -45,31 +45,35 @@ const WhaleStatsHeader = () => {
           </p>
         </div>
         <br/>
+        {whaleTransactionData ? (
         <div className={styles.flexCenter}>
-            <>
-            <WhaleStatsTrendingCard title="BTC" symbol={btc}/>
-            <WhaleStatsTrendingCard title="ETH" symbol={eth}/>
-            <WhaleStatsTrendingCard title="USDT/USDC" symbol={usdt}/>
-              {/* <TrendingCard
-                title="Trending"
-                icon={fire}
-                sortedMatchingMetaData={sortedMatchingData7d}
-                feild={"7d"}
-              />
-              <TrendingCard
-                title="Biggest Gainers"
-                icon={gainers}
-                sortedMatchingMetaData={sortedMatchingData24h}
-                feild={"24h"}
-              />
-              <TrendingCard
-                title="Recently Added"
-                icon={recent}
-                sortedMatchingMetaData={sortedMatchingLast3}
-                feild={"Last3Added"}
-              /> */}
-            </>
-        </div>
+        <>
+        <WhaleStatsTrendingCard title="BTC" symbol={btc} total={whaleTransactionData.totalBtcAmt} amtIn={whaleTransactionData.btcIn} amtOut={whaleTransactionData.btcOut}/>
+        <WhaleStatsTrendingCard title="ETH" symbol={eth} total={whaleTransactionData.totalEthAmt} amtIn={whaleTransactionData.ethIn} amtOut={whaleTransactionData.ethOut}/>
+        <WhaleStatsTrendingCard title="Combined" symbol={usdt} total={whaleTransactionData.combinedAmt} amtIn={whaleTransactionData.combinedIn} amtOut={whaleTransactionData.combinedOut}/>
+          {/* <TrendingCard
+            title="Trending"
+            icon={fire}
+            sortedMatchingMetaData={sortedMatchingData7d}
+            feild={"7d"}
+          />
+          <TrendingCard
+            title="Biggest Gainers"
+            icon={gainers}
+            sortedMatchingMetaData={sortedMatchingData24h}
+            feild={"24h"}
+          />
+          <TrendingCard
+            title="Recently Added"
+            icon={recent}
+            sortedMatchingMetaData={sortedMatchingLast3}
+            feild={"Last3Added"}
+          /> */}
+        </>
+    </div>
+        ) : (
+            <h1>Loading...</h1>
+        )}
       </div>
     </div>
   );
