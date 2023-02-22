@@ -7,6 +7,9 @@ import { useRouter } from 'next/router'
 
 const styles = {
   tableRow: `text-white border-b border-gray-800 text-[0.93rem]`,
+  rowHeight: {
+    height: "75px"
+  }
 }
 
 const CMCtableRow = ({
@@ -46,7 +49,7 @@ const CMCtableRow = ({
 
   return (
     <tbody className={styles.tableRow}>
-      <tr>
+      <tr style={styles.rowHeight}>
         <td>
           <Star />
         </td>
