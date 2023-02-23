@@ -19,7 +19,7 @@ const WhaleStats = () => {
       <div className="mt-10" />
       <WhaleStatsHeader whaleTransactionData={whaleTransactionData} />
       <div className="mt-20" />
-      <WhaleStatsTable />
+      <WhaleStatsTable whaleTransactions={whaleTransactions}/>
     </div>
   );
 };
