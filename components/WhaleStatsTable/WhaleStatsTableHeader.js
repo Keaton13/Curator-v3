@@ -10,9 +10,10 @@ const WhaleStatsTableHeader = () => {
             <th>Blockchain</th>
             <th>Amount</th>
             <th>Amount USD</th>
+            <th>From</th>
             <th>Type</th>
             <th>To</th>
-            <th>From</th>
+            <th>Type</th>
         </tr>
     </tbody>
   )  
