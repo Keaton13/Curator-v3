@@ -47,29 +47,9 @@ const WhaleStatsHeader = ({whaleTransactionData}) => {
         <br/>
         {whaleTransactionData ? (
         <div className={styles.flexCenter}>
-        <>
         <WhaleStatsTrendingCard title="BTC" symbol={btc} total={whaleTransactionData.totalBtcAmt} amtIn={whaleTransactionData.btcIn} amtOut={whaleTransactionData.btcOut}/>
         <WhaleStatsTrendingCard title="ETH" symbol={eth} total={whaleTransactionData.totalEthAmt} amtIn={whaleTransactionData.ethIn} amtOut={whaleTransactionData.ethOut}/>
         <WhaleStatsTrendingCard title="Combined" symbol={usdt} total={whaleTransactionData.combinedAmt} amtIn={whaleTransactionData.combinedIn} amtOut={whaleTransactionData.combinedOut}/>
-          {/* <TrendingCard
-            title="Trending"
-            icon={fire}
-            sortedMatchingMetaData={sortedMatchingData7d}
-            feild={"7d"}
-          />
-          <TrendingCard
-            title="Biggest Gainers"
-            icon={gainers}
-            sortedMatchingMetaData={sortedMatchingData24h}
-            feild={"24h"}
-          />
-          <TrendingCard
-            title="Recently Added"
-            icon={recent}
-            sortedMatchingMetaData={sortedMatchingLast3}
-            feild={"Last3Added"}
-          /> */}
-        </>
     </div>
         ) : (
             <h1>Loading...</h1>

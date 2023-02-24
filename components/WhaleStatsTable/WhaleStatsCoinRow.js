@@ -11,7 +11,6 @@ const styles = {
 };
 
 const CoinNameRow = ({ name }) => {
-  console.log(name);
   let image;
   if (name == "bitcoin") {
     image = "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png";

@@ -7,12 +7,6 @@ import { WhaleContext } from "../../context/whaleContext";
 const WhaleStats = () => {
   let { whaleTransactions, whaleTransactionData } = useContext(WhaleContext);
 
-  useEffect(() => {
-    if (whaleTransactions) {
-      console.log(whaleTransactions);
-      console.log(whaleTransactionData);
-    }
-  });
   return (
     <div className="min-h-screen">
       <Header />
