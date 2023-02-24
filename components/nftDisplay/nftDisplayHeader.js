@@ -51,12 +51,6 @@ const NFTDisplayHeader = (props) => {
   const { totalWalletValue } = useContext(NFTContext);
   const [hover, setHover] = useState(false);
 
-  useEffect(() => {
-    if (totalWalletValue) {
-      console.log(totalWalletValue);
-    }
-  }, [totalWalletValue]);
-
   return (
     <div style={styles.headerContainer}>
       <button
