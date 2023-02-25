@@ -7,7 +7,8 @@ const { EvmChain } = require('@moralisweb3/common-evm-utils');
 
 export default function handler(req, res) {
     const getWalletNfts = async () => {
-          let address = '0x8c96d1BC087191B2fD5963D792550CeFa7955210'
+          let {address} = req.body
+          console.log(address);
           let chain = EvmChain.ETHEREUM;
           
             const response = await Moralis.EvmApi.nft.getWalletNFTs({
