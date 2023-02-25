@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import NftDisplayHeader from "./nftDisplayHeader";
 import NftCard from "./nftCard";
 import { NFTContext } from "../../context/nftContext";
+import { useAccount } from "wagmi";
 
 const styles = {
   container: {
@@ -21,11 +22,23 @@ const styles = {
 };
 
 const nftDisplay = () => {
-  const { userWalletNfts } = useContext(NFTContext);
+  const { userWalletNfts, convertCollectionData } = useContext(NFTContext);
   const [nftDisplay, setNftDisplay] = useState("Floor");
-  //   const [highestFloor, setHighestFloor] = useState();
-  //   const [highestVolume, setHighestVolume] = useState();
-  //   const [newestNft, setNewestNft] = useState();
+  const { address, isConnecting, isDisconnected } = useAccount();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (address && userWalletNfts.length === 0) {
+      setIsLoading(true);
+      setError(null);
+      convertCollectionData(address)
+        .then(() => setIsLoading(false))
+        .catch((err) => setError(err));
+    } else {
+      setIsLoading(false)
+    }
+  }, [address]);
 
   let userWalletNftsFiltered;
   if (nftDisplay === "Floor") {
@@ -45,13 +58,21 @@ const nftDisplay = () => {
   return (
     <div>
       <NftDisplayHeader setNftDisplay={setNftDisplay} />
-      <div style={styles.container}>
-        <div style={styles.grid}>
-          {userWalletNftsFiltered.map((nft) => (
-            <NftCard nft={nft} />
-          ))}
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error: {error.message}</div>
+      ) : address ? (
+        <div style={styles.container}>
+          <div style={styles.grid}>
+            {userWalletNftsFiltered.map((nft) => (
+              <NftCard nft={nft} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div>Please Connect Wallet</div>
+      )}
     </div>
   );
 };

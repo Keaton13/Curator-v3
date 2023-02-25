@@ -13,7 +13,6 @@ export const NFTProvider = ({ children }) => {
 
   useEffect(() => {
     getTrendingNftCollections();
-    convertCollectionData();
   }, []);
 
   const getTrendingNftCollections = async () => {
@@ -63,10 +62,15 @@ export const NFTProvider = ({ children }) => {
     }
   };
 
-  const getWalletNfts = async () => {
+  const getWalletNfts = async (address) => {
     console.log("calling Moralis data");
     try {
-      const res = await fetch("/api/getWalletNfts");
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address: address }),
+      }
+      const res = await fetch("/api/getWalletNfts", options);
       const data = await res.json();
       return data.data;
     } catch (e) {
@@ -74,9 +78,14 @@ export const NFTProvider = ({ children }) => {
     }
   };
 
-  const getWalletNftCollections = async () => {
+  const getWalletNftCollections = async (address) => {
     try {
-      const res = await fetch("/api/getWalletNftCollectionsOpensea");
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address: address }),
+      }
+      const res = await fetch("/api/getWalletNftCollectionsOpensea", options);
       const data = await res.json();
       return data.data;
     } catch (e) {
@@ -99,9 +108,9 @@ export const NFTProvider = ({ children }) => {
     }
   };
 
-  const convertCollectionData = async () => {
-    const walletNfts = await getWalletNfts();
-    const walletCollections = await getWalletNftCollections();
+  const convertCollectionData = async (address) => {
+    const walletNfts = await getWalletNfts(address);
+    const walletCollections = await getWalletNftCollections(address);
 
     console.log(walletNfts);
     console.log(walletCollections);
@@ -160,6 +169,7 @@ export const NFTProvider = ({ children }) => {
         userWalletNfts,
         walletNftCollectionData,
         totalWalletValue,
+        convertCollectionData
       }}
     >
       {children}
