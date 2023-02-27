@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import NftDisplayHeader from "./nftDisplayHeader";
 import NftCard from "./nftCard";
+import WalletConnectModal from "../WalletConnectModal";
 import { NFTContext } from "../../context/nftContext";
 import { useAccount } from "wagmi";
+import { Wallet } from "ethers";
 
 const styles = {
   container: {
@@ -22,11 +24,12 @@ const styles = {
 };
 
 const nftDisplay = () => {
+  const { address, isConnecting, isDisconnected } = useAccount();
   const { userWalletNfts, convertCollectionData } = useContext(NFTContext);
   const [nftDisplay, setNftDisplay] = useState("Floor");
-  const { address, isConnecting, isDisconnected } = useAccount();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     if (address && userWalletNfts.length === 0) {
@@ -54,6 +57,10 @@ const nftDisplay = () => {
       (a, b) => b.blockNumber - a.blockNumber
     );
   }
+  
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div>
@@ -71,8 +78,8 @@ const nftDisplay = () => {
           </div>
         </div>
       ) : (
-        <div>Please Connect Wallet</div>
-      )}
+        <WalletConnectModal isOpen={isOpen} onClose={handleClose}/>
+        )}
     </div>
   );
 };
