@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../assets/keyblade20.png";
+import logo from "../assets/Keyblade20.png";
 import { Web3Button, Web3ModalButton } from "@web3modal/react";
 
 const styles = {
