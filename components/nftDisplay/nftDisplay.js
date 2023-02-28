@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import NftDisplayHeader from "./nftDisplayHeader";
 import NftCard from "./nftCard";
+import WalletConnectModal from "../WalletConnectModal";
 import { NFTContext } from "../../context/nftContext";
 import { useAccount } from "wagmi";
+import { Wallet } from "ethers";
 
 const styles = {
   container: {
@@ -22,11 +24,12 @@ const styles = {
 };
 
 const nftDisplay = () => {
+  const { address, isConnecting, isDisconnected } = useAccount();
   const { userWalletNfts, convertCollectionData } = useContext(NFTContext);
   const [nftDisplay, setNftDisplay] = useState("Floor");
-  const { address, isConnecting, isDisconnected } = useAccount();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     if (address && userWalletNfts.length === 0) {
@@ -36,7 +39,7 @@ const nftDisplay = () => {
         .then(() => setIsLoading(false))
         .catch((err) => setError(err));
     } else {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }, [address]);
 
@@ -55,11 +58,15 @@ const nftDisplay = () => {
     );
   }
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div>
       <NftDisplayHeader setNftDisplay={setNftDisplay} />
       {isLoading ? (
-        <div>Loading...</div>
+        <WalletConnectModal status={"Loading"}/>
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : address ? (
@@ -71,7 +78,7 @@ const nftDisplay = () => {
           </div>
         </div>
       ) : (
-        <div>Please Connect Wallet</div>
+        <WalletConnectModal />
       )}
     </div>
   );
