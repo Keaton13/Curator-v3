@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "next/image";
+import logo from "../assets/keyblade20.png";
 import { Web3Button, Web3ModalButton } from "@web3modal/react";
 
 const styles = {
@@ -11,63 +13,73 @@ const styles = {
     color: "#FFFF",
     background: "#323546",
     alignItems: "center",
-    borderRadius: "20px"
+    borderRadius: "20px",
   },
   header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
     padding: "1rem",
+    width: "67%",
+    margin: "auto",
   },
   h2: {
     margin: 0,
     fontSize: "1.5rem",
   },
-  closeButton: {
-    backgroundColor: "transparent",
-    border: "none",
-    fontSize: "2rem",
-    cursor: "pointer",
-  },
-  closeIcon: {
-    display: "block",
-    lineHeight: 1,
-  },
-  visuallyHidden: {
-    position: "absolute",
-    clip: "rect(0 0 0 0)",
-    width: "1px",
-    height: "1px",
-    margin: "-1px",
-    border: 0,
-    padding: 0,
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-  },
   content: {
+    height: "100%",
+    padding: "1rem",
+  },
+  image: {
+    margin: "auto",
+    width: "75%",
+    padding: "20px 10px 10px 10px",
+    transform: "rotate(7deg)",
+  },
+  web3ButtonContainer: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
-    height: '100%',
-    padding: "1rem",
+  },
+  logoText: {
+    fontSize: "62px",
+    fontFamily: "cursive",
+    margin: "auto",
+    width: "50%",
   },
 };
 
-const WalletConnectModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
-
-  return (
-    <div style={styles.modal}>
-      <div style={styles.header}>
-        <h2 style={styles.h2}>Please Connect Wallet</h2>
-      </div>
-      <div style={styles.content}>
-        <div>
-          <Web3Button />
+const WalletConnectModal = ({ status }) => {
+  if (status === "Loading") {
+    return (
+      <div style={styles.modal}>
+        <div style={styles.header}>
+          <h2 style={styles.h2}>Loading Wallet NFT's...</h2>
+        </div>
+        <div style={styles.content}>
+          <div>
+            <h1 style={styles.logoText}>Curator</h1>
+            <Image src={logo} alt="logo" style={styles.image} />
+          </div>
+          <div style={styles.web3ButtonContainer}></div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div style={styles.modal}>
+        <div style={styles.content}>
+          <div>
+            <h1 style={styles.logoText}>Curator</h1>
+            <Image src={logo} alt="logo" style={styles.image} />
+          </div>
+          <div style={styles.header}>
+            <h2 style={styles.h2}>Please Connect Wallet</h2>
+          </div>
+          <div style={styles.web3ButtonContainer}>
+            <Web3Button />
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default WalletConnectModal;

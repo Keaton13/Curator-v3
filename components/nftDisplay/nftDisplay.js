@@ -39,7 +39,7 @@ const nftDisplay = () => {
         .then(() => setIsLoading(false))
         .catch((err) => setError(err));
     } else {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }, [address]);
 
@@ -57,7 +57,7 @@ const nftDisplay = () => {
       (a, b) => b.blockNumber - a.blockNumber
     );
   }
-  
+
   const handleClose = () => {
     setIsOpen(false);
   };
@@ -66,7 +66,7 @@ const nftDisplay = () => {
     <div>
       <NftDisplayHeader setNftDisplay={setNftDisplay} />
       {isLoading ? (
-        <div>Loading...</div>
+        <WalletConnectModal status={"Loading"}/>
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : address ? (
@@ -78,8 +78,8 @@ const nftDisplay = () => {
           </div>
         </div>
       ) : (
-        <WalletConnectModal isOpen={isOpen} onClose={handleClose}/>
-        )}
+        <WalletConnectModal />
+      )}
     </div>
   );
 };
