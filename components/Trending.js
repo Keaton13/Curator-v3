@@ -6,7 +6,6 @@ import gainers from "../assets/gainers.png";
 import recent from "../assets/recent.png";
 import Rate from "./cmc-table/Rate";
 import TrendingCard from "./TrendingCard";
-import { get } from "https";
 
 const styles = {
   trendingWrapper: `mx-auto max-w-screen-2xl`,
@@ -27,8 +26,8 @@ const Trending = () => {
     if (top100Coins && coinMetaData && globalCryptoData) {
       let top100CoinsCopy = top100Coins.slice();
       let coinMetaDataCopy = coinMetaData.slice();
-      sortAndGetTop("percent_change_7d", top100CoinsCopy, coinMetaDataCopy);
       sortAndGetTop("percent_change_24h", top100CoinsCopy, coinMetaDataCopy);
+      sortAndGetTop("percent_change_7d", top100CoinsCopy, coinMetaDataCopy);
       sortAndGetLast3(top100CoinsCopy, coinMetaDataCopy);
       getGlobalCryptoData();
     }
@@ -59,7 +58,7 @@ const Trending = () => {
   function getGlobalCryptoData() {
     let marketCapUsd = globalCryptoData.quote.USD.total_market_cap;
     let marketCapUsdConversion = (marketCapUsd / 1e12).toFixed(2);
-    let dailyPercentChange = formatNum(globalCryptoData.quote.USD.total_volume_24h_yesterday_percentage_change);
+    let dailyPercentChange = formatNum(globalCryptoData.quote.USD.total_market_cap_yesterday_percentage_change);
 
     setGlobalCryptoDataText({ marketCapUsdConversion, dailyPercentChange });
   }
@@ -121,16 +120,19 @@ const Trending = () => {
                 title="Trending"
                 icon={fire}
                 sortedMatchingMetaData={sortedMatchingData7d}
+                feild={"7d"}
               />
               <TrendingCard
                 title="Biggest Gainers"
                 icon={gainers}
                 sortedMatchingMetaData={sortedMatchingData24h}
+                feild={"24h"}
               />
               <TrendingCard
                 title="Recently Added"
                 icon={recent}
                 sortedMatchingMetaData={sortedMatchingLast3}
+                feild={"Last3Added"}
               />
             </>
           ) : (

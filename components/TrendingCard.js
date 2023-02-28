@@ -11,6 +11,7 @@ const TrendingCard = ({
   title,
   icon,
   sortedMatchingMetaData,
+  feild
 }) => {
   const [topCoins, setTopCoins] = useState(null);
   const [coinsMapped, setCoinsMapped] = useState(null);
@@ -42,7 +43,7 @@ const TrendingCard = ({
             symbol={topCoins[0].symbol}
             name={topCoins[0].name}
             icon={coinsMapped[0].logo}
-            rate={topCoins[0].quote.USD.percent_change_7d}
+            rate={feild === "24h" ? topCoins[0].quote.USD.percent_change_24h : topCoins[0].quote.USD.percent_change_7d}
           />
           <TrendingCardRow
             key={2}
@@ -50,7 +51,7 @@ const TrendingCard = ({
             symbol={topCoins[1].symbol}
             name={topCoins[1].name}
             icon={coinsMapped[1].logo}
-            rate={topCoins[1].quote.USD.percent_change_7d}
+            rate={feild === "24h" ? topCoins[1].quote.USD.percent_change_24h : topCoins[1].quote.USD.percent_change_7d}
           />
           <TrendingCardRow
             key={3}
@@ -58,7 +59,7 @@ const TrendingCard = ({
             symbol={topCoins[2].symbol}
             name={topCoins[2].name}
             icon={coinsMapped[2].logo}
-            rate={topCoins[2].quote.USD.percent_change_7d}
+            rate={feild === "24h" ? topCoins[2].quote.USD.percent_change_24h : topCoins[2].quote.USD.percent_change_7d}
           />
         </div>
       ) : (
