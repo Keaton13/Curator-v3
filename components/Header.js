@@ -3,7 +3,7 @@ import Image from "next/image";
 import Search from "../assets/svg/search";
 import { useRouter } from "next/router";
 import { Web3Button, Web3ModalButton } from "@web3modal/react";
-import logo from "../assets/keyblade20.png";
+import logo from "../assets/Keyblade20.png";
 
 const styles = {
   header: `bg-[#17171A] text-white h-20 flex w-full`,
