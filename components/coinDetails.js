@@ -3,6 +3,7 @@ import Image from "next/image";
 import Rate from "./cmc-table/Rate";
 import RateFilled from "./buttons/RateFilled";
 import DropDownBtn from "./buttons/DropDownBtn";
+import WalletConnectModal from "./walletConnectModal";
 
 const styles = {
   coinDetails: `min-h-screen text-white`,
@@ -247,8 +248,8 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
           </div>
         </div>
       ) : (
-        <div>Loading...</div>
-      )}
+          <WalletConnectModal status={"Loading"} loadingText={"Loading Data..."}/>
+          )}
     </main>
   );
 };

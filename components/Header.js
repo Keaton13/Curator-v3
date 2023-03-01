@@ -3,7 +3,7 @@ import Image from "next/image";
 import Search from "../assets/svg/search";
 import { useRouter } from "next/router";
 import { Web3Button, Web3ModalButton } from "@web3modal/react";
-import logo from "../assets/keyblade20.png";
+import logo from "../assets/Keyblade20.png";
 
 const styles = {
   header: `bg-[#17171A] text-white h-20 flex w-full`,
@@ -15,7 +15,7 @@ const styles = {
   inputContainer: `flex items-center justify-center p-2 rounded bg-[#171924]`,
   input: `bg-transparent outline-none text-white w-70 ml-3`,
   web3Button: `p-[20px]`,
-  image: `m-auto w-100 ml-5 mr-5`,
+  image: `m-auto w-100 ml-5 mr-5 pt-4`,
   logoContainer: `flex justify-center items-center mx-8`,
   logoText: {
     color: '#FFFF',

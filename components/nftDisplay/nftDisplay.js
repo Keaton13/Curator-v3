@@ -66,7 +66,7 @@ const nftDisplay = () => {
     <div>
       <NftDisplayHeader setNftDisplay={setNftDisplay} />
       {isLoading ? (
-        <WalletConnectModal status={"Loading"}/>
+        <WalletConnectModal status={"Loading"} loadingText={"Loading NFTs..."}/>
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : address ? (
