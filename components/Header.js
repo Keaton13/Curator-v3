@@ -15,7 +15,7 @@ const styles = {
   inputContainer: `flex items-center justify-center p-2 rounded bg-[#171924]`,
   input: `bg-transparent outline-none text-white w-70 ml-3`,
   web3Button: `p-[20px]`,
-  image: `m-auto w-100 ml-5 mr-5`,
+  image: `m-auto w-100 ml-5 mr-5 pt-4`,
   logoContainer: `flex justify-center items-center mx-8`,
   logoText: {
     color: '#FFFF',
