@@ -3,7 +3,7 @@ import Image from "next/image";
 import Rate from "./cmc-table/Rate";
 import RateFilled from "./buttons/RateFilled";
 import DropDownBtn from "./buttons/DropDownBtn";
-import WalletConnectModal from "./walletConnectModal";
+import WalletConnectModal from "./WalletConnectModal";
 
 const styles = {
   coinDetails: `min-h-screen text-white`,
