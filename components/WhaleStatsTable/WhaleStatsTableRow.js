@@ -16,6 +16,9 @@ const styles = {
     textOverflow: "ellipsis",
     margin: "auto",
   },
+  tableRowSymbol: {
+    color: "#6188FF"
+  }
 };
 
 const WhaleStatsTableRow = ({ transaction, index }) => {
@@ -36,7 +39,7 @@ const WhaleStatsTableRow = ({ transaction, index }) => {
           <td>
             <div>
               <p>
-                {formatNum(transaction.amount)} {transaction.symbol}
+                {formatNum(transaction.amount)} <span className="text-gray-400">{transaction.symbol}</span>
               </p>
             </div>
           </td>
@@ -52,7 +55,7 @@ const WhaleStatsTableRow = ({ transaction, index }) => {
           </td>
           <td>
             <div>
-              <p>{transaction.from.owner_type}</p>
+              <p style={styles.tableRowSymbol}>{transaction.from.owner_type}</p>
             </div>
           </td>
           <td>
@@ -62,7 +65,7 @@ const WhaleStatsTableRow = ({ transaction, index }) => {
           </td>
           <td>
             <div>
-              <p>{transaction.from.owner_type}</p>
+              <p style={styles.tableRowSymbol}>{transaction.from.owner_type}</p>
             </div>
           </td>
         </tr>

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { CoinMarketContext } from "../../context/context";
 import CoinDetails from "../../components/coinDetails";
 import Header from "../../components/Header";
+import WalletConnectModal from "../../components/WalletConnectModal";
 
 const Price = () => {
   let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
@@ -38,7 +39,7 @@ const Price = () => {
           coinMetaData={targetCoinMetaData}
         />
       ) : (
-        <div>Loading...</div>
+        <WalletConnectModal status={"Loading"} loadingText={"Loading Data..."}/>
       )}
     </div>
   );
