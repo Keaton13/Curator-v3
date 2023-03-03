@@ -64,12 +64,12 @@ const styles = {
   },
 };
 
-const NftCard = (nft) => {
+const NftCard = ({nft}) => {
   const [localStyles, setLocalStyles] = useState(styles);
   const [imageSrc, setImageSrc] = useState();
 
   useEffect(() => {
-    let nftImage = nft.nft.metadata;
+    let nftImage = nft.metadata;
     if (nftImage) {
       if (nftImage.image.startsWith("ipfs://")) {
         nftImage.image = "https://dweb.link/ipfs/" + nftImage.image.substring(7);
@@ -77,11 +77,13 @@ const NftCard = (nft) => {
       } else {
         setImageSrc(nftImage.image)
       }
+    } else {
+      setImageSrc()
     }
   }, [nft]);
 
   const handleImageError = () => {
-    console.log('Error loading image:', nft.nft.metadata.image)
+    console.log('Error loading image:', nft.metadata.image)
     setImageSrc()
   }
 
@@ -92,14 +94,14 @@ const NftCard = (nft) => {
           <img
             style={styles.image}
             src={imageSrc}
-            alt={nft.nft.collectionData.name}
+            alt={nft.collectionData.name}
             onError={handleImageError}
           />
         ) : (
           <div>
             <Image
               src={logo}
-              alt={nft.nft.collectionData.name}
+              alt={nft.collectionData.name}
               height={250}
               style={styles.altImage}
             />
@@ -110,32 +112,32 @@ const NftCard = (nft) => {
       <div style={styles.details}>
         {imageSrc ? (
           <div>
-            {nft.nft.metadata.name ? (
-              <h2 style={styles.statLabel}>{nft.nft.metadata.name}</h2>
+            {nft.metadata && nft.metadata.name ? (
+              <h2 style={styles.statLabel}>{nft.metadata.name}</h2>
             ) : (
-              <h2 style={styles.statLabel}>{nft.nft.tokenId}</h2>
+              <h2 style={styles.statLabel}>{nft.tokenId}</h2>
             )}
-            <h2 style={styles.statLabel}>{nft.nft.name}</h2>
+            <h2 style={styles.statLabel}>{nft.name}</h2>
           </div>
         ) : (
           <div>
             <h2 style={styles.statLabel}>
               {" " + " " + "#"}
-              {nft.nft.tokenId.slice(0, 8)}
+              {nft.tokenId.slice(0, 8)}
             </h2>
-            <h2 style={styles.statLabel}>{nft.nft.name}</h2>
+            <h2 style={styles.statLabel}>{nft.name}</h2>
           </div>
         )}
         <br />
         <div style={styles.stats}>
           <div style={styles.stat}>
             <p style={styles.statLabel}>Floor Price</p>
-            <p style={styles.statValue}>{nft.nft.collectionData.floor}</p>
+            <p style={styles.statValue}>{nft.collectionData.floor}</p>
           </div>
           <div style={styles.stat}>
             <p style={styles.statLabel}>Volume (24hr)</p>
             <p style={styles.statValue}>
-              {(+nft.nft.collectionData.volume24h).toFixed(3)}
+              {(+nft.collectionData.volume24h).toFixed(3)}
             </p>
           </div>
         </div>
