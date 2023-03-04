@@ -44,9 +44,6 @@ const Header = () => {
             <div className={styles.badge} />
           </div>
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Exchanges</div>
-          </div>
-          <div className={styles.navItem}>
             <div
               className={styles.navLink}
               onClick={() => Router.push("/nfts/nft")}
