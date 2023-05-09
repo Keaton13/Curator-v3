@@ -33,7 +33,7 @@ const WhaleStatsTable = ({ whaleTransactions }) => {
   }
   return (
     <div className="text-white font-bold">
-      <div className="mx-auto max-w-screen-2xl">
+      <div className="mx-auto max-w-screen-2xl overflow-auto">
         <table className="w-full">
           <WhaleStatsTableHeader setTransactionDisplay={setTransactionDisplay}/>
           {whaleTransactions &&

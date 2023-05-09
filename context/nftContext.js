@@ -31,7 +31,7 @@ export const NFTProvider = ({ children }) => {
     try {
       const res = await fetch("/api/getTrendingNftCollections24h");
       const data = await res.json();
-      console.log(data.data);
+      // console.log(data.data);
       setTrendingCollections24h(data.data);
       getTrendingNftCollections7d();
     } catch (e) {
@@ -43,7 +43,7 @@ export const NFTProvider = ({ children }) => {
     try {
       const res = await fetch("/api/getTrendingNftCollections7d");
       const data = await res.json();
-      console.log(data.data);
+      // console.log(data.data);
       setTrendingCollections7d(data.data);
       getTrendingNftCollections30d();
     } catch (e) {
@@ -55,7 +55,7 @@ export const NFTProvider = ({ children }) => {
     try {
       const res = await fetch("/api/getTrendingNftCollections30d");
       const data = await res.json();
-      console.log(data.data);
+      // console.log(data.data);
       setTrendingCollections30d(data.data);
     } catch (e) {
       console.error(e);

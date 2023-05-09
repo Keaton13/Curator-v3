@@ -6,10 +6,8 @@ import Rate from './Rate'
 import { useRouter } from 'next/router'
 
 const styles = {
-  tableRow: `text-white border-b border-gray-800 text-[0.93rem]`,
-  rowHeight: {
-    height: "75px"
-  }
+  tableRow: `text-white border-b border-gray-800 lg:text-[0.93rem]`,
+  rowHeight: `h-[75px] xs:text-2xl`
 }
 
 const CMCtableRow = ({
@@ -49,7 +47,7 @@ const CMCtableRow = ({
 
   return (
     <tbody className={styles.tableRow}>
-      <tr style={styles.rowHeight}>
+      <tr className={styles.rowHeight}>
         <td>
           <Star />
         </td>
