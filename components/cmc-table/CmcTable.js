@@ -9,7 +9,7 @@ const CMCTable = () => {
   return (
     <div className="text-white font-bold">
       <div className="mx-auto max-w-screen-2xl">
-        <table className="w-full">
+        <table className="w-full overflow-auto">
         <CMCTableHeader/>
           {top100Coins && coinMetaData ? (
             top100Coins.map((coin, index) => {

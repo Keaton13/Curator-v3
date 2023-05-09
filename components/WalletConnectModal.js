@@ -8,7 +8,6 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: "25%",
     margin: "auto",
     color: "#FFFF",
     background: "#323546",
@@ -51,7 +50,7 @@ const styles = {
 const WalletConnectModal = ({ status, loadingText }) => {
   if (status === "Loading") {
     return (
-      <div style={styles.modal}>
+      <div style={styles.modal} className="modalWidth">
         <div style={styles.header}>
           <h2 style={styles.h2}>{loadingText}</h2>
         </div>
@@ -66,7 +65,7 @@ const WalletConnectModal = ({ status, loadingText }) => {
     );
   } else {
     return (
-      <div style={styles.modal}>
+      <div style={styles.modal} className="modalWidth">
         <div style={styles.content}>
           <div>
             <h1 style={styles.logoText}>Curator</h1>

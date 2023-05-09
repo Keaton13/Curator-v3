@@ -7,3 +7,26 @@ body {
   height: 550vh;
   width: 100vw;
 }
+html {
+  width: 100vw;
+}
+
+.nftTable {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.modalWidth {
+  width: 25%;
+}
+@media only screen and (max-device-width: 480px) {
+  body {
+    width: 75rem !important;
+  }
+  .nftTable {
+    width: 100%;
+  }
+  .modalWidth {
+    width: 50%;
+  }
+}

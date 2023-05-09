@@ -8,12 +8,10 @@ const WhaleStats = () => {
   let { whaleTransactions, whaleTransactionData } = useContext(WhaleContext);
 
   return (
-    <div className="min-h-screen">
+    <div>
       <Header />
-      <div className="mt-10" />
       <WhaleStatsHeader whaleTransactionData={whaleTransactionData} />
-      <div className="mt-20" />
-      <WhaleStatsTable whaleTransactions={whaleTransactions}/>
+      <WhaleStatsTable whaleTransactions={whaleTransactions} />
     </div>
   );
 };

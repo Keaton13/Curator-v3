@@ -1,4 +1,5 @@
 // import { useEffect, useState, useContext } from "react";
+import React from 'react';
 import Header from "../../components/Header";
 import NftTable from "../../components/nftTable/NftTable";
 import NftDisplay from "../../components/nftDisplay/nftDisplay";
