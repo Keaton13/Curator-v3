@@ -94,10 +94,10 @@ const NftTable = () => {
               <th style={styles.th}>Volume</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-2xl lg:text-base">
             {nftCollections1 ? (
               nftCollections1.map((collection, index) => (
-                <NftTableRow collection={collection} index={1} />
+                <NftTableRow collection={collection} index={index + 1} />
               ))
             ) : (
               <tr>
@@ -114,7 +114,7 @@ const NftTable = () => {
               <th style={styles.th}>Volume</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-2xl lg:text-base">
             {nftCollections2 ? (
               nftCollections2.map((collection, index) => (
                 <NftTableRow collection={collection} index={6 + index} />

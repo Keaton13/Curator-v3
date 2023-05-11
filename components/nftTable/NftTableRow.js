@@ -47,10 +47,10 @@ const styles = {
   },
 };
 
-const NftTableRow = (collection, index) => {
+const NftTableRow = (props) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-
-  const data = collection.collection;
+  console.log(props.index)
+  const data = props.collection;
   const handleImageLoad = () => {
     setIsImageLoaded(true);
   };
@@ -60,7 +60,7 @@ const NftTableRow = (collection, index) => {
       {data && (
         <>
           <td style={styles.section1}>
-            <div style={styles.number}>{1}</div>
+            <div style={styles.number}>{props.index}</div>
             <div style={styles.img}>
               <img style={styles.imgWidth} src={data.collection.image_url} alt="icon" onLoad={handleImageLoad} />
               {!isImageLoaded && <div>Loading...</div>}

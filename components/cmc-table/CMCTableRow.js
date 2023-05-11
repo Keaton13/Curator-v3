@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 const styles = {
   tableRow: `text-white border-b border-gray-800 lg:text-[0.93rem]`,
-  rowHeight: `h-[75px] xs:text-2xl`
+  rowHeight: `lg:h-[75px] h-[150px] xs:text-2xl`
 }
 
 const CMCtableRow = ({

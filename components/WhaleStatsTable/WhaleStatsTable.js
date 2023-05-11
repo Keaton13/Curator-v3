@@ -34,7 +34,7 @@ const WhaleStatsTable = ({ whaleTransactions }) => {
   return (
     <div className="text-white font-bold">
       <div className="mx-auto max-w-screen-2xl overflow-auto">
-        <table className="w-full">
+        <table className="w-full overflow-auto lg:text-lg text-3xl">
           <WhaleStatsTableHeader setTransactionDisplay={setTransactionDisplay}/>
           {whaleTransactions &&
             whaleTransactions.map((transaction, index) => {
