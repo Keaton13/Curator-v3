@@ -8,8 +8,8 @@ const WhaleStatsHeader = ({whaleTransactionData}) => {
     console.log(whaleTransactionData)
     const styles = {
         trendingWrapper: `mx-auto max-w-screen-2xl`,
-        h1: `text-3xl text-white`,
-        flexCenter: `flex items-center`,
+        h1: `text-3xl text-white mt-4`,
+        flexCenter: `flex items-center flex-col lg:flex-row lg:w-full w-3/4 m-auto`,
       };
 
   return (
@@ -30,7 +30,7 @@ const WhaleStatsHeader = ({whaleTransactionData}) => {
           </div>
         </div>
         <br />
-        <div className="flex">
+        <div className="flex lg:text-base text-2xl">
           <p className="text-gray-400">
             This data shows most recent transactions on different blockchains over 1 million dollars
           </p>

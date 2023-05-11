@@ -10,7 +10,7 @@ import TrendingCard from "./TrendingCard";
 const styles = {
   trendingWrapper: `mx-auto max-w-screen-2xl`,
   h1: `text-3xl text-white`,
-  flexCenter: `flex items-center`,
+  flexCenter: `flex items-center flex-col lg:flex-row lg:w-full w-3/4 m-auto`,
 };
 
 const Trending = () => {
@@ -90,7 +90,7 @@ const Trending = () => {
         </div>
         <br />
         {globalCryptoDataText ? (
-          <div className="flex">
+          <div className="flex lg:text-base text-2xl">
             <p className="text-gray-400">
               The global crypto market cap is {globalCryptoDataText.marketCapUsdConversion} Trillion, a
             </p>

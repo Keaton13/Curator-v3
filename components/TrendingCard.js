@@ -3,7 +3,7 @@ import Image from "next/image";
 import MoreButton from "./MoreButton";
 import TrendingCardRow from "./TrendingCardRow";
 const styles = {
-  trendingCard: `w-full p-5 py-3 pb-0 bg-[#323546] rounded-xl text-white mr-3`,
+  trendingCard: `w-full p-5 py-3 pb-0 bg-[#323546] rounded-xl text-white mr-3 mb-5`,
   trendingCardWrapper: `flex items-center justify-between`,
 };
 
