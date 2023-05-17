@@ -1,27 +1,72 @@
-# Next.js + Tailwind CSS Example
+# Curator 
+---
+ A web3 application that shows top coin information, whale stats, top/trending nft stats and nft porfolio value
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## live Demo
+>[curator-v3.netlify.app/](https://curator-v3.netlify.app/)
 
-## Deploy your own
+## Technologies Used
+---
+- Next.js
+- React Context
+- React Router
+- MoralisSDK
+- Web3 React
+- Ethers
+- Wagmi
+- Tailwind
+- Postcss
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## Api's Used
+---
+- Moralis Web3
+- CoinMarketCap
+- OpenSea
+- Whale Alert
+- NFT Stats
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+## Features
+---
+- Users can see top 100 trending coins with live price stats and chart
+- Users can see the last 100 whale transactions over 1M
+- Users can see whale transactions stats showing money flowing into and out of exchanges
+- Users can see trending NFT Collections
+- Users can see top NFT Collections by volume
+- Users can display ETH NFTs in connected wallet
+- Users can see estimated ETH value of ETH nfts in wallet
 
-## How to use
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+## Preview
+---
+>Sign-up
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+<!-- ![](./preview/MyTunes-Log-In.gif) -->
+> ---
+>Login
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+<!-- ![](./preview/MyTunes-Sign-Up.gif) -->
+> ---
+>Users can connect to spotify api
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+<!-- ![](./preview/MyTunes-spotify-Connect.gif) -->
+> ---
+>Users can search for reccomended music based on favorite category and favorite music
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+<!-- ![](./preview/MyTunes-User-Search.gif) -->
+> ---
+>Users can watch reccomended songs via youtube api
+
+<!-- ![](./preview/MyTunes-User-youtube.gif) -->
+> ---
+>Users can add song to spotify playlist
+
+<!-- ![](./preview/MyTunes-User-add-playlist.gif) -->
+> ---
+>Users can view most played songs
+
+<!-- ![](./preview/MyTunes-User-Most-Played.gif) -->
+> ---
+>Users can view most recent songs
+
+<!-- ![](./preview/MyTunes-User-Recently-Played.gif) -->
+> ---
