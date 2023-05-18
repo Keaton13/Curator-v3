@@ -2,20 +2,18 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import MoreButton from "./MoreButton";
 import TrendingCardRow from "./TrendingCardRow";
+
+// Styles for TrendingCard
 const styles = {
   trendingCard: `w-full p-5 py-3 pb-0 bg-[#323546] rounded-xl text-white mr-3 mb-5`,
   trendingCardWrapper: `flex items-center justify-between`,
 };
 
-const TrendingCard = ({
-  title,
-  icon,
-  sortedMatchingMetaData,
-  feild
-}) => {
+const TrendingCard = ({ title, icon, sortedMatchingMetaData, feild }) => {
   const [topCoins, setTopCoins] = useState(null);
   const [coinsMapped, setCoinsMapped] = useState(null);
 
+  // Sets variables and saves to state on inital render and subsequent re-render 
   useEffect(() => {
     if (sortedMatchingMetaData) {
       const topCoins = sortedMatchingMetaData.coins;
@@ -24,6 +22,7 @@ const TrendingCard = ({
       setCoinsMapped(coinsMapped);
     }
   });
+  
   return (
     <div className={styles.trendingCard}>
       <div className={styles.trendingCardWrapper}>
@@ -43,7 +42,11 @@ const TrendingCard = ({
             symbol={topCoins[0].symbol}
             name={topCoins[0].name}
             icon={coinsMapped[0].logo}
-            rate={feild === "24h" ? topCoins[0].quote.USD.percent_change_24h : topCoins[0].quote.USD.percent_change_7d}
+            rate={
+              feild === "24h"
+                ? topCoins[0].quote.USD.percent_change_24h
+                : topCoins[0].quote.USD.percent_change_7d
+            }
           />
           <TrendingCardRow
             key={2}
@@ -51,7 +54,11 @@ const TrendingCard = ({
             symbol={topCoins[1].symbol}
             name={topCoins[1].name}
             icon={coinsMapped[1].logo}
-            rate={feild === "24h" ? topCoins[1].quote.USD.percent_change_24h : topCoins[1].quote.USD.percent_change_7d}
+            rate={
+              feild === "24h"
+                ? topCoins[1].quote.USD.percent_change_24h
+                : topCoins[1].quote.USD.percent_change_7d
+            }
           />
           <TrendingCardRow
             key={3}
@@ -59,7 +66,11 @@ const TrendingCard = ({
             symbol={topCoins[2].symbol}
             name={topCoins[2].name}
             icon={coinsMapped[2].logo}
-            rate={feild === "24h" ? topCoins[2].quote.USD.percent_change_24h : topCoins[2].quote.USD.percent_change_7d}
+            rate={
+              feild === "24h"
+                ? topCoins[2].quote.USD.percent_change_24h
+                : topCoins[2].quote.USD.percent_change_7d
+            }
           />
         </div>
       ) : (

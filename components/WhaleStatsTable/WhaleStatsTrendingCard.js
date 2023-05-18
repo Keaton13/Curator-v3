@@ -2,6 +2,7 @@ import React from "react";
 import MoreButton from "../MoreButton";
 import Image from "next/image";
 
+// Styles for WhaleStatsTrendingCard
 const styles = {
   trendingCard: `w-full p-5 py-3 pb-0 bg-[#323546] rounded-xl text-white mr-3 mb-5`,
   trendingCardWrapper: `flex justify-between`,
@@ -11,11 +12,13 @@ const styles = {
 };
 
 const WhaleStatsTrendingCard = ({ title, symbol, total, amtIn, amtOut }) => {
+  // Formats number for trending card
   const formatNum = (num) => {
     if (num) {
       return Number(num.toFixed(2)).toLocaleString();
     }
   };
+  
   return (
     <div className={styles.trendingCard}>
       <div className={styles.trendingCardWrapper}>

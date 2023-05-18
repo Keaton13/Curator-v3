@@ -3,6 +3,7 @@ import NftTableHeader from "./NftTableHeader";
 import NftTableRow from "./NftTableRow";
 import { NFTContext } from "../../context/nftContext";
 
+// Styles for NftTable component
 const styles = {
   thead: {
     // backgroundColor: "#2D3748",
@@ -46,11 +47,10 @@ const styles = {
 };
 
 const NftTable = () => {
-  const [trending1, setTrending1] = useState(null);
-  const [trending2, setTrending2] = useState(null);
   const [nftDisplayTime, setNftDisplayTime] = useState("24h");
   const [nftDisplayCategory, setNftDisplayCategory] = useState("Top");
 
+  // Grabbing collection data from context
   const {
     trendingCollections,
     trendingCollections24h,
@@ -61,9 +61,7 @@ const NftTable = () => {
   let nftCollections1;
   let nftCollections2;
 
-  useEffect(() => {
-  }, [nftCollections1, nftCollections2])
-
+  // Filers NFT into 2 variables for rendering based on state
   if (nftDisplayCategory === "Trending") {
     nftCollections1 = trendingCollections?.stats?.slice(0, 5) || [];
     nftCollections2 = trendingCollections?.stats?.slice(5, 10) || [];
@@ -80,8 +78,6 @@ const NftTable = () => {
     }
   }  
   
-  let nftIndex = 1; 
-
   return (
     <div className="text-white font-bold overflow-x-auto">
       <NftTableHeader setNftDisplayTime={setNftDisplayTime} nftDisplayTime={nftDisplayTime} setNftDisplayCategory={setNftDisplayCategory}/>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../../assets/KeybladeBlackVertical.png";
 
+//Styles for nftCard compoment
 const styles = {
   card: {
     background: "#F5F5F5",
@@ -65,12 +66,14 @@ const styles = {
 };
 
 const NftCard = ({nft}) => {
-  const [localStyles, setLocalStyles] = useState(styles);
+  //State for nft image source
   const [imageSrc, setImageSrc] = useState();
 
+  //Perform actions when nft changes
   useEffect(() => {
     let nftImage = nft.metadata;
     if (nftImage) {
+      //Replace image url with new ipfs gateway
       if (nftImage.image.startsWith("ipfs://")) {
         nftImage.image = "https://dweb.link/ipfs/" + nftImage.image.substring(7);
         setImageSrc(nftImage.image)
@@ -82,6 +85,7 @@ const NftCard = ({nft}) => {
     }
   }, [nft]);
 
+  //If image can't load reset imageSrc state
   const handleImageError = () => {
     console.log('Error loading image:', nft.metadata.image)
     setImageSrc()

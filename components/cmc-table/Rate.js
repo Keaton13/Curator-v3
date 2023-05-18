@@ -2,6 +2,7 @@ import React from "react";
 import ChevronDown from "../../assets/svg/chevronDown";
 import ChevronUp from "../../assets/svg/chevronUp";
 
+//Styles for Rate component
 const styles = {
   rate: `rate flex items-center`,
   red: `ml-2 text-[#EA3943]`,
@@ -9,7 +10,9 @@ const styles = {
 };
 
 const Rate = ({ rate, symbol }) => {
+  //Limits rate to 2 deciamal points
   rate = parseFloat(rate).toFixed(2);
+
   return (
     <div className={styles.rate}>
       {symbol ? <small className="text-gray-400">{symbol}</small> : <></>}&nbsp;&nbsp;

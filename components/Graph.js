@@ -1,7 +1,7 @@
 import React from "react";
 import { Line } from 'react-chartjs-2'
-import Chart from "chart.js/auto";
 
+// Chart points
 const randomPoints = [
   [65, 59, 100, 80, 10, 56, 72, 45, 67, 55, 42],
   [10, 50, 30, 84, 38, 90, 42, 77, 100, 0, 100],
@@ -10,6 +10,7 @@ const randomPoints = [
   [0, 100, 47, 19, 90, 34, 25, 65, 78, 0, 32],
 ];
 
+// Gets random points for chart
 const getRandomPoints = () => {
   const rndInt = Math.floor(Math.random() * 4) + 1;
   return randomPoints[rndInt]
@@ -49,6 +50,7 @@ const data = {
   ]
 };
 
+// Graph options
 const options = {
   plugins: {
     Legend: {

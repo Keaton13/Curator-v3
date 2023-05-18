@@ -1,10 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import btc from "../../assets/btc.png";
-import eth from "../../assets/eth.png";
-import xrp from "../../assets/xrp.png";
-import tron from "../../assets/tron.webp";
 
+// Styles for CoinNameRow
 const styles = {
   coinNameRow: `flex items-center`,
   buyButton: `bg-[#1A1F3A] text-[#6188FF] p-1 px-3 text-sm rounded-lg cursor-pointer hover:opacity-50`,
@@ -12,6 +9,8 @@ const styles = {
 
 const CoinNameRow = ({ name }) => {
   let image;
+
+  // Sets diffent coin icons based off name
   if (name == "bitcoin") {
     image = "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png";
   } else if ((name = "ethereum")) {
