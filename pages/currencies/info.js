@@ -6,6 +6,7 @@ import Graph from "../../components/Graph";
 import Chat from "../../components/Chat";
 
 const styles = {
+  // Styles for Currency component
   activeTab: `p-1 px-2 mr-2 rounded-lg bg-[#171924]`,
   tabItem: `px-2`,
   tabContainer: `flex items-center p-2 rounded-xl bg-[#222531] border border-gray-500/10 text-sm`,
@@ -24,37 +25,38 @@ const Currencies = () => {
   const [loading, setLoading] = useState(true);
   const [coinTextData, setCoinTextData] = useState({});
 
+  // Calls getURLData on component mount
   useEffect(() => {
     getURLData();
   }, []);
 
+  // Fetches and sets the ID from the URL parameter
   const getURLData = async () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     setId(Number(urlParams.get("id")));
   };
 
-  useEffect(() => {
+
+useEffect(() => {
     if (top100Coins && coinMetaData) {
-     let targetCoin = top100Coins.find((object) => object.id === id);
-     let targetCoinMetaData = coinMetaData.find((object) => object.id === id);
-    //  setCoinTextData(targetCoin, targetCoinMetaData)
-    //  setLoading(false);
-     if(targetCoin, targetCoinMetaData) {
-      getCoinTextData(targetCoin, targetCoinMetaData)
-     }
+      let targetCoin = top100Coins.find((object) => object.id === id); // Find the target coin by matching the ID
+      let targetCoinMetaData = coinMetaData.find((object) => object.id === id); // Find the target coin's metadata by matching the ID
+      if (targetCoin && targetCoinMetaData) {
+        getCoinTextData(targetCoin, targetCoinMetaData); // Call a function to retrieve and set the coin text data
+      }
     }
   }, [top100Coins, coinMetaData, id]);
 
+  // Sets the coin text data for display
   const getCoinTextData = (targetCoin, targetCoinMetaData) => {
-    console.log(targetCoin, targetCoinMetaData)
     let from = targetCoin.name;
     let fromLogo = targetCoinMetaData.logo;
     let fromSymbol = targetCoin.symbol;
     let price = targetCoin.quote.USD.price;
-    setCoinTextData({from, fromLogo, fromSymbol, price});
+    setCoinTextData({ from, fromLogo, fromSymbol, price });
     setLoading(false);
-  }
+  };
 
   return (
     <div className={styles.info}>
@@ -63,6 +65,7 @@ const Currencies = () => {
         <div className={styles.flexStart}>
           <div className={styles.tabContainerWrapper}>
             <div className={styles.flexBetween}>
+              {/* Tab container for different sections */}
               <div className={styles.tabContainer}>
                 <p className={styles.activeTab}>Price</p>
                 <p className={styles.tabItem}>Market Cap</p>
@@ -84,6 +87,7 @@ const Currencies = () => {
             <Graph />
             <br />
             <div className={styles.flexBetweenContianer}>
+              {/* Currency checkboxes */}
               <div className="flex">
                 <div className={styles.flexContainer}>
                   <input className="outline-none" type="checkbox" /> &nbsp; USD
@@ -94,6 +98,7 @@ const Currencies = () => {
                 </div>
               </div>
 
+              {/* API reference */}
               <p>
                 Want more data?{""}
                 <span className="text-[#6188FF]">Check out our API!</span>
@@ -101,15 +106,15 @@ const Currencies = () => {
             </div>
             <br />
             <br />
+            {/* Renders the CMCPriceConverter component with coin text data */}
             {coinTextData ? (
-              <CMCPriceConverter
-                coinTextData={coinTextData}
-              />
+              <CMCPriceConverter coinTextData={coinTextData} />
             ) : (
               <></>
             )}
           </div>
           <div className="pt-10 ml-5">
+            {/* Renders the Chat component */}
             <Chat />
           </div>
         </div>

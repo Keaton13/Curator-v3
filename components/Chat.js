@@ -6,6 +6,7 @@ import Image from "next/image";
 import {Button} from './Button'
 import ChatCard from "./ChatCard";
 
+// Styles for Chat
 const styles = {
   bullishLabel: `flex cursor-pointer active:bg-green-600 items-center text text-green-600 border border-green-600 h-min px-2 rounded-lg`,
   bearishLabel: `flex cursor-pointer active:bg-red-500 items-center text-[#EA3943] border border-red-600 h-min px-2 rounded-lg`,
@@ -24,10 +25,6 @@ const styles = {
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [bullishValue, setBullishValue] = useState(true);
-
-  const sendMessage = () => {
-
-  }
 
   return (
     <>

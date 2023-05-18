@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NFTContext } from "../../context/nftContext";
 
+// Styles for nftDisplayHeader
 const styles = {
   headerContainer: {
     display: "flex",
@@ -48,7 +49,9 @@ const styles = {
 };
 
 const NFTDisplayHeader = (props) => {
+  // Grabbing wallet value from context
   const { totalWalletValue } = useContext(NFTContext);
+
   const [hover, setHover] = useState(false);
 
   return (
@@ -77,13 +80,6 @@ const NFTDisplayHeader = (props) => {
       >
         <span>Created</span>
       </button>
-      {/* <button
-        style={hover === 3 ? styles.headerTitleHover : styles.headerTitle}
-        onMouseEnter={() => setHover(3)}
-        onMouseLeave={() => setHover(false)}
-      >
-        <span>Activity</span>
-      </button> */}
       <div style={styles.headerWalletContainer}>
         {totalWalletValue ? (
           <p style={styles.headerWalletValue}>

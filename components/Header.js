@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Web3Button, Web3ModalButton } from "@web3modal/react";
 import logo from "../assets/Keyblade20.png";
 
+// Header styles
 const styles = {
   header: `bg-[#17171A] text-white h-20 flex w-full`,
   headerwrapper: `flex justify-center h-full max-w-screen-xl mx-auto px-4 items-center`,
@@ -23,7 +24,6 @@ const styles = {
     fontSize: "36px",
     fontFamily: "Cursive"
   }
-  // logoText: `text-white ml-2 text-3xl font-family: 'Lucida Handwriting', cursive;`,
 };
 
 const Header = () => {

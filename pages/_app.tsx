@@ -12,11 +12,10 @@ import {
   walletConnectProvider,
 } from "@web3modal/ethereum";
 
-
 function MyApp({ Component, pageProps }: AppProps) {
   const chains = [arbitrum, mainnet, polygon];
 
-  // Wagmi client
+  // Configure and create Wagmi client
   const { provider } = configureChains(chains, [
     walletConnectProvider({ projectId: "82915dadbee6155499f62dcf0e95a501" }),
   ]);
@@ -31,21 +30,30 @@ function MyApp({ Component, pageProps }: AppProps) {
     provider,
   });
 
-  // Web3Modal Ethereum Client
+  // Create Web3Modal Ethereum Client
   const ethereumClient = new EthereumClient(wagmiClient, chains);
 
   return (
     <>
-    <WagmiConfig client={wagmiClient}>
-      <CoinMarketProvider>
-        <NFTProvider>
-          <WhaleProvider>
-            <Component {...pageProps} />
-          </WhaleProvider>
-        </NFTProvider>
-      </CoinMarketProvider>
-    </WagmiConfig>
-    <Web3Modal projectId="82915dadbee6155499f62dcf0e95a501" ethereumClient={ethereumClient}/>
+      {/* Wagmi Configuration */}
+      <WagmiConfig client={wagmiClient}>
+        {/* CoinMarketProvider */}
+        <CoinMarketProvider>
+          {/* NFTProvider */}
+          <NFTProvider>
+            {/* WhaleProvider */}
+            <WhaleProvider>
+              <Component {...pageProps} />
+            </WhaleProvider>
+          </NFTProvider>
+        </CoinMarketProvider>
+      </WagmiConfig>
+
+      {/* Web3Modal for connecting to Ethereum */}
+      <Web3Modal
+        projectId="82915dadbee6155499f62dcf0e95a501"
+        ethereumClient={ethereumClient}
+      />
     </>
   );
 }

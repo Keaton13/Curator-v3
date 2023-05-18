@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ChevronDown from "../../assets/svg/chevronDown";
 
+// Styles for WhaleStatsTableHeader
 const styles = {
   header: {
     padding: "20px",

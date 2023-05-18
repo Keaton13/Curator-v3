@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 
+// NftTableRow styles
 const styles = {
   tableRow: {
     width: "100%",
@@ -49,8 +50,11 @@ const styles = {
 
 const NftTableRow = (props) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  console.log(props.index)
+
+  // Setting collection data
   const data = props.collection;
+
+  // Onload sets imageLoaded to true
   const handleImageLoad = () => {
     setIsImageLoaded(true);
   };

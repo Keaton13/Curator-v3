@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Header from "../../components/Header";
 import WhaleStatsHeader from "../../components/WhaleStatsTable/WhaleStatsHeader";
 import WhaleStatsTable from "../../components/WhaleStatsTable/WhaleStatsTable";

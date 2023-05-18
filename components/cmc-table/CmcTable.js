@@ -4,6 +4,7 @@ import CMCTableHeader from "./CMCTableHeader";
 import CMCTableRow from "./CMCTableRow";
 
 const CMCTable = () => {
+  // Using the App Context to access top100Coins and coinmetaData for mapping function below
   let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
 
   return (
