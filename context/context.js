@@ -79,7 +79,7 @@ export const CoinMarketProvider = ({ children }) => {
     try {
       let apiResponse = await getGlobalCryptoData();
       setGlobalCryptoData(apiResponse); // Set the state with the global crypto data
-      console.log("Global CryptoData", apiResponse); // Log the fetched global crypto data
+      // console.log("Global CryptoData", apiResponse); // Log the fetched global crypto data
     } catch (e) {
       // Handle error if fetching global crypto data fails
     }
