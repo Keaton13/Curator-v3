@@ -4,12 +4,13 @@ import CMCTableHeader from "./CMCTableHeader";
 import CMCTableRow from "./CMCTableRow";
 
 const CMCTable = () => {
+  // Using the App Context to access top100Coins and coinmetaData for mapping function below
   let { top100Coins, coinMetaData } = useContext(CoinMarketContext);
 
   return (
     <div className="text-white font-bold">
-      <div className="mx-auto max-w-screen-2xl">
-        <table className="w-full">
+      <div className="mx-auto max-w-screen-2xl overflow-auto">
+        <table className="w-full overflow-auto lg:text-2xl text-5xl">
         <CMCTableHeader/>
           {top100Coins && coinMetaData ? (
             top100Coins.map((coin, index) => {

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Web3Button, Web3ModalButton } from "@web3modal/react";
 import logo from "../assets/Keyblade20.png";
 
+// Header styles
 const styles = {
   header: `bg-[#17171A] text-white h-20 flex w-full`,
   headerwrapper: `flex justify-center h-full max-w-screen-xl mx-auto px-4 items-center`,
@@ -15,7 +16,7 @@ const styles = {
   inputContainer: `flex items-center justify-center p-2 rounded bg-[#171924]`,
   input: `bg-transparent outline-none text-white w-70 ml-3`,
   web3Button: `p-[20px]`,
-  image: `m-auto w-100 ml-5 mr-5`,
+  image: `m-auto w-100 ml-5 mr-5 pt-4`,
   logoContainer: `flex justify-center items-center mx-8`,
   logoText: {
     color: '#FFFF',
@@ -23,7 +24,6 @@ const styles = {
     fontSize: "36px",
     fontFamily: "Cursive"
   }
-  // logoText: `text-white ml-2 text-3xl font-family: 'Lucida Handwriting', cursive;`,
 };
 
 const Header = () => {
@@ -42,9 +42,6 @@ const Header = () => {
               Cryptocurrencies
             </div>
             <div className={styles.badge} />
-          </div>
-          <div className={styles.navItem}>
-            <div className={styles.navLink}>Exchanges</div>
           </div>
           <div className={styles.navItem}>
             <div

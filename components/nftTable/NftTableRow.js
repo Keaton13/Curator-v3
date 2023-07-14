@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
+// NftTableRow styles
 const styles = {
   tableRow: {
     width: "100%",
@@ -13,17 +14,17 @@ const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    padding: "15px", // add this line
+    padding: "15px",  // add this line
   },
   section2: {
     width: "20%",
     textAlign: "center",
-    padding: "15px", // add this line
+    padding: "15px",  // add this line
   },
   section3: {
     width: "20%",
     textAlign: "center",
-    padding: "15px", // add this line
+    padding: "15px",  // add this line
   },
   number: {
     width: "10%",
@@ -34,12 +35,12 @@ const styles = {
   img: {
     display: "flex",
     alignItems: "center",
-    width: "6rem",
+    width: "10rem",
     height: "5rem",
   },
   imgWidth: {
-    maxWidth: "85%",
-    borderRadius: "10%",
+    maxWidth: "50%",
+    borderRadius: "10%"
   },
   name: {
     width: "50%",
@@ -47,10 +48,13 @@ const styles = {
   },
 };
 
-const NftTableRow = (collection) => {
+const NftTableRow = (props) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-  const data = collection.collection;
+  // Setting collection data
+  const data = props.collection;
+
+  // Onload sets imageLoaded to true
   const handleImageLoad = () => {
     setIsImageLoaded(true);
   };
@@ -60,35 +64,20 @@ const NftTableRow = (collection) => {
       {data && (
         <>
           <td style={styles.section1}>
-            <div style={styles.number}>{collection.index}</div>
+            <div style={styles.number}>{props.index}</div>
             <div style={styles.img}>
-              <img
-                style={styles.imgWidth}
-                src={data.collection.image_url}
-                alt="icon"
-                onLoad={handleImageLoad}
-              />
+              <img style={styles.imgWidth} src={data.collection.image_url} alt="icon" onLoad={handleImageLoad} />
               {!isImageLoaded && <div>Loading...</div>}
             </div>
             <div style={styles.name}>{data.collection.name}</div>
           </td>
           <td style={styles.section2}>
-            {data.floorPrice ? (
-              <div style={styles.price}>{data.floorPrice.toFixed(2)} ETH</div>
-            ) : (
-              <div style={styles.price}>0 ETH</div>
-            )}
+            <div style={styles.price}>{data.floorPrice.toFixed(2)} ETH</div>
           </td>
           <td style={styles.section3}>
-            {data.collection.stats ? (
-              <div style={styles.volume}>
-                {data.collection.stats.one_day_volume.toFixed(2)} ETH
-              </div>
-            ) : (
-              <div style={styles.volume}>
-                0 ETH
-              </div>
-            )}
+            <div style={styles.volume}>
+              {data.collection.stats.one_day_volume.toFixed(2)} ETH
+            </div>
           </td>
         </>
       )}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Header from "../../components/Header";
 import WhaleStatsHeader from "../../components/WhaleStatsTable/WhaleStatsHeader";
 import WhaleStatsTable from "../../components/WhaleStatsTable/WhaleStatsTable";
@@ -8,12 +8,10 @@ const WhaleStats = () => {
   let { whaleTransactions, whaleTransactionData } = useContext(WhaleContext);
 
   return (
-    <div className="min-h-screen">
+    <div>
       <Header />
-      <div className="mt-10" />
       <WhaleStatsHeader whaleTransactionData={whaleTransactionData} />
-      <div className="mt-20" />
-      <WhaleStatsTable whaleTransactions={whaleTransactions}/>
+      <WhaleStatsTable whaleTransactions={whaleTransactions} />
     </div>
   );
 };

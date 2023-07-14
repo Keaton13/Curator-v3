@@ -1,17 +1,17 @@
-import Image from 'next/image'
-import More from '../../assets/svg/more'
-import Star from '../../assets/svg/star'
-import CoinNameRow from '../CoinNameRow'
-import Rate from './Rate'
-import { useRouter } from 'next/router'
+import Image from "next/image";
+import More from "../../assets/svg/more";
+import Star from "../../assets/svg/star";
+import CoinNameRow from "../CoinNameRow";
+import Rate from "./Rate";
+import { useRouter } from "next/router";
 
+// Styles for the CMCTableRow component
 const styles = {
-  tableRow: `text-white border-b border-gray-800 text-[0.93rem]`,
-  rowHeight: {
-    height: "75px"
-  }
-}
+  tableRow: `text-white border-b border-gray-800 lg:text-[0.93rem]`,
+  rowHeight: `lg:h-[75px] h-[150px] xs:text-2xl`,
+};
 
+// Props passed from CMCTable
 const CMCtableRow = ({
   id,
   starNum,
@@ -26,37 +26,36 @@ const CMCtableRow = ({
   volumeValue,
   volumeInCoin,
   volumeCryptoValue,
-  circulatingSupply
+  circulatingSupply,
 }) => {
+  // Router initiation
+  const router = useRouter();
 
-  const router = useRouter()
-
+  //Change page to info with coinId
   const viewCoinDetails = () => {
-    router.push(
-      `/currencies/info?id=${id}`,
-    )
-  }
+    router.push(`/currencies/info?id=${id}`);
+  };
 
+  //Change page to price wtih CoinId
   const viewPrice = () => {
-    router.push(
-      `/currencies/price?id=${id}`,
-    )
-  }
+    router.push(`/currencies/price?id=${id}`);
+  };
 
-  const formatNum = num => {
-    return Number(num.toFixed(2)).toLocaleString()
-  }
+  //Converts number, removes excess decimals
+  const formatNum = (num) => {
+    return Number(num.toFixed(2)).toLocaleString();
+  };
 
   return (
     <tbody className={styles.tableRow}>
-      <tr style={styles.rowHeight}>
+      <tr className={styles.rowHeight}>
         <td>
           <Star />
         </td>
         <td>{starNum}</td>
 
         {coinIcon && coinIcon ? (
-          <td className='cursor-pointer'>
+          <td className="cursor-pointer">
             <CoinNameRow
               name={coinName}
               icon={coinIcon}
@@ -67,7 +66,7 @@ const CMCtableRow = ({
           <></>
         )}
 
-        <td className='cursor-pointer' onClick={viewPrice}>
+        <td className="cursor-pointer" onClick={viewPrice}>
           <p>${formatNum(price)}</p>
         </td>
         <td>
@@ -89,7 +88,7 @@ const CMCtableRow = ({
         <td>
           <div>
             <p>${formatNum(volumeCryptoValue)}</p>
-            <p className='text-gray-400'>
+            <p className="text-gray-400">
               {formatNum(volumeInCoin)}&nbsp;{coinSymbol}
             </p>
           </div>
@@ -97,12 +96,19 @@ const CMCtableRow = ({
 
         <td>
           <div>
-            <p className='float-right mr-3'>{formatNum(circulatingSupply)}&nbsp;{coinSymbol}</p>
+            <p className="float-right mr-3">
+              {formatNum(circulatingSupply)}&nbsp;{coinSymbol}
+            </p>
           </div>
         </td>
 
         <td>
-          <Image src={`https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/${id}.svg`} width={150} height={100} alt='test' />
+          <Image
+            src={`https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/${id}.svg`}
+            width={150}
+            height={100}
+            alt="test"
+          />
         </td>
 
         <td>
@@ -110,7 +116,7 @@ const CMCtableRow = ({
         </td>
       </tr>
     </tbody>
-  )
-}
+  );
+};
 
-export default CMCtableRow
+export default CMCtableRow;

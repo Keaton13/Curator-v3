@@ -10,7 +10,7 @@ const styles = {
 const CMCTableHeader = () => {
   return (
     <tbody>
-        <tr>
+        <tr className='lg:text-2xl text-4xl'>
             <th></th>
             <th className='flex items-center'><b># &nbsp;</b><ChevronDown /></th>
             <th>Name</th>

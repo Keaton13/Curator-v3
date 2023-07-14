@@ -3,6 +3,7 @@ import Image from "next/image";
 import converter from "../assets/converter.png";
 import Usd from "../assets/svg/usd";
 
+// Styles for CMCPriceConverter
 const styles = {
   converter: `flex items-center justify-between bg-[#171924] border border-grey-500/10 px-5 py-5 rounded-xl`,
   convertButton: `bg-[#1d4ed8] p-2 px-5 w-min rounded-xl mt-5 cursor-pointer hover:opacity-60`,
@@ -10,6 +11,7 @@ const styles = {
 
 const CMCPriceConverter = ({coinTextData}) => {
 
+  // Formats num for price
   const formatNum = num => {
     if(num){
       return Number(num.toFixed(2)).toLocaleString()

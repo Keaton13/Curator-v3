@@ -3,12 +3,12 @@ import Image from "next/image";
 import logo from "../assets/Keyblade20.png";
 import { Web3Button, Web3ModalButton } from "@web3modal/react";
 
+// Styles for WalletConnectModal
 const styles = {
   modal: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: "25%",
     margin: "auto",
     color: "#FFFF",
     background: "#323546",
@@ -23,6 +23,7 @@ const styles = {
   h2: {
     margin: 0,
     fontSize: "1.5rem",
+    textAlign: "center"
   },
   content: {
     height: "100%",
@@ -37,6 +38,7 @@ const styles = {
   web3ButtonContainer: {
     display: "flex",
     justifyContent: "center",
+    padding: "10px 10px"
   },
   logoText: {
     fontSize: "62px",
@@ -46,12 +48,12 @@ const styles = {
   },
 };
 
-const WalletConnectModal = ({ status }) => {
+const WalletConnectModal = ({ status, loadingText }) => {
   if (status === "Loading") {
     return (
-      <div style={styles.modal}>
+      <div style={styles.modal} className="modalWidth">
         <div style={styles.header}>
-          <h2 style={styles.h2}>Loading Wallet NFT's...</h2>
+          <h2 style={styles.h2}>{loadingText}</h2>
         </div>
         <div style={styles.content}>
           <div>
@@ -64,7 +66,7 @@ const WalletConnectModal = ({ status }) => {
     );
   } else {
     return (
-      <div style={styles.modal}>
+      <div style={styles.modal} className="modalWidth">
         <div style={styles.content}>
           <div>
             <h1 style={styles.logoText}>Curator</h1>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ChevronDown from "../../assets/svg/chevronDown";
 
+// Styles for NftTableHeader
 const styles = {
   headerContainer: {
     display: "flex",
@@ -74,10 +75,12 @@ const NftTableHeader = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hover, setHover] = useState(false);
 
+  // Changes dropdown state
   const handleDropdownClick = () => {
     setIsOpen(!isOpen);
   };
 
+  // Changes state when drop down variable is clicked
   const handleOptionClick = (option) => {
     setIsOpen(false);
     props.setNftDisplayTime(option);

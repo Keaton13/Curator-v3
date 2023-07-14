@@ -8,6 +8,7 @@ import BearishFilled from "./buttons/BearishFilled";
 import BullishFilled from "./buttons/BullishFilled";
 import Shiba from '../assets/shiba.png'
 
+// Styles for ChatCard
 const styles = {
     postAction: `flex items-center`,
     chatCard: `border-b border-gray-700 pb-6 mb-6`,

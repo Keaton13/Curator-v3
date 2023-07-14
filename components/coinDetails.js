@@ -3,7 +3,9 @@ import Image from "next/image";
 import Rate from "./cmc-table/Rate";
 import RateFilled from "./buttons/RateFilled";
 import DropDownBtn from "./buttons/DropDownBtn";
+import WalletConnectModal from "./WalletConnectModal";
 
+// coinDetails styles
 const styles = {
   coinDetails: `min-h-screen text-white`,
   coinDetailsLinks: `flex mt-3 flex-wrap`,
@@ -20,6 +22,7 @@ const styles = {
 const CoinDetails = ({ id, coinData, coinMetaData }) => {
   const [coinTextData, setCoinData] = useState({});
 
+  // Filters coinMetaData and CoinData then sets to state
   useEffect(() => {
     if (coinData && coinMetaData) {
       let logo = coinMetaData.logo;
@@ -247,8 +250,8 @@ const CoinDetails = ({ id, coinData, coinMetaData }) => {
           </div>
         </div>
       ) : (
-        <div>Loading...</div>
-      )}
+          <WalletConnectModal status={"Loading"} loadingText={"Loading Data..."}/>
+          )}
     </main>
   );
 };

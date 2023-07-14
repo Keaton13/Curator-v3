@@ -1,23 +1,25 @@
 const Moralis = require('moralis').default;
 const { EvmChain } = require('@moralisweb3/common-evm-utils');
 
- Moralis.start({
-    apiKey: process.env.MORALIS_API_KEY,
-  });
+// Start Moralis with the provided API key
+Moralis.start({
+  apiKey: process.env.MORALIS_API_KEY,
+});
 
 export default function handler(req, res) {
-    const getWalletNfts = async () => {
-          let {address} = req.body
-          console.log(address);
-          let chain = EvmChain.ETHEREUM;
-          
-            const response = await Moralis.EvmApi.nft.getWalletNFTs({
-                address,
-                chain
-            })
-            // console.log(response?.result);
-          const data = response?.result;
-          res.status(200).json({data})
-    }    
-    getWalletNfts();
+  const getWalletNfts = async () => {
+    let { address } = req.body; // Extract address from the request body
+
+    let chain = EvmChain.ETHEREUM; // Set the chain to Ethereum
+
+    const response = await Moralis.EvmApi.nft.getWalletNFTs({
+      address,
+      chain
+    });
+
+    const data = response?.result; // Get the result from the response
+    res.status(200).json({ data }); // Send the data in the response
+  };
+
+  getWalletNfts(); // Call the getWalletNfts function
 }

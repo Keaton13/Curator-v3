@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import logo from "../../assets/KeybladeBlackVertical.png";
 
+//Styles for nftCard compoment
 const styles = {
   card: {
     background: "#F5F5F5",
@@ -14,9 +17,15 @@ const styles = {
     overflow: "hidden",
   },
   image: {
-    width: "100%",
     height: "100%",
-    objectFit: "cover",
+    margin: "auto"
+  },
+  altImageText: {
+    textAlign: "center",
+    fontStyle: "oblique",
+  },
+  altImage: {
+    margin: "30px 25%",
   },
   details: {
     padding: "20px 20px 20px",
@@ -56,35 +65,59 @@ const styles = {
   },
 };
 
-const NftCard = (nft) => {
-  const [localStyles, setLocalStyles] = useState(styles);
+const NftCard = ({nft}) => {
+  //State for nft image source
+  const [imageSrc, setImageSrc] = useState();
 
-  nft = nft.nft;
-//   console.log(nft);
-  let nftImage = nft.metadata;
-  let nftName = nft.collectionData.name;
-  let tokenId = nft.tokenId.slice(0, 8);
-
-  if (nftImage) {
-    if (nftImage.image.startsWith("ipfs://")) {
-      nftImage.image = "https://dweb.link/ipfs/" + nftImage.image.substring(7);
+  //Perform actions when nft changes
+  useEffect(() => {
+    let nftImage = nft.metadata;
+    if (nftImage) {
+      //Replace image url with new ipfs gateway
+      if (nftImage.image.startsWith("ipfs://")) {
+        nftImage.image = "https://dweb.link/ipfs/" + nftImage.image.substring(7);
+        setImageSrc(nftImage.image)
+      } else {
+        setImageSrc(nftImage.image)
+      }
+    } else {
+      setImageSrc()
     }
+  }, [nft]);
+
+  //If image can't load reset imageSrc state
+  const handleImageError = () => {
+    console.log('Error loading image:', nft.metadata.image)
+    setImageSrc()
   }
 
   return (
     <div key={nft.id} style={styles.card}>
       <div style={styles.imageContainer}>
-        {nftImage ? (
-          <img src={nftImage.image} alt={nftName} />
+        {imageSrc ? (
+          <img
+            style={styles.image}
+            src={imageSrc}
+            alt={nft.collectionData.name}
+            onError={handleImageError}
+          />
         ) : (
-          <h1>No Image</h1>
+          <div>
+            <Image
+              src={logo}
+              alt={nft.collectionData.name}
+              height={250}
+              style={styles.altImage}
+            />
+            <h1 style={styles.altImageText}>Unable to load image</h1>
+          </div>
         )}
       </div>
       <div style={styles.details}>
-        {nftImage ? (
+        {imageSrc ? (
           <div>
-            {nftImage.name ? (
-              <h2 style={styles.statLabel}>{nftImage.name}</h2>
+            {nft.metadata && nft.metadata.name ? (
+              <h2 style={styles.statLabel}>{nft.metadata.name}</h2>
             ) : (
               <h2 style={styles.statLabel}>{nft.tokenId}</h2>
             )}
@@ -92,7 +125,10 @@ const NftCard = (nft) => {
           </div>
         ) : (
           <div>
-            <h2 style={styles.statLabel}>{" " + " " + "#"}{tokenId}</h2>
+            <h2 style={styles.statLabel}>
+              {" " + " " + "#"}
+              {nft.tokenId.slice(0, 8)}
+            </h2>
             <h2 style={styles.statLabel}>{nft.name}</h2>
           </div>
         )}

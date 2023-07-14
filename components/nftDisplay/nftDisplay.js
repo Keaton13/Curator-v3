@@ -4,8 +4,8 @@ import NftCard from "./nftCard";
 import WalletConnectModal from "../WalletConnectModal";
 import { NFTContext } from "../../context/nftContext";
 import { useAccount } from "wagmi";
-import { Wallet } from "ethers";
 
+//Style for nftDisplay
 const styles = {
   container: {
     margin: "0 auto",
@@ -24,13 +24,18 @@ const styles = {
 };
 
 const nftDisplay = () => {
-  const { address, isConnecting, isDisconnected } = useAccount();
+  // Using the account hook to get the user's Ethereum address
+  const { address } = useAccount();
+
+  // Grabbing context data from NFTContext
   const { userWalletNfts, convertCollectionData } = useContext(NFTContext);
+
   const [nftDisplay, setNftDisplay] = useState("Floor");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
 
+  //Perform actions when address changes
   useEffect(() => {
     if (address && userWalletNfts.length === 0) {
       setIsLoading(true);
@@ -44,6 +49,8 @@ const nftDisplay = () => {
   }, [address]);
 
   let userWalletNftsFiltered;
+
+  // Filters users wallet nfts for display
   if (nftDisplay === "Floor") {
     userWalletNftsFiltered = userWalletNfts.sort(
       (a, b) => b.collectionData.floor - a.collectionData.floor
@@ -66,7 +73,10 @@ const nftDisplay = () => {
     <div>
       <NftDisplayHeader setNftDisplay={setNftDisplay} />
       {isLoading ? (
-        <WalletConnectModal status={"Loading"}/>
+        <WalletConnectModal
+          status={"Loading"}
+          loadingText={"Loading NFTs..."}
+        />
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : address ? (
