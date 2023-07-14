@@ -93,7 +93,7 @@ const Chat = () => {
       />
 
       <div className={styles.postButtonContainer}>
-        <Button label='Post' onPress={sendMessage} />
+        <Button label='Post' onPress={setMessage} />
       </div>
 
       

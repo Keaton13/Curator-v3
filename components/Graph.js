@@ -1,4 +1,5 @@
 import React from "react";
+import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2'
 
 // Chart points
@@ -24,7 +25,7 @@ const data = {
     "6:04 PM",
     "9:04 AM",
     "12:04 PM",
-    "3: 04 PM",
+    "3:04 PM",
   ],
   datasets: [
     {

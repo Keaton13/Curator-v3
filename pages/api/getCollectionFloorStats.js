@@ -6,7 +6,8 @@ export default function handler(req, res) {
         {
           method: 'GET',
           headers: {
-            Accept: '*/*'
+            Accept: '*/*',
+            'X-API-KEY': `${process.env.OPENSEA_API_KEY}`
           },
         }
       );

@@ -23,7 +23,6 @@ export const NFTProvider = ({ children }) => {
     try {
       const res = await fetch("/api/getTrendingNftCollections");
       const data = await res.json();
-      console.log(data.data);
       setTrendingCollections(data.data); // Set the state with the fetched data
       getTrendingNftCollections24h(); // Fetch additional trending collections
     } catch (e) {
@@ -68,7 +67,6 @@ export const NFTProvider = ({ children }) => {
 
   // Fetches the wallet's NFTs based on the address
   const getWalletNfts = async (address) => {
-    console.log("calling Moralis data");
     try {
       const options = {
         method: "POST",
@@ -93,6 +91,7 @@ export const NFTProvider = ({ children }) => {
       };
       const res = await fetch("/api/getWalletNftCollectionsOpensea", options);
       const data = await res.json();
+      console.log(data.data);
       return data.data; // Return the fetched NFT collection data
     } catch (e) {
       console.error(e);
@@ -120,8 +119,8 @@ export const NFTProvider = ({ children }) => {
     const walletNfts = await getWalletNfts(address); // Fetch the wallet's NFTs
     const walletCollections = await getWalletNftCollections(address); // Fetch the wallet's NFT collections
 
-    console.log(walletNfts);
-    console.log(walletCollections);
+    // console.log(walletNfts);
+    // console.log(walletCollections);
 
     let collectionData = [];
 
